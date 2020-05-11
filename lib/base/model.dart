@@ -19,7 +19,7 @@
 /// Visually, it looks like this:
 ///   View <--> Presenter <--> Model
 ///
-/// Maybe that's confusing, so here's an in-depth explanation with code:
+/// Let's walk through the base classes for MVP:
 ///
 /// This is the base Model.
 ///
