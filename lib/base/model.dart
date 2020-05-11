@@ -7,6 +7,7 @@
 /// We will be using the Model-View-Presenter (MVP) architecture pattern for the
 /// CLEANEST codebase ever (knock on wood). This guide will take you through
 /// each base class and an example implementation to give you a better
+/// understanding of how the M, V, and P work cohesively.
 ///
 /// There is a number on the screen and the user presses a button that
 /// increments it, this is what happens behind the scenes:
