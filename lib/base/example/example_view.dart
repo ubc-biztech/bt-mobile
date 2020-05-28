@@ -1,11 +1,12 @@
+import '../view.dart';
 /// This is a lot of text.
 ///
 /// TL;DR: Yes this is an abstract class, any logic that HAS to be done by the
 ///        View will happen here, just like the overridden initState method.
 ///
-/// Notice how this is an abstract class that is extended by _ExampleView in
+/// Notice how this is an abstract class that is extended by _ExampleState in
 /// the example.dart file. The reason why we have this 'middle man' between
-/// _ExampleView and View is to alleviate as much as we can from the State
+/// _ExampleState and View is to alleviate as much as we can from the State
 /// class. Because we're using a structured MVP design pattern, we shouldn't add
 /// any logic to the State class since it goes in the Presenter class, or maybe
 /// even here.
@@ -18,9 +19,8 @@
 ///
 /// Lastly, check out example_presenter.dart.
 
-import 'package:bt_mobile/base/example/example.dart';
-import 'package:bt_mobile/base/example/example_model.dart';
-import 'package:bt_mobile/base/view.dart';
+import 'example.dart';
+import 'example_model.dart';
 
 abstract class ExampleView extends View<Example, ExampleModel> {
   @override

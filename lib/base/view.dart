@@ -16,8 +16,9 @@
 //    }
 // }
 
-import 'package:bt_mobile/base/model.dart';
 import 'package:flutter/material.dart';
+
+import 'model.dart';
 
 abstract class View<S extends StatefulWidget, M extends Model>
     extends State<S> {

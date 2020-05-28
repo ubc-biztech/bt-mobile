@@ -6,7 +6,7 @@
 ///   return Example(ExamplePresenter());
 /// }
 ///
-/// BUT WAIT, notice how there's two classes here: Example and _ExampleView.
+/// BUT WAIT, notice how there's two classes here: Example and _ExampleState.
 /// Example is a StatefulWidget, opposed to a StatelessWidget. As described by
 /// Google, a state is “whatever data you need in order to rebuild your UI at
 /// any moment in time”. StatefulWidgets can modify its state and re-render
@@ -15,7 +15,7 @@
 ///
 /// As for StatelessWidgets, we'll get into that at another time.
 ///
-/// Notice how _ExampleView extends the View class. Also notice how there is
+/// Notice how _ExampleState extends the View class. Also notice how there is
 /// barely anything in that class other than the build method. That's how things
 /// should be. Do a final notice of the build method:
 /// - When showing exampleNumber, we get the dynamic data from the Model.
@@ -24,10 +24,10 @@
 ///
 /// After this makes some sense, check out example_model.dart.
 
-import 'package:bt_mobile/base/example/example_model.dart';
-import 'package:bt_mobile/base/example/example_presenter.dart';
-import 'package:bt_mobile/base/view.dart';
 import 'package:flutter/material.dart';
+
+import 'example_presenter.dart';
+import 'example_view.dart';
 
 class Example extends StatefulWidget {
   const Example(this.presenter, {Key key}) : super(key: key);
@@ -35,10 +35,10 @@ class Example extends StatefulWidget {
   final ExamplePresenter presenter;
 
   @override
-  State<StatefulWidget> createState() => _ExampleView();
+  State<StatefulWidget> createState() => _ExampleState();
 }
 
-class _ExampleView extends View<Example, ExampleModel> {
+class _ExampleState extends ExampleView {
   @override
   Widget build(BuildContext context) {
     return Column(
