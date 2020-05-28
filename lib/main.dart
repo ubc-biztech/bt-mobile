@@ -1,6 +1,7 @@
-import 'package:bt_mobile/constants/strings.dart';
-import 'package:bt_mobile/home/home.dart';
 import 'package:flutter/material.dart';
+
+import 'constants/strings.dart';
+import 'home/home.dart';
 
 void main() {
   runApp(BizTechMobile());

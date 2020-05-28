@@ -1,6 +1,7 @@
-import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/colors.dart';
+import '../constants/strings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
