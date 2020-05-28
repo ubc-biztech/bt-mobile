@@ -1,6 +1,3 @@
-import 'model.dart';
-import 'view.dart';
-
 /// This is the base Presenter.
 ///
 /// The presenter is where all the logic goes. Here, we can make changes to the
@@ -27,6 +24,9 @@ import 'view.dart';
 ///     updateView();
 ///   }
 /// }
+
+import 'model.dart';
+import 'view.dart';
 
 class Presenter<V extends View, M extends Model> {
   V _view;

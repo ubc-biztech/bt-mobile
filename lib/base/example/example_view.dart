@@ -1,4 +1,3 @@
-import '../view.dart';
 /// This is a lot of text.
 ///
 /// TL;DR: Yes this is an abstract class, any logic that HAS to be done by the
@@ -18,6 +17,8 @@ import '../view.dart';
 /// class, so it goes here.
 ///
 /// Lastly, check out example_presenter.dart.
+
+import '../view.dart';
 
 import 'example.dart';
 import 'example_model.dart';

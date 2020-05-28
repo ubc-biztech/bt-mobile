@@ -1,7 +1,3 @@
-import '../presenter.dart';
-import 'example_model.dart';
-import 'example_view.dart';
-
 /// These Presenter classes can be jam-packed with action. The onButtonPressed
 /// method lives here and is accessible by the View. You can see how it takes
 /// data from the model, manipulates it, and tells the View to update itself.
@@ -11,6 +7,10 @@ import 'example_view.dart';
 /// Hopefully, you now have a basic idea of MVP and how we'll be building out
 /// this awesome app. There will be more guides to come when the cooler
 /// things are implemented!
+
+import '../presenter.dart';
+import 'example_model.dart';
+import 'example_view.dart';
 
 class ExamplePresenter extends Presenter<ExampleView, ExampleModel> {
   void onButtonPressed() {
