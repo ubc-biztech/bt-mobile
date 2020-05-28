@@ -6,12 +6,16 @@
 ///   return Example(ExamplePresenter());
 /// }
 ///
-/// BUT WAIT, notice how there's two classes here: Example and _ExampleState.
-/// Example is a StatefulWidget, as opposed to a StatelessWidget, which means it
-/// can change States. States are a complex topic that we don't need to get into
-/// right now. Just know that we can architect our UI with the build method.
+/// BUT WAIT, notice how there's two classes here: Example and _ExampleView.
+/// Example is a StatefulWidget, opposed to a StatelessWidget. As described by
+/// Google, a state is “whatever data you need in order to rebuild your UI at
+/// any moment in time”. StatefulWidgets can modify its state and re-render
+/// itself to reflect those changes. So, to prevent cluttering, we've abstracted
+/// the "state data" to a corresponding Model.
 ///
-/// Notice how _ExampleState extends the View class. Also notice how there is
+/// As for StatelessWidgets, we'll get into that at another time.
+///
+/// Notice how _ExampleView extends the View class. Also notice how there is
 /// barely anything in that class other than the build method. That's how things
 /// should be. Do a final notice of the build method:
 /// - When showing exampleNumber, we get the dynamic data from the Model.
@@ -31,10 +35,10 @@ class Example extends StatefulWidget {
   final ExamplePresenter presenter;
 
   @override
-  State<StatefulWidget> createState() => _ExampleState();
+  State<StatefulWidget> createState() => _ExampleView();
 }
 
-class _ExampleState extends View<Example, ExampleModel> {
+class _ExampleView extends View<Example, ExampleModel> {
   @override
   Widget build(BuildContext context) {
     return Column(
