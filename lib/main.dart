@@ -1,3 +1,4 @@
+import 'package:bt_mobile/home/home_presenter.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/strings.dart';
@@ -15,7 +16,7 @@ class BizTechMobile extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: Home(HomePresenter()),
     );
   }
 }
