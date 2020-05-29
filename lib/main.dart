@@ -13,9 +13,7 @@ class BizTechMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: S.title,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Proxima-Nova'),
       home: Home(HomePresenter()),
     );
   }

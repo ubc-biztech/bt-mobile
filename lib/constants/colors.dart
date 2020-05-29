@@ -1,5 +1,5 @@
 import 'dart:ui';
 
 class C {
-  static const Color backgroundGreen = Color(0xFF596348);
+  static const Color backgroundGreen = Color(0xFFDEF3CF);
 }
