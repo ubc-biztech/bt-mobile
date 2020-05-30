@@ -22,7 +22,7 @@ class _HomeState extends HomeView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: C.backgroundGreen,
+      backgroundColor: C.background,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,10 @@ class _HomeState extends HomeView {
                         ],
                       ),
                       const SizedBox(height: 4.0),
-                      TermProgressBar(widget: widget, model: model),
+                      TermProgressBar(
+                        presenter: widget.presenter,
+                        model: model,
+                      ),
                       const SizedBox(height: 16.0),
                       TermFractionStats(model: model)
                     ],
