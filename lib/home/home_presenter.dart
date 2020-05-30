@@ -62,9 +62,6 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
 
   void setProgressWidth(double width) {
     model.topProgressWidth = model.percentage * width;
-    print(width);
-    print(model.percentage);
-    print(model.topProgressWidth);
     updateView();
   }
 }

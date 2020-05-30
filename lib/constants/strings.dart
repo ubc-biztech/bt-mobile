@@ -1,7 +1,7 @@
 class S {
   static const String title = 'Hi, welcome to BizTech mobile!';
 
-  /// Whenever we have dynamic text in a string, we put this in its location so
+  /// Whenever we have dynamic text in a string, we put this in its place so
   /// that we can just replace it.
   ///
   /// ie.
