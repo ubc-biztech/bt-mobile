@@ -13,10 +13,14 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     model.date = DateFormat('yMMMEd').format(today);
     model.startDate = format.format(termStart);
     model.endDate = format.format(termEnd);
-    setWeekStats();
+    setStats();
   }
 
-  void setWeekStats() {
+  DateTime today = DateTime.now();
+  DateTime termStart = DateTime(2020, 5, 11);
+  DateTime termEnd = DateTime(2020, 6, 18);
+
+  void setStats() {
     final int todayDiff = today.difference(termStart).inDays;
     final int endDiff = termEnd.difference(termStart).inDays;
 
@@ -28,16 +32,20 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
       model.percentage = 1.0;
     }
 
-    model.numericDayNumerator = 'Day $numericDayNumerator';
-    model.numericDayDenominator = ' / $numericDayDenominator';
+    model.numericDayNumerator =
+        S.dayNumerator.replaceFirst(S.r, '$numericDayNumerator');
+    model.numericDayDenominator =
+        S.dayDenominator.replaceFirst(S.r, '$numericDayDenominator');
 
     int numericWeekNumerator =
         ((todayDiff + termStart.weekday - 1) / 7).floor() + 1;
     numericWeekNumerator = numericWeekNumerator < 0 ? 0 : numericWeekNumerator;
     final int numericWeekDenominator =
         (endDiff + termStart.weekday + (7 - termEnd.weekday)) ~/ 7;
-    model.numericWeekNumerator = 'Week $numericWeekNumerator';
-    model.numericWeekDenominator = ' / $numericWeekDenominator';
+    model.numericWeekNumerator =
+        S.weekNumerator.replaceFirst(S.r, '$numericWeekNumerator');
+    model.numericWeekDenominator =
+        S.weekDenominator.replaceFirst(S.r, '$numericWeekDenominator');
   }
 
   void setGreeting() {
@@ -59,8 +67,4 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     print(model.topProgressWidth);
     updateView();
   }
-
-  DateTime today = DateTime.now();
-  DateTime termStart = DateTime(2020, 5, 11);
-  DateTime termEnd = DateTime(2020, 6, 18);
 }
