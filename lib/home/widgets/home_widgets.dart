@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import 'home_model.dart';
+import '../home_model.dart';
 
 class GreetingAndWeather extends StatelessWidget {
   const GreetingAndWeather({
@@ -38,11 +38,15 @@ class GreetingAndWeather extends StatelessWidget {
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1.0,
-                  child: RaisedButton(
-                    color: Colors.orangeAccent,
+                  child: Card(
+                    child: Container(
+                      color: Colors.orangeAccent,
+                      constraints: const BoxConstraints.expand(),
+                    ),
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: const CircleBorder(),
-                    elevation: 2.0,
-                    onPressed: () {},
+                    elevation: 2,
                   ),
                 ),
                 Expanded(
@@ -65,6 +69,7 @@ class GreetingAndWeather extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 20.0),
         ],
       ),
     );
