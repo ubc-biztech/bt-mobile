@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 import '../base/presenter.dart';
+import '../common/term_manager.dart';
 import '../constants/strings.dart';
 import 'home_model.dart';
 import 'home_view.dart';
@@ -14,6 +15,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     model.startDate = format.format(termStart);
     model.endDate = format.format(termEnd);
     setStats();
+    final TermManager termManager = TermManager();
+    termManager.setupTermManager();
   }
 
   DateTime today = DateTime.now();
