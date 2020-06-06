@@ -1,6 +1,8 @@
 import 'package:bt_mobile/common/term_manager.dart';
+import 'package:bt_mobile/common/weather_manager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:tuple/tuple.dart';
 
 import '../base/presenter.dart';
 import '../constants/strings.dart';
@@ -13,6 +15,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     setGreeting();
     setDates();
     setStats();
+    setWeather();
   }
 
   final GetIt _getIt = GetIt.I;
@@ -24,17 +27,27 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   DateTime _termStart = DateTime(2020, 1, 1);
   DateTime _termEnd = DateTime(2020, 12, 31);
 
+  void setWeather() {
+    final WeatherManager weatherManager = _getIt<WeatherManager>();
+    final Tuple3<int, String, String> tempNameIcon =
+        weatherManager.getWeatherInformation;
+    if (tempNameIcon == null) {
+      model.isThereWeatherData = false;
+      return;
+    }
+    model.degrees = S.degreesC.replaceFirst(S.r, '${tempNameIcon.item1}');
+    model.city = tempNameIcon.item2;
+  }
+
   void setDates() {
     final TermManager termManager = _getIt<TermManager>();
     final TermDate termDate = termManager.getCurrentTermDate();
-    _termStart = termDate.startDate;
-    _termEnd = termDate.endDate;
 
     // If the values are null, default to beginning and end of current year
-    _termStart ??= DateTime(_today.year, 1, 1);
-    _termEnd ??= DateTime(_today.year, 12, 31);
+    _termStart = termDate?.startDate ?? DateTime(_today.year, 1, 1);
+    _termEnd = termDate?.endDate ?? DateTime(_today.year, 12, 31);
 
-    model.term = termDate.title;
+    model.term = termDate?.title ?? S.emptyTitle;
     model.date = _todayFormat.format(_today);
     model.startDate = _termFormat.format(_termStart);
     model.endDate = _termFormat.format(_termEnd);

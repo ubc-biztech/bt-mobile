@@ -12,6 +12,8 @@ class S {
   static const String r = 'REPLACE_ME_PLZ';
 
   /// Home
+  static const String degreesC = '${S.r}°C';
+  static const String degreesF = '${S.r}°F';
   static const String goodMorning = 'Good morning!';
   static const String goodDay = 'Good day!';
   static const String goodAfternoon = 'Good afternoon!';
@@ -20,4 +22,5 @@ class S {
   static const String dayDenominator = ' / $r';
   static const String weekNumerator = 'Week $r';
   static const String weekDenominator = ' / $r';
+  static const String emptyTitle = 'What a year...';
 }

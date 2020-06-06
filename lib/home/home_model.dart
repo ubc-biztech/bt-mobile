@@ -3,8 +3,9 @@ import 'package:bt_mobile/base/model.dart';
 class HomeModel extends Model {
   String salutation = '';
   String date = '';
-  String degrees = '23°C';
-  String city = 'Vancouver';
+  String degrees = '';
+  String city = '';
+  bool isThereWeatherData = true;
 
   // Stats card
   double percentage = 0.0;

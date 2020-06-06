@@ -31,45 +31,52 @@ class GreetingAndWeather extends StatelessWidget {
             style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16.0),
-          SizedBox(
-            height: 47.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Card(
-                    child: Container(
-                      color: Colors.orangeAccent,
-                      constraints: const BoxConstraints.expand(),
-                    ),
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: const CircleBorder(),
-                    elevation: 2,
-                  ),
-                ),
-                Expanded(
-                  child: AutoSizeText(
-                    model.degrees,
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 28.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Expanded(
-                  child: AutoSizeText(
-                    model.city,
-                    maxLines: 1,
-                    style: const TextStyle(
-                        fontSize: 28.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+          _weather,
+          const SizedBox(height: 20.0),
+        ],
+      ),
+    );
+  }
+
+  Widget get _weather {
+    if (!model.isThereWeatherData) {
+      return Container();
+    }
+    return SizedBox(
+      height: 47.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: 1.0,
+            child: Card(
+              child: Container(
+                color: Colors.orangeAccent,
+                constraints: const BoxConstraints.expand(),
+              ),
+              semanticContainer: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shape: const CircleBorder(),
+              elevation: 2,
             ),
           ),
-          const SizedBox(height: 20.0),
+          Expanded(
+            child: AutoSizeText(
+              model.degrees,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style:
+                  const TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: AutoSizeText(
+              model.city,
+              maxLines: 1,
+              style:
+                  const TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );
