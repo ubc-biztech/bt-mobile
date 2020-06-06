@@ -29,17 +29,28 @@ class TermManager {
   }
 
   /// Iterates through all the terms in [_termDates] and returns the current
-  /// term or reading break that today's date is within. We do date range checks
-  /// using [DateTime.millisecondsSinceEpoch]. This is possible because of the
-  /// date + 1 day - 1 ms logic in [TermDate._parseDateTime].
+  /// term, reading break, or closest future term in reference to today's date.
+  ///
+  /// We do date range checks using [DateTime.millisecondsSinceEpoch]. The logic
+  /// in [TermDate._parseDateTime] makes this possible (date + 1 day - 1 ms).
   TermDate getCurrentTermDate() {
     if (_termDates == null || _termDates.dates == null) {
       return null;
     }
     final int todayInMs = DateTime.now().millisecondsSinceEpoch;
+    TermDate last;
     for (TermDate t in _termDates.dates) {
-      if (todayInMs >= t.startDate.millisecondsSinceEpoch &&
-          todayInMs <= t.endDate.millisecondsSinceEpoch) {
+      // Is today's date within the range of t?
+      final bool isWithinRange =
+          todayInMs >= t.startDate.millisecondsSinceEpoch &&
+              todayInMs <= t.endDate.millisecondsSinceEpoch;
+
+      // Is today's date within the range of the last t and current t?
+      final bool isWithinCurrentAndPrevious = last != null &&
+          todayInMs > last.endDate.millisecondsSinceEpoch &&
+          todayInMs < t.startDate.millisecondsSinceEpoch;
+
+      if (isWithinRange || isWithinCurrentAndPrevious) {
         if (t.readingBreak != null &&
             todayInMs >= t.readingBreak.startDate.millisecondsSinceEpoch &&
             todayInMs <= t.readingBreak.endDate.millisecondsSinceEpoch) {
@@ -47,6 +58,7 @@ class TermManager {
         }
         return t;
       }
+      last = t;
     }
     return null;
   }

@@ -13,7 +13,7 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
     model = SplashModel();
   }
 
-  final GetIt _getIt = GetIt.instance;
+  final GetIt _getIt = GetIt.I;
 
   Future setupManagers(BuildContext context) async {
     _getIt.registerSingleton<TermManager>(TermManager());
