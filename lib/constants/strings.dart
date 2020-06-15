@@ -12,15 +12,25 @@ class S {
   static const String r = 'REPLACE_ME_PLZ';
 
   /// Home
-  static const String degreesC = '${S.r}°C';
-  static const String degreesF = '${S.r}°F';
-  static const String goodMorning = 'Good morning!';
-  static const String goodDay = 'Good day!';
-  static const String goodAfternoon = 'Good afternoon!';
-  static const String goodEvening = 'Good evening!';
-  static const String dayNumerator = 'Day $r';
-  static const String dayDenominator = ' / $r';
-  static const String weekNumerator = 'Week $r';
-  static const String weekDenominator = ' / $r';
-  static const String emptyTitle = 'What a year...';
+  static const String homeTitle = 'Home';
+  static const String homeDegreesC = '${S.r}°C';
+  static const String homeDegreesF = '${S.r}°F';
+  static const String homeGoodMorning = 'Good morning!';
+  static const String homeGoodDay = 'Good day!';
+  static const String homeGoodAfternoon = 'Good afternoon!';
+  static const String homeGoodEvening = 'Good evening!';
+  static const String homeDayNumerator = 'Day $r';
+  static const String homeDayDenominator = ' / $r';
+  static const String homeWeekNumerator = 'Week $r';
+  static const String homeWeekDenominator = ' / $r';
+  static const String homeEmptyTitle = 'What a year...';
+
+  /// Events
+  static const String eventsTitle = 'Events';
+  static const String eventsDesc = 'This is where our events are listed!';
+
+  /// Profile
+  static const String profileTitle = 'Profile';
+  static const String profileDesc =
+      'This is where users can edit their profile!';
 }

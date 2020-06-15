@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/colors.dart';
 import 'home_presenter.dart';
 import 'home_view.dart';
 import 'widgets/greeting_and_weather.dart';
@@ -18,18 +17,13 @@ class Home extends StatefulWidget {
 class _HomeState extends HomeView {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: C.morningBackground,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            GreetingAndWeather(model: model),
-            TermStats(model: model, widget: widget),
-          ],
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        GreetingAndWeather(model: model),
+        TermStats(model: model, widget: widget),
+      ],
     );
   }
 }

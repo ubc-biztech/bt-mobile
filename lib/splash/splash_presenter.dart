@@ -1,7 +1,7 @@
 import 'package:bt_mobile/common/term_manager.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
-import 'package:bt_mobile/home/home.dart';
-import 'package:bt_mobile/home/home_presenter.dart';
+import 'package:bt_mobile/main/main.dart';
+import 'package:bt_mobile/main/main_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -27,6 +27,6 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
     await _getIt<WeatherManager>().setupWeatherManager();
 
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => Home(HomePresenter())));
+        MaterialPageRoute(builder: (context) => Main(MainPresenter())));
   }
 }
