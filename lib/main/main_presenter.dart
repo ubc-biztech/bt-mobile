@@ -1,3 +1,4 @@
+import 'package:bt_mobile/constants/images.dart';
 import 'package:bt_mobile/constants/strings.dart';
 import 'package:bt_mobile/events/events.dart';
 import 'package:bt_mobile/events/events_presenter.dart';
@@ -20,9 +21,8 @@ class MainPresenter extends Presenter<MainView, MainModel> {
 
   void _addPages() {
     model.pages.add(Home(HomePresenter()));
-    model.iconAndTitles.add(Tuple2(
-        Image.asset('assets/images/biztech-65.png', height: 24.0),
-        S.homeTitle));
+    model.iconAndTitles
+        .add(Tuple2(Image.asset(I.biztech65, height: 24.0), S.homeTitle));
     model.pages.add(Events(EventsPresenter()));
     model.iconAndTitles.add(Tuple2(Icon(Icons.calendar_today), S.eventsTitle));
     model.pages.add(Profile(ProfilePresenter()));
