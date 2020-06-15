@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bt_mobile/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../home.dart';
@@ -22,25 +23,41 @@ class TermStats extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: double.infinity),
       margin: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Card(
+        color: C.darkBackgroundCard,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 23.0, vertical: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AutoSizeText(model.term,
-                  maxLines: 1,
-                  style: const TextStyle(
-                      fontSize: 30.0, fontWeight: FontWeight.w900)),
+              AutoSizeText(
+                model.term,
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold,
+                  color: C.darkColor2,
+                ),
+              ),
               const SizedBox(height: 16.0),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   AutoSizeText(model.startDate,
-                      maxLines: 1, style: const TextStyle(fontSize: 16.0)),
+                      maxLines: 1,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                        color: C.darkColor2,
+                      )),
                   AutoSizeText(model.endDate,
-                      maxLines: 1, style: const TextStyle(fontSize: 16.0)),
+                      maxLines: 1,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: C.darkColor2,
+                        fontWeight: FontWeight.w600,
+                      )),
                 ],
               ),
               const SizedBox(height: 4.0),
@@ -48,7 +65,7 @@ class TermStats extends StatelessWidget {
                 presenter: widget.presenter,
                 model: model,
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 12.0),
               TermFractionStats(model: model)
             ],
           ),

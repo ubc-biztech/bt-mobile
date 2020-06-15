@@ -5,7 +5,7 @@ import 'package:tuple/tuple.dart';
 class MainModel extends Model {
   int pageIndex = 0;
   List<Widget> pages = [];
-  List<Tuple2<Icon, String>> iconAndTitles = [];
+  List<Tuple2<Widget, String>> iconAndTitles = [];
 
   Widget get currentPage => pages[pageIndex];
 }

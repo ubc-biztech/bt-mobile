@@ -1,3 +1,4 @@
+import 'package:bt_mobile/constants/colors.dart';
 import 'package:bt_mobile/constants/strings.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class _ProfileState extends ProfileView {
       child: Container(
         child: const Text(
           S.profileDesc,
+          style: TextStyle(color: C.darkColor2),
         ),
       ),
     );

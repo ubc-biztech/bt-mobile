@@ -17,11 +17,14 @@ class _MainState extends MainView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: C.morningBackground,
+      backgroundColor: C.darkBackground,
       body: SafeArea(
         child: model.currentPage,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: C.darkBackground,
+        selectedItemColor: C.darkColor1,
+        unselectedItemColor: C.darkColor2,
         onTap: widget.presenter.onTabTapped,
         currentIndex: model.pageIndex,
         showUnselectedLabels: false,
