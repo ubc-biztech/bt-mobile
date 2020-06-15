@@ -16,17 +16,33 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
   }
 
   final GetIt _getIt = GetIt.I;
+  AnimationController controller;
+  Animation<double> animation;
+
+  void initializeAnimation(TickerProvider ticker) {
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 250), vsync: ticker);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+    controller.forward();
+  }
 
   Future setupManagers(BuildContext context) async {
     await DotEnv().load('.env');
-
     _getIt.registerSingleton<TermManager>(TermManager());
-    await _getIt<TermManager>().setupTermManager();
-
     _getIt.registerSingleton<WeatherManager>(WeatherManager());
-    await _getIt<WeatherManager>().setupWeatherManager();
+    final List<Future> waitForThese = [
+      _getIt<TermManager>().setupTermManager(),
+      _getIt<WeatherManager>().setupWeatherManager()
+    ]; // work on these asynchronously
+    await Future.wait(waitForThese);
+    final Main main = Main(MainPresenter());
+    await Future.delayed(const Duration(seconds: 1));
+    await controller.reverse();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => main));
+  }
 
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+  void onDispose() {
+    controller.dispose();
   }
 }
