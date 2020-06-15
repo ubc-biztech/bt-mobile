@@ -12,8 +12,9 @@ addons:
       - libstdc++6
       - fonts-droid-fallback
 before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
+  - git clone https://github.com/flutter/flutter.git -b stable
   - ./flutter/bin/flutter doctor
+  - echo "OPEN_WEATHER_API_KEY=FAKE_KEY_123" >> .env
 script:
   - ./flutter/bin/flutter test
 cache:
