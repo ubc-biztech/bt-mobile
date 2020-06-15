@@ -57,12 +57,12 @@ class _InnerContainerState extends State<_InnerContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: C.darkColor3,
       constraints: const BoxConstraints(minWidth: double.infinity),
       height: 24.0,
       alignment: Alignment.centerLeft,
       child: AnimatedContainer(
-        color: C.bizTechGrey,
+        color: C.darkColor1,
         width: widget.model.topProgressWidth,
         height: 24.0,
         curve: Curves.fastOutSlowIn,

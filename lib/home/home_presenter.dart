@@ -35,7 +35,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
       model.isThereWeatherData = false;
       return;
     }
-    model.degrees = S.degreesC.replaceFirst(S.r, '${tempNameIcon.item1}');
+    model.degrees = S.homeDegreesC.replaceFirst(S.r, '${tempNameIcon.item1}');
     model.city = tempNameIcon.item2;
     model.weatherIconUrl = tempNameIcon.item3;
   }
@@ -48,7 +48,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     _termStart = termDate?.startDate ?? DateTime(_today.year, 1, 1);
     _termEnd = termDate?.endDate ?? DateTime(_today.year, 12, 31);
 
-    model.term = termDate?.title ?? S.emptyTitle;
+    model.term = termDate?.title ?? S.homeEmptyTitle;
     model.date = _todayFormat.format(_today);
     model.startDate = _termFormat.format(_termStart);
     model.endDate = _termFormat.format(_termEnd);
@@ -68,9 +68,9 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
 
     model.percentage = numericDayNumerator / numericDayDenominator;
     model.numericDayNumerator =
-        S.dayNumerator.replaceFirst(S.r, '$numericDayNumerator');
+        S.homeDayNumerator.replaceFirst(S.r, '$numericDayNumerator');
     model.numericDayDenominator =
-        S.dayDenominator.replaceFirst(S.r, '$numericDayDenominator');
+        S.homeDayDenominator.replaceFirst(S.r, '$numericDayDenominator');
 
     final int numericWeekDenominator =
         (endDiff + _termStart.weekday + (7 - _termEnd.weekday)) ~/ 7;
@@ -83,20 +83,20 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     }
 
     model.numericWeekNumerator =
-        S.weekNumerator.replaceFirst(S.r, '$numericWeekNumerator');
+        S.homeWeekNumerator.replaceFirst(S.r, '$numericWeekNumerator');
     model.numericWeekDenominator =
-        S.weekDenominator.replaceFirst(S.r, '$numericWeekDenominator');
+        S.homeWeekDenominator.replaceFirst(S.r, '$numericWeekDenominator');
   }
 
   void setGreeting() {
     if (_today.hour >= 4 && _today.hour < 12) {
-      model.salutation = S.goodMorning;
+      model.salutation = S.homeGoodMorning;
     } else if (_today.hour >= 12 && _today.hour < 13) {
-      model.salutation = S.goodDay;
+      model.salutation = S.homeGoodDay;
     } else if (_today.hour >= 13 && _today.hour < 17) {
-      model.salutation = S.goodAfternoon;
+      model.salutation = S.homeGoodAfternoon;
     } else {
-      model.salutation = S.goodEvening;
+      model.salutation = S.homeGoodEvening;
     }
   }
 

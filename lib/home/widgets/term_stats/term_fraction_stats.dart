@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bt_mobile/constants/colors.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../home_model.dart';
@@ -48,12 +49,19 @@ class _FractionStat extends StatelessWidget {
         AutoSizeText(
           numeratorText,
           maxLines: 1,
-          style: const TextStyle(fontSize: 24.0),
+          style: const TextStyle(
+            fontSize: 22.0,
+            fontWeight: FontWeight.w600,
+            color: C.darkColor2,
+          ),
         ),
         AutoSizeText(
           denominatorText,
           maxLines: 1,
-          style: const TextStyle(fontSize: 16.0),
+          style: const TextStyle(
+            fontSize: 16.0,
+            color: C.darkColor3,
+          ),
         ),
       ],
     );
