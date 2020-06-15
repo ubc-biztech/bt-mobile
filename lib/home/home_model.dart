@@ -5,6 +5,7 @@ class HomeModel extends Model {
   String date = '';
   String degrees = '';
   String city = '';
+  String weatherIconUrl = 'http://malformed';
   bool isThereWeatherData = true;
 
   // Stats card

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/colors.dart';
-import '../home_model.dart';
-import '../home_presenter.dart';
+import '../../../constants/colors.dart';
+import '../../home_model.dart';
+import '../../home_presenter.dart';
 
 class TermProgressBar extends StatelessWidget {
   const TermProgressBar({
@@ -31,7 +31,8 @@ class TermProgressBar extends StatelessWidget {
   }
 }
 
-class _InnerContainer extends StatelessWidget {
+/// This needs to be a StatefulWidget so that we can get the dynamic width.
+class _InnerContainer extends StatefulWidget {
   const _InnerContainer({
     Key key,
     @required this.presenter,
@@ -42,9 +43,19 @@ class _InnerContainer extends StatelessWidget {
   final HomeModel model;
 
   @override
+  _InnerContainerState createState() => _InnerContainerState();
+}
+
+class _InnerContainerState extends State<_InnerContainer> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero,
+        () => widget.presenter.setProgressWidth(context.size.width));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Future.delayed(
-        Duration.zero, () => presenter.setProgressWidth(context.size.width));
     return Container(
       color: Colors.white,
       constraints: const BoxConstraints(minWidth: double.infinity),
@@ -52,8 +63,9 @@ class _InnerContainer extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: AnimatedContainer(
         color: C.bizTechGrey,
-        width: model.topProgressWidth,
+        width: widget.model.topProgressWidth,
         height: 24.0,
+        curve: Curves.fastOutSlowIn,
         duration: const Duration(milliseconds: 1500),
       ),
     );

@@ -14,13 +14,16 @@ class WeatherManager {
   Tuple3<int, String, String> _tempNameIcon;
   static const _openWeatherApi =
       'http://api.openweathermap.org/data/2.5/weather?${S.r}&appid=${S.r}';
+  static const _openWeatherIcon =
+      'https://raw.githubusercontent.com/ubc-biztech/bt-app-content/master/weather-icons/${S.r}.png';
+
   static const _lastWeatherTimeStampKey = 'last_weather_time_stamp';
   static const _lastWeatherKey = 'last_weather';
 
   /// Get the [SharedPreferences] instance in preparation to get or save local
-  /// data. Attempt to pull data from GitHub, and if anything goes wrong,
-  /// default to the data that was saved to the device. Return true if there is
-  /// data to show. Return false if there is no data to show.
+  /// data. Attempt to pull data from GitHub. If anything goes wrong, default to
+  /// the data that was saved to the device. Return true if there is data to
+  /// show. Return false if there is no data to show.
   Future<bool> setupWeatherManager() async {
     _preferences = await SharedPreferences.getInstance();
     bool progress = await _getWeatherTempNameIconFromApi();
@@ -68,7 +71,8 @@ class WeatherManager {
       final http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        final String icon = data['weather'][0]['icon'];
+        final String icon =
+            _openWeatherIcon.replaceFirst(S.r, data['weather'][0]['icon']);
         final double tempDouble = data['main']['temp'];
         final int temp = (tempDouble - 273.15).round();
         final String name = data['name'];

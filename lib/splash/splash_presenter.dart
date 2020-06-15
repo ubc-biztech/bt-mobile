@@ -26,7 +26,6 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
     _getIt.registerSingleton<WeatherManager>(WeatherManager());
     await _getIt<WeatherManager>().setupWeatherManager();
 
-    await Future.delayed(const Duration(seconds: 1));
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => Home(HomePresenter())));
   }

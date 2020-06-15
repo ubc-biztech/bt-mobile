@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../home_model.dart';
@@ -49,15 +50,9 @@ class GreetingAndWeather extends StatelessWidget {
         children: <Widget>[
           AspectRatio(
             aspectRatio: 1.0,
-            child: Card(
-              child: Container(
-                color: Colors.orangeAccent,
-                constraints: const BoxConstraints.expand(),
-              ),
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: const CircleBorder(),
-              elevation: 2,
+            child: CachedNetworkImage(
+              imageUrl: model.weatherIconUrl,
+              fit: BoxFit.contain,
             ),
           ),
           Expanded(

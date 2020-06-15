@@ -37,6 +37,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     }
     model.degrees = S.degreesC.replaceFirst(S.r, '${tempNameIcon.item1}');
     model.city = tempNameIcon.item2;
+    model.weatherIconUrl = tempNameIcon.item3;
   }
 
   void setDates() {
@@ -100,7 +101,10 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   }
 
   void setProgressWidth(double width) {
+    final double old = model.topProgressWidth;
     model.topProgressWidth = model.percentage * width;
-    updateView();
+    if (old != model.topProgressWidth) {
+      updateView();
+    }
   }
 }

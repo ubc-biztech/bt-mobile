@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 
-import '../home_model.dart';
+import '../../home_model.dart';
 
 class TermFractionStats extends StatelessWidget {
   const TermFractionStats({
