@@ -37,13 +37,13 @@ class AppleSignInButton extends StatelessWidget {
               const SizedBox(
                 width: _iconPadding,
               ),
-              Expanded(
+              const Expanded(
                 child: Align(
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     S.loginApple,
                     maxLines: 1,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Roboto-Medium',
                         fontSize: 18.0,
                         color: C.loginButtonFont),
@@ -92,13 +92,13 @@ class GoogleSignInButton extends StatelessWidget {
               const SizedBox(
                 width: _iconPadding,
               ),
-              Expanded(
+              const Expanded(
                 child: Align(
                   alignment: Alignment.center,
                   child: AutoSizeText(
                     S.loginGoogle,
                     maxLines: 1,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Roboto-Medium',
                         fontSize: 18.0,
                         color: C.loginButtonFont),
@@ -147,7 +147,7 @@ class FacebookSignInButton extends StatelessWidget {
               const SizedBox(
                 width: _iconPadding,
               ),
-              Expanded(
+              const Expanded(
                 child: Align(
                   alignment: Alignment.center,
                   child: AutoSizeText(
