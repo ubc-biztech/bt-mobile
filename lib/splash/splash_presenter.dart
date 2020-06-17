@@ -1,7 +1,7 @@
 import 'package:bt_mobile/common/term_manager.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
+import 'package:bt_mobile/login/login.dart';
+import 'package:bt_mobile/login/login_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -35,7 +35,8 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
       _getIt<WeatherManager>().setupWeatherManager()
     ]; // work on these asynchronously
     await Future.wait(waitForThese);
-    final Main main = Main(MainPresenter());
+//    final Widget main = Main(MainPresenter());
+    final Widget main = Login(LoginPresenter());
     await Future.delayed(const Duration(seconds: 1));
     await controller.reverse();
     Navigator.pushReplacement(

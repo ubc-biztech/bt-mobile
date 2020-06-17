@@ -11,4 +11,8 @@ class C {
   static const Color darkColor1 = Color(0xFF96FF50);
   static const Color darkColor2 = Color(0xFFFFFFFF);
   static const Color darkColor3 = Color(0xFFAEC4F4);
+
+  /// Login
+  static const Color loginButtonFont = Color(0x8A000000);
+  static const Color loginFacebookButton = Color(0xFF1877F2);
 }

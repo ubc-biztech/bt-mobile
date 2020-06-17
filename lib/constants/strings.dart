@@ -33,4 +33,12 @@ class S {
   static const String profileTitle = 'Profile';
   static const String profileDesc =
       'This is where users can edit their profile!';
+
+  /// Login
+  static const String loginWelcome = 'Welcome!';
+  static const String loginSalutation =
+      'Glad you could join us,\nsign in to continue.';
+  static const String loginGoogle = 'Sign in with Google';
+  static const String loginFacebook = 'Login with Facebook';
+  static const String loginApple = 'Sign in with Apple';
 }

@@ -26,6 +26,7 @@ dependencies:
   get_it: ^4.0.2
   flutter_dotenv: ^2.1.0
   cached_network_image: ^2.2.0+1
+  simple_animations: ^2.2.1
   flutter:
     sdk: flutter
 
@@ -75,6 +76,9 @@ flutter:
           weight: 700
         - asset: assets/fonts/Proxima-Nova-Black.otf
           weight: 900
+    - family: Roboto-Medium
+      fonts:
+        - asset: assets/fonts/Roboto-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
