@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bt_mobile/constants/colors.dart';
+import 'package:bt_mobile/constants/strings.dart';
 import 'package:bt_mobile/login/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +24,15 @@ class _LoginState extends LoginView {
       body: SafeArea(
         child: Center(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 35.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            constraints: const BoxConstraints(maxWidth: 400),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const AutoSizeText(
-                    'Welcome!',
+                    S.loginWelcome,
                     style: TextStyle(
                       fontSize: 44.0,
                       fontWeight: FontWeight.bold,
@@ -39,7 +41,7 @@ class _LoginState extends LoginView {
                   ),
                   const SizedBox(height: 4.0),
                   const AutoSizeText(
-                    'Glad you could join us, sign in to continue.',
+                    S.loginSalutation,
                     style: TextStyle(
                       height: 1.4,
                       fontSize: 32.0,
@@ -48,10 +50,12 @@ class _LoginState extends LoginView {
                     ),
                     maxLines: 2,
                   ),
-                  const SizedBox(height: 30.0),
+                  const SizedBox(height: 20.0),
                   GoogleSignInButton(() {}),
                   const SizedBox(height: 10.0),
                   FacebookSignInButton(() {}),
+                  const SizedBox(height: 10.0),
+                  AppleSignInButton(() {}),
                 ],
               ),
             ),

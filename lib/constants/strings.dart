@@ -35,7 +35,10 @@ class S {
       'This is where users can edit their profile!';
 
   /// Login
-  static const String google_sign_in = 'Sign in with Google';
-  static const String facebook_sign_in = 'Login with Facebook';
-  static const String apple_sign_in = 'Sign in with Apple';
+  static const String loginWelcome = 'Welcome!';
+  static const String loginSalutation =
+      'Glad you could join us,\nsign in to continue.';
+  static const String loginGoogle = 'Sign in with Google';
+  static const String loginFacebook = 'Login with Facebook';
+  static const String loginApple = 'Sign in with Apple';
 }
