@@ -1,4 +1,5 @@
 import UIKit
+import flutter_cognito_plugin
 import Flutter
 
 @UIApplicationMain
