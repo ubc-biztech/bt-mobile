@@ -1,3 +1,5 @@
+import 'package:bt_mobile/constants/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cognito_plugin/flutter_cognito_plugin.dart';
 
 class AuthManager {
@@ -16,7 +18,24 @@ class AuthManager {
     return isSignedIn;
   }
 
-  Future signInWithFacebook() async {
+  /// Added 1 second delays to all sign in and sign out actions because there
+  /// seems to be a lingering race condition, even when we wait for the previous
+  /// operation to finish.
+  Future<bool> signOut(BuildContext context) async {
+    _showLoadingDialog(context);
+    try {
+      await Cognito.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+    await Future.delayed(const Duration(seconds: 1));
+    final bool isSuccessful = !await Cognito.isSignedIn();
+    Navigator.pop(context); // dismiss loading dialog
+    return isSuccessful;
+  }
+
+  Future<bool> signInWithFacebook(BuildContext context) async {
+    _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
         identityProvider: 'Facebook',
@@ -25,10 +44,14 @@ class AuthManager {
     } catch (e) {
       print(e.toString());
     }
-    return await Cognito.isSignedIn();
+    await Future.delayed(const Duration(seconds: 1));
+    final bool isSuccessful = await Cognito.isSignedIn();
+    Navigator.pop(context); // dismiss loading dialog
+    return isSuccessful;
   }
 
-  Future<bool> signInWithGoogle() async {
+  Future<bool> signInWithGoogle(BuildContext context) async {
+    _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
         identityProvider: 'Google',
@@ -37,10 +60,14 @@ class AuthManager {
     } catch (e) {
       print(e.toString());
     }
-    return await Cognito.isSignedIn();
+    await Future.delayed(const Duration(seconds: 1));
+    final bool isSuccessful = await Cognito.isSignedIn();
+    Navigator.pop(context); // dismiss loading dialog
+    return isSuccessful;
   }
 
-  Future<bool> signInWithApple() async {
+  Future<bool> signInWithApple(BuildContext context) async {
+    _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
         identityProvider: 'Apple',
@@ -49,6 +76,25 @@ class AuthManager {
     } catch (e) {
       print(e.toString());
     }
-    return await Cognito.isSignedIn();
+    await Future.delayed(const Duration(seconds: 1));
+    final bool isSuccessful = await Cognito.isSignedIn();
+    Navigator.pop(context); // dismiss loading dialog
+    return isSuccessful;
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      child: Center(
+        child: SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+          ),
+        ),
+      ),
+    );
   }
 }

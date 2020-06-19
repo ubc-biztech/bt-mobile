@@ -18,11 +18,17 @@ class _ProfileState extends ProfileView {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: const Text(
-          S.profileDesc,
-          style: TextStyle(color: C.darkColor2),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text(
+            S.profileDesc,
+            style: TextStyle(color: C.darkColor2),
+          ),
+          RaisedButton(
+            onPressed: () => widget.presenter.signOutUser(context),
+          )
+        ],
       ),
     );
   }

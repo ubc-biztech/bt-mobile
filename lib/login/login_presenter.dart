@@ -16,7 +16,7 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
   final AuthManager _authManager = GetIt.I<AuthManager>();
 
   Future onFacebookButtonPressed(BuildContext context) async {
-    final bool isSignedIn = await _authManager.signInWithFacebook();
+    final bool isSignedIn = await _authManager.signInWithFacebook(context);
     if (isSignedIn) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Main(MainPresenter())));
@@ -24,7 +24,7 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
   }
 
   Future onGoogleButtonPressed(BuildContext context) async {
-    final bool isSignedIn = await _authManager.signInWithGoogle();
+    final bool isSignedIn = await _authManager.signInWithGoogle(context);
     if (isSignedIn) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Main(MainPresenter())));
@@ -32,7 +32,7 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
   }
 
   Future onAppleButtonPressed(BuildContext context) async {
-    final bool isSignedIn = await _authManager.signInWithApple();
+    final bool isSignedIn = await _authManager.signInWithApple(context);
     if (isSignedIn) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Main(MainPresenter())));
