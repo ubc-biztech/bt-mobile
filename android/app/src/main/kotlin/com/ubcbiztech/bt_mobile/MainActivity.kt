@@ -1,4 +1,4 @@
-package com.example.bt_mobile
+package com.ubcbiztech.bt_mobile
 
 import androidx.annotation.NonNull
 import com.pycampers.flutter_cognito_plugin.CognitoPluginActivity
