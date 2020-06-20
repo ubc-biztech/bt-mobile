@@ -34,7 +34,7 @@ class AuthManager {
     return isSuccessful;
   }
 
-  Future<bool> signInWithFacebook(BuildContext context) async {
+  Future<String> signInWithFacebook(BuildContext context) async {
     _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
@@ -46,11 +46,12 @@ class AuthManager {
     }
     await Future.delayed(const Duration(seconds: 1));
     final bool isSuccessful = await Cognito.isSignedIn();
+    final Tokens tokens = await Cognito.getTokens();
     Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful;
+    return isSuccessful ? tokens.idToken : null;
   }
 
-  Future<bool> signInWithGoogle(BuildContext context) async {
+  Future<String> signInWithGoogle(BuildContext context) async {
     _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
@@ -62,11 +63,12 @@ class AuthManager {
     }
     await Future.delayed(const Duration(seconds: 1));
     final bool isSuccessful = await Cognito.isSignedIn();
+    final Tokens tokens = await Cognito.getTokens();
     Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful;
+    return isSuccessful ? tokens.idToken : null;
   }
 
-  Future<bool> signInWithApple(BuildContext context) async {
+  Future<String> signInWithApple(BuildContext context) async {
     _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
@@ -78,8 +80,9 @@ class AuthManager {
     }
     await Future.delayed(const Duration(seconds: 1));
     final bool isSuccessful = await Cognito.isSignedIn();
+    final Tokens tokens = await Cognito.getTokens();
     Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful;
+    return isSuccessful ? tokens.idToken : null;
   }
 
   void _showLoadingDialog(BuildContext context) {

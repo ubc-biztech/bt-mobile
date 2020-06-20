@@ -11,6 +11,11 @@ import 'profile_view.dart';
 class ProfilePresenter extends Presenter<ProfileView, ProfileModel> {
   ProfilePresenter() {
     model = ProfileModel();
+    printUserInfo();
+  }
+
+  Future printUserInfo() async {
+    final AuthManager _am = GetIt.I<AuthManager>();
   }
 
   Future signOutUser(BuildContext context) async {
