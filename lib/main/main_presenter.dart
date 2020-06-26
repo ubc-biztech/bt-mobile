@@ -22,7 +22,7 @@ class MainPresenter extends Presenter<MainView, MainModel> {
   void _addPages() {
     model.pages.add(Home(HomePresenter()));
     model.iconAndTitles
-        .add(Tuple2(Image.asset(I.biztech65, height: 24.0), S.homeTitle));
+        .add(Tuple2(ImageIcon(AssetImage(I.biztech65)), S.homeTitle));
     model.pages.add(Events(EventsPresenter()));
     model.iconAndTitles.add(Tuple2(Icon(Icons.calendar_today), S.eventsTitle));
     model.pages.add(Profile(ProfilePresenter()));

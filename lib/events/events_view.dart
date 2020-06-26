@@ -7,5 +7,6 @@ abstract class EventsView extends View<Events, EventsModel> {
   void initState() {
     super.initState();
     widget.presenter.view = this;
+    widget.presenter.onInitState();
   }
 }
