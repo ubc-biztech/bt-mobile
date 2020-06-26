@@ -26,7 +26,7 @@ class _ProfileState extends ProfileView {
             style: TextStyle(color: C.darkColor2),
           ),
           RaisedButton(
-            child: Text('Sign out'),
+            child: const Text('Sign out'),
             onPressed: () => widget.presenter.signOutUser(context),
           )
         ],
