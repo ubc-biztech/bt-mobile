@@ -26,10 +26,6 @@ class _ProfileState extends ProfileView {
             style: TextStyle(color: C.darkColor2),
           ),
           RaisedButton(
-            child: Text('user info'),
-            onPressed: () => widget.presenter.printUserInfo(),
-          ),
-          RaisedButton(
             child: Text('Sign out'),
             onPressed: () => widget.presenter.signOutUser(context),
           )

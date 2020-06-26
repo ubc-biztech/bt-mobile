@@ -88,6 +88,8 @@ class AuthManager {
     return isSuccessful;
   }
 
+  /// The loading dialog takes up the whole screen. It must be dismissed by
+  /// popping the context off with [Navigator.pop].
   void _showLoadingDialog(BuildContext context) {
     showDialog(
       context: context,
