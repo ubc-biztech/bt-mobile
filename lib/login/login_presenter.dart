@@ -1,5 +1,4 @@
 import 'package:bt_mobile/common/auth_manager.dart';
-import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/main/main.dart';
 import 'package:bt_mobile/main/main_presenter.dart';
 import 'package:flutter/material.dart';
@@ -17,27 +16,26 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
   final AuthManager _authManager = GetIt.I<AuthManager>();
 
   Future onFacebookButtonPressed(BuildContext context) async {
-    final String idToken = await _authManager.signInWithFacebook(context);
-    _onSignInAttempt(idToken, context);
+    final bool isSuccessful = await _authManager.signInWithFacebook(context);
+    if (isSuccessful) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+    }
   }
 
   Future onGoogleButtonPressed(BuildContext context) async {
-    final String idToken = await _authManager.signInWithGoogle(context);
-    _onSignInAttempt(idToken, context);
+    final bool isSuccessful = await _authManager.signInWithGoogle(context);
+    if (isSuccessful) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+    }
   }
 
   Future onAppleButtonPressed(BuildContext context) async {
-    final String idToken = await _authManager.signInWithApple(context);
-    _onSignInAttempt(idToken, context);
-  }
-
-  void _onSignInAttempt(String idToken, BuildContext context) {
-    final User user = User.fromIdToken(idToken);
-    if (user == null) {
-      return;
+    final bool isSuccessful = await _authManager.signInWithApple(context);
+    if (isSuccessful) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
     }
-    GetIt.I.registerSingleton<User>(user);
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => Main(MainPresenter())));
   }
 }

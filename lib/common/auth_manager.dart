@@ -1,6 +1,8 @@
+import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cognito_plugin/flutter_cognito_plugin.dart';
+import 'package:get_it/get_it.dart';
 
 class AuthManager {
   /// Get the [SharedPreferences] instance in preparation to get or save local
@@ -14,6 +16,11 @@ class AuthManager {
       isSignedIn = await Cognito.isSignedIn();
     } catch (e) {
       // do nothing
+    }
+    if (isSignedIn) {
+      final Tokens tokens = await Cognito.getTokens();
+      final User user = User.fromIdToken(tokens.idToken);
+      GetIt.I.registerSingleton<User>(user);
     }
     return isSignedIn;
   }
@@ -30,59 +37,55 @@ class AuthManager {
     }
     await Future.delayed(const Duration(seconds: 1));
     final bool isSuccessful = !await Cognito.isSignedIn();
+    if (isSuccessful) {
+      GetIt.I.unregister(instance: GetIt.I<User>());
+    }
     Navigator.pop(context); // dismiss loading dialog
     return isSuccessful;
   }
 
-  Future<String> signInWithFacebook(BuildContext context) async {
-    _showLoadingDialog(context);
-    try {
-      await Cognito.showSignIn(
-        identityProvider: 'Facebook',
-        scopes: ['email', 'profile', 'openid'],
-      );
-    } catch (e) {
-      print(e.toString());
-    }
-    await Future.delayed(const Duration(seconds: 1));
-    final bool isSuccessful = await Cognito.isSignedIn();
-    final Tokens tokens = await Cognito.getTokens();
-    Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful ? tokens.idToken : null;
+  Future<bool> signInWithFacebook(BuildContext context) async {
+    return _signIn('Facebook', context);
   }
 
-  Future<String> signInWithGoogle(BuildContext context) async {
-    _showLoadingDialog(context);
-    try {
-      await Cognito.showSignIn(
-        identityProvider: 'Google',
-        scopes: ['email', 'profile', 'openid'],
-      );
-    } catch (e) {
-      print(e.toString());
-    }
-    await Future.delayed(const Duration(seconds: 1));
-    final bool isSuccessful = await Cognito.isSignedIn();
-    final Tokens tokens = await Cognito.getTokens();
-    Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful ? tokens.idToken : null;
+  Future<bool> signInWithGoogle(BuildContext context) async {
+    return _signIn('Google', context);
   }
 
-  Future<String> signInWithApple(BuildContext context) async {
+  Future<bool> signInWithApple(BuildContext context) async {
+    return _signIn('Apple', context);
+  }
+
+  /// Show a loading dialog so that users can't do any additional actions while
+  /// we load. If we can't generate a [User]  from the idToken, then sign out.
+  /// Register the [User] singleton to [GetIt] and close the dialog by calling
+  /// [Navigator.pop].
+  Future<bool> _signIn(String provider, BuildContext context) async {
     _showLoadingDialog(context);
     try {
       await Cognito.showSignIn(
-        identityProvider: 'Apple',
+        identityProvider: provider,
         scopes: ['email', 'profile', 'openid'],
       );
     } catch (e) {
       print(e.toString());
     }
     await Future.delayed(const Duration(seconds: 1));
-    final bool isSuccessful = await Cognito.isSignedIn();
+    bool isSuccessful = await Cognito.isSignedIn();
     final Tokens tokens = await Cognito.getTokens();
-    Navigator.pop(context); // dismiss loading dialog
-    return isSuccessful ? tokens.idToken : null;
+    final User user = User.fromIdToken(tokens.idToken);
+    isSuccessful = isSuccessful && user != null;
+    if (isSuccessful) {
+      GetIt.I.registerSingleton<User>(user);
+    } else {
+      try {
+        await Cognito.signOut();
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+    Navigator.pop(context);
+    return isSuccessful;
   }
 
   void _showLoadingDialog(BuildContext context) {

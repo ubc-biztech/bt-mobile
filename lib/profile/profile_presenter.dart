@@ -14,9 +14,7 @@ class ProfilePresenter extends Presenter<ProfileView, ProfileModel> {
     printUserInfo();
   }
 
-  Future printUserInfo() async {
-    final AuthManager _am = GetIt.I<AuthManager>();
-  }
+  Future printUserInfo() async {}
 
   Future signOutUser(BuildContext context) async {
     final bool signOut = await GetIt.I<AuthManager>().signOut(context);
