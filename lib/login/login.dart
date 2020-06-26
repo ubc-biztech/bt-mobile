@@ -51,11 +51,14 @@ class _LoginState extends LoginView {
                     maxLines: 2,
                   ),
                   const SizedBox(height: 20.0),
-                  GoogleSignInButton(() {}),
+                  GoogleSignInButton(
+                      () => widget.presenter.onGoogleButtonPressed(context)),
                   const SizedBox(height: 10.0),
-                  FacebookSignInButton(() {}),
+                  FacebookSignInButton(
+                      () => widget.presenter.onFacebookButtonPressed(context)),
                   const SizedBox(height: 10.0),
-                  AppleSignInButton(() {}),
+                  AppleSignInButton(
+                      () => widget.presenter.onAppleButtonPressed(context)),
                 ],
               ),
             ),

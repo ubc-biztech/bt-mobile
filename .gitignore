@@ -9,6 +9,7 @@
 .history
 .svn/
 .env
+android/app/src/main/res/raw/awsconfiguration.json
 
 # IntelliJ related
 *.iml
