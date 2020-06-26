@@ -6,4 +6,18 @@ class EventsPresenter extends Presenter<EventsView, EventsModel> {
   EventsPresenter() {
     model = EventsModel();
   }
+
+  bool _isInitialized = false;
+
+  void onInitState() {
+    if (_isInitialized) {
+      return;
+    }
+    _isInitialized = true;
+    _fetchEvents();
+  }
+
+  Future _fetchEvents() async {
+    // do nothing for now
+  }
 }

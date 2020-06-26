@@ -13,6 +13,20 @@ class ProfilePresenter extends Presenter<ProfileView, ProfileModel> {
     model = ProfileModel();
   }
 
+  bool _isInitialized = false;
+
+  void onInitState() {
+    if (_isInitialized) {
+      return;
+    }
+    _isInitialized = true;
+    _fetchProfile();
+  }
+
+  Future _fetchProfile() async {
+    // do nothing for now
+  }
+
   Future signOutUser(BuildContext context) async {
     final bool signOut = await GetIt.I<AuthManager>().signOut(context);
     if (signOut) {

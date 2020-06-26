@@ -7,5 +7,6 @@ abstract class ProfileView extends View<Profile, ProfileModel> {
   void initState() {
     super.initState();
     widget.presenter.view = this;
+    widget.presenter.onInitState();
   }
 }
