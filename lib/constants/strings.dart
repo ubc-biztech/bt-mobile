@@ -41,4 +41,80 @@ class S {
   static const String loginGoogle = 'Sign in with Google';
   static const String loginFacebook = 'Login with Facebook';
   static const String loginApple = 'Sign in with Apple';
+
+  /// NewMember
+  static const String newMemberTitle = 'Member Information';
+  static const String newMemberDescription =
+      'Thanks for signing in! Your information helps us do our best to '
+      'accommodate your needs and improve our future events.';
+  static const String newMemberOther = 'Other';
+  static const String newMemberOptional = '(Optional)';
+  static const String newMemberSubmit = 'Submit';
+  static const String newMemberFormDisclaimer =
+      'All fields marked with an asterisk (*) are required.';
+
+  // First name
+  static const String newMemberFirstName = 'First name';
+  static const String newMemberFirstNameRequired = 'First name is required';
+
+  // Last name
+  static const String newMemberLastName = 'Last name';
+  static const String newMemberLastNameRequired = 'Last name is required';
+
+  // Email
+  static const String newMemberEmail = 'Email address';
+  static const String newMemberEmailRequired = 'Email address is required';
+  static const String newMemberValidEmailRequired =
+      'Valid email address is required';
+
+  // Student ID
+  static const String newMemberStudentId = 'Student number';
+  static const String newMemberStudentIdRequired = 'Student number is required';
+  static const String newMemberValidStudentIdRequired =
+      'Valid student number is required';
+
+  // Membership
+  static const String newMemberMembershipCode = 'Membership code';
+
+  // Faculty
+  static const String newMemberFaculty = 'Faculty';
+  static const String newMemberFacultyArts = 'Arts';
+  static const String newMemberFacultyCommerce = 'Commerce';
+  static const String newMemberFacultyScience = 'Science';
+  static const String newMemberFacultyEngineering = 'Engineering';
+  static const String newMemberFacultyKinesiology = 'Kinesiology';
+  static const String newMemberFacultyLfs = 'Land and Food Systems';
+  static const String newMemberFacultyForestry = 'Forestry';
+
+  // Year
+  static const String newMemberYear = 'Level of study';
+  static const String newMember1Year = '1st Year';
+  static const String newMember2Year = '2nd Year';
+  static const String newMember3Year = '3rd Year';
+  static const String newMember4Year = '4th Year';
+  static const String newMember5PlusYear = '5+ Year';
+
+  // Diet
+  static const String newMemberDiet = 'Dietary Restrictions';
+  static const String newMemberDietNone = 'None';
+  static const String newMemberDietVegetarian = 'Vegetarian';
+  static const String newMemberDietVegan = 'Vegan';
+  static const String newMemberDietGlutenFree = 'Gluten Free';
+
+  // Gender
+  static const String newMemberGender = 'Gender';
+  static const String newMemberGenderMale = 'Male';
+  static const String newMemberGenderFemale = 'Female';
+  static const String newMemberGenderOther = 'Other / Prefer not to say';
+
+  // Heard from
+  static const String newMemberHeardFrom =
+      'How did you hear about UBC BizTech?';
+  static const String newMemberHeardFromFacebook = 'Facebook';
+  static const String newMemberHeardFromBoothing = 'Boothing';
+  static const String newMemberHeardFromFriends = 'Friends';
+  static const String newMemberHeardFromBizTechNewsletter =
+      'BizTech Newsletter';
+  static const String newMemberHeardFromFacultyNewsletter =
+      'Faculty Newsletter';
 }

@@ -14,14 +14,14 @@ class User {
   factory User.fromIdToken(String idToken) {
     final Map<String, dynamic> map = _parseJwt(idToken);
     if (map == null) {
-      return null;
+      throw Error();
     }
     final String email = map['email'].toString();
     final List<String> name = map['name'].toString().split(' ').toList();
     final List<dynamic> groups = map['cognito:groups'].toList();
     final bool isAdmin =
         groups.contains('admin') || email.endsWith('@ubcbiztech.com');
-    final String studentId = map['custom:student_id'];
+    final int studentId = map['custom:student_id'];
     return User(
         firstName: name.first,
         lastName: name.last,
@@ -57,5 +57,27 @@ class User {
   String lastName;
   String email;
   bool isAdmin;
-  String studentId;
+  String inviteCode;
+  int studentId;
+  String faculty;
+  String year;
+  String diet;
+  String heardFrom;
+  String gender;
+
+  Map<String, dynamic> get userDetails => {
+        'email': email,
+        'fname': firstName,
+        'lname': lastName,
+        'id': studentId,
+        'inviteCode': inviteCode,
+        'faculty': faculty,
+        'year': year,
+        'diet': diet,
+        'heardFrom': heardFrom,
+        'gender': gender,
+      };
+
+  bool get isStudentIdValid =>
+      studentId != null && studentId > 9999999 && studentId < 100000000;
 }

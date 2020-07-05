@@ -1,4 +1,4 @@
-import 'package:bt_mobile/common/auth_manager.dart';
+import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/login/login.dart';
 import 'package:bt_mobile/login/login_presenter.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,8 @@ class ProfilePresenter extends Presenter<ProfileView, ProfileModel> {
   }
 
   Future signOutUser(BuildContext context) async {
-    final bool signOut = await GetIt.I<AuthManager>().signOut(context);
+    final bool signOut =
+        await GetIt.I<AuthenticationManager>().signOut(context);
     if (signOut) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Login(LoginPresenter())));
