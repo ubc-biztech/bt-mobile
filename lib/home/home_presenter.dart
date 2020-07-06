@@ -54,8 +54,15 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     model.endDate = _termFormat.format(_termEnd);
   }
 
+  /// The reason we create [todayAtZeroHours] as opposed to just using
+  /// [_today] is because the math requires dates at 0 hours, 0 seconds, and
+  /// 0 milliseconds. Otherwise, our date logic will have to account for
+  /// rounding those values, which is too complicated for me. We should probably
+  /// unit test this method...
   void setStats() {
-    final int todayDiff = _today.difference(_termStart).inDays;
+    final DateTime todayAtZeroHours =
+        DateTime(_today.year, _today.month, _today.day);
+    final int todayDiff = todayAtZeroHours.difference(_termStart).inDays;
     final int endDiff = _termEnd.difference(_termStart).inDays;
 
     final int numericDayDenominator = endDiff + 1;
