@@ -57,7 +57,7 @@ class _InnerContainerState extends State<_InnerContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: C.darkColor3,
+      color: const Color(0xFF374872),
       constraints: const BoxConstraints(minWidth: double.infinity),
       height: 24.0,
       alignment: Alignment.centerLeft,
