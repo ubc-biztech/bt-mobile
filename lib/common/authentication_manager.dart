@@ -26,8 +26,9 @@ class AuthenticationManager {
     return tokens.idToken;
   }
 
-  /// Submits the user details from the "New Member" registration form. Errors
-  /// are not handled here, so they must be caught by whatever calls this
+  /// Submits the user details from the "New Member" registration form.
+  ///
+  /// Errors are not handled here, so they must be caught by whatever calls this
   /// method. If the POST call works, update the user attributes to include the
   /// student_id.
   Future submitUserDetails(BuildContext context) async {
@@ -48,16 +49,16 @@ class AuthenticationManager {
 
   /// Determine what the authentication status of the current user is.
   ///
-  /// AuthenticationStatus.unauthenticated:
+  /// [AuthenticationStatus.unauthenticated]
   ///  - The user is not signed in with any of the social media providers.
   ///
-  /// AuthenticationStatus.unregistered:
+  /// [AuthenticationStatus.unregistered]
   ///  - The user is signed in with one of the social media providers.
   ///  - The user has not filled out of the "New Member" registration form.
   ///  - The user managed to have a malformed Student ID, so they must re-do the
   ///    "New Member" registration form.
   ///
-  /// AuthenticationStatus.registered:
+  /// [AuthenticationStatus.registered]
   ///  - The user is signed in with one of the social media providers.
   ///  - The user has filled out the "New Member" registration form.
   ///  - The user's details are valid, including Student ID, they all G.
@@ -73,6 +74,7 @@ class AuthenticationManager {
       final Map<String, dynamic> userResponseBody = await Fetcher()
           .fetchBackend<Map<String, dynamic>>(
               '/users/${user.studentId}', FetcherMethod.get);
+      user.updateUserDetailsFromBackend(userResponseBody);
       return AuthenticationStatus.registered;
     } catch (e) {
       try {
@@ -85,6 +87,8 @@ class AuthenticationManager {
     }
   }
 
+  /// Signs the user out of their account and unregisters the [User] singleton.
+  ///
   /// Added 1 second delays to all sign in and sign out actions because there
   /// seems to be a lingering race condition, even when we [await] for the
   /// previous operation to finish.
@@ -116,6 +120,8 @@ class AuthenticationManager {
     return _signIn(SignInProvider.apple, context);
   }
 
+  /// Signs the user in with their [SignInProvider].
+  ///
   /// Show a loading dialog so that users can't do any additional actions while
   /// we load. If we can't generate a [User] from the idToken, then sign out.
   /// Register the [User] singleton to [GetIt] and close the dialog by calling
@@ -150,6 +156,8 @@ class AuthenticationManager {
     return status;
   }
 
+  /// Registers a globally accessible [User] singleton if signed in.
+  ///
   /// This is called when sign in is attempted. If we can instantiate a [User]
   /// object, register it as a global singleton to [GetIt]. If anything goes
   /// wrong, we sign the user out so that they can try logging in again.

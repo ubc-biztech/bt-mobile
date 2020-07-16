@@ -72,6 +72,15 @@ class User {
   String heardFrom;
   String gender;
 
+  void updateUserDetailsFromBackend(Map<String, dynamic> details) {
+    if (details.containsKey('fname')) {
+      firstName = details['fname'];
+    }
+    if (details.containsKey('lname')) {
+      lastName = details['lname'];
+    }
+  }
+
   Map<String, dynamic> get userDetails {
     final Map<String, dynamic> details = {
       'email': email,
