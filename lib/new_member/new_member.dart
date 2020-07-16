@@ -45,7 +45,7 @@ class _NewMemberState extends NewMemberView {
                           return AutoSizeText(
                             model.labelText,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: C.darkError,
                             ),
                           );

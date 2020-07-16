@@ -15,28 +15,28 @@ class NewMemberGreeting extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: 37.0),
+        children: const <Widget>[
+          SizedBox(height: 37.0),
           AutoSizeText(
             S.newMemberTitle,
             maxLines: 1,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 36.0,
               fontWeight: FontWeight.bold,
               color: C.darkColor1,
             ),
           ),
-          const SizedBox(height: 11.0),
+          SizedBox(height: 11.0),
           AutoSizeText(
             S.newMemberDescription,
             maxLines: 4,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w600,
               color: C.darkColor2,
             ),
           ),
-          const SizedBox(height: 16.0),
+          SizedBox(height: 16.0),
         ],
       ),
     );
