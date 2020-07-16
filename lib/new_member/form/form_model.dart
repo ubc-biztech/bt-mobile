@@ -16,15 +16,8 @@ class DisclaimerModel implements FormModel {
 
 class SubmitButtonModel implements FormModel {
   SubmitButtonModel({
-    @required Function onPressed,
     @required this.isEnabled,
-  }) {
-    _onPressed = onPressed;
-  }
-
-  Function _onPressed;
-
-  Function get onPressed => isEnabled() ? _onPressed : null;
+  });
 
   @override
   bool isRequired = true;

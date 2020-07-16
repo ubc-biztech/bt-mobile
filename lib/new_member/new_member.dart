@@ -4,6 +4,7 @@ import 'package:bt_mobile/new_member/form/custom_radio_field.dart';
 import 'package:bt_mobile/new_member/form/form_model.dart';
 import 'package:flutter/material.dart';
 
+import 'form/custom_submit_button.dart';
 import 'form/custom_text_field.dart';
 import 'new_member_presenter.dart';
 import 'new_member_view.dart';
@@ -57,31 +58,8 @@ class _NewMemberState extends NewMemberView {
                             model: model,
                           );
                         } else if (model is SubmitButtonModel) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                top: 26.0, left: 12, right: 12, bottom: 10),
-                            child: RaisedButton(
-                              color: C.darkColor1,
-                              child: Container(
-                                height: 50.0,
-                                constraints: const BoxConstraints(
-                                    minWidth: double.infinity),
-                                alignment: Alignment.center,
-                                child: AutoSizeText(
-                                  model.labelText,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              onPressed: model.onPressed,
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                            ),
-                          );
+                          return CustomSubmitButton(
+                              model: model, widget: widget);
                         }
                         return Container();
                       }).toList(),

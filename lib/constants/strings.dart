@@ -53,6 +53,23 @@ class S {
   static const String newMemberFormDisclaimer =
       'All fields marked with an asterisk (*) are required.';
 
+  static const String newMember404ErrorTitle = 'Uh oh...';
+  static const String newMember404Error =
+      'Thanks for submitting your information! Unfortunately, we weren\'t able '
+      'to verify your membership code. Please double check your code and try '
+      'again in the Profile section of the app.';
+  static const String newMember404Button = 'Okay';
+  static const String newMember409ErrorTitle = 'Uh oh...';
+  static const String newMember409Error = 'Unfortunately, an account with '
+      'this student number has already been registered. Sign in with that '
+      'account to continue or contact the UBC BizTech team for further help.';
+  static const String newMember409Button = 'Okay';
+  static const String newMemberErrorTitle = 'Uh oh...';
+  static const String newMemberError = 'Something went wrong! Are you '
+      'connected to the internet? Contact the UBC BizTech team if this issue '
+      'persists.';
+  static const String newMemberButton = 'Try again';
+
   // First name
   static const String newMemberFirstName = 'First name';
   static const String newMemberFirstNameRequired = 'First name is required';

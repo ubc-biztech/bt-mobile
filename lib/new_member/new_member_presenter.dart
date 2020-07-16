@@ -1,5 +1,9 @@
+import 'package:bt_mobile/common/authentication_manager.dart';
+import 'package:bt_mobile/common/backend_request.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/strings.dart';
+import 'package:bt_mobile/main/main.dart';
+import 'package:bt_mobile/main/main_presenter.dart';
 import 'package:bt_mobile/new_member/form/form_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -7,6 +11,7 @@ import 'package:get_it/get_it.dart';
 import '../base/presenter.dart';
 import 'new_member_model.dart';
 import 'new_member_view.dart';
+import 'widgets/error_dialogs.dart';
 
 class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
   NewMemberPresenter() {
@@ -15,6 +20,53 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
   }
 
   User user = GetIt.I<User>();
+
+  Future onSubmitButtonPressed(BuildContext context) async {
+    if (!areUserFieldsValid()) {
+      return;
+    }
+    final AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
+    try {
+      await authManager.submitUserDetails(context);
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+    } catch (e) {
+      final bool isBadResponse = e is BadResponseError;
+      if (isBadResponse && e.status == 404) {
+        _show404Dialog(context);
+      } else if (isBadResponse && e.status == 409) {
+        _show409Dialog(context);
+      } else {
+        _showGeneralErrorDialog(context);
+      }
+    }
+  }
+
+  void _show404Dialog(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const FourOhFourDialog(),
+    );
+  }
+
+  void _show409Dialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const FourOhNineDialog(),
+    );
+  }
+
+  void _showGeneralErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const GeneralErrorDialog(),
+    );
+  }
 
   bool areUserFieldsValid() {
     return firstNameValidator(user.firstName) == null &&
@@ -205,9 +257,6 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
         isRequired: false,
       ),
       SubmitButtonModel(
-        onPressed: () {
-          updateView();
-        },
         isEnabled: areUserFieldsValid,
       ),
     ];

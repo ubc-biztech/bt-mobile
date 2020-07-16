@@ -21,7 +21,7 @@ class BizTechMobile extends StatelessWidget {
         unselectedWidgetColor: C.darkColor3,
         accentColor: C.darkColor1,
         errorColor: C.darkError,
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: C.darkColor3),
           ),

@@ -26,7 +26,41 @@ class AuthenticationManager {
     return tokens.idToken;
   }
 
+  /// Submits the user details from the "New Member" registration form. Errors
+  /// are not handled here, so they must be caught by whatever calls this
+  /// method. If the POST call works, update the user attributes to include the
+  /// student_id.
+  Future submitUserDetails(BuildContext context) async {
+    _showLoadingDialog(context);
+    final User user = GetIt.I<User>();
+    try {
+      await Cognito.updateUserAttributes(
+          {'custom:student_id': '${user.studentId}'});
+      await Fetcher()
+          .fetchBackend('/users', FetcherMethod.post, data: user.userDetails);
+    } catch (e) {
+      // Only catching here so that we can close the loading dialog.
+      Navigator.pop(context);
+      rethrow;
+    }
+    Navigator.pop(context);
+  }
+
+  /// Determine what the authentication status of the current user is.
   ///
+  /// AuthenticationStatus.unauthenticated:
+  ///  - The user is not signed in with any of the social media providers.
+  ///
+  /// AuthenticationStatus.unregistered:
+  ///  - The user is signed in with one of the social media providers.
+  ///  - The user has not filled out of the "New Member" registration form.
+  ///  - The user managed to have a malformed Student ID, so they must re-do the
+  ///    "New Member" registration form.
+  ///
+  /// AuthenticationStatus.registered:
+  ///  - The user is signed in with one of the social media providers.
+  ///  - The user has filled out the "New Member" registration form.
+  ///  - The user's details are valid, including Student ID, they all G.
   Future<AuthenticationStatus> getAuthenticationStatus() async {
     if (!await Cognito.isSignedIn()) {
       return AuthenticationStatus.unauthenticated;
@@ -36,8 +70,9 @@ class AuthenticationManager {
       return AuthenticationStatus.unregistered;
     }
     try {
-      await Fetcher()
-          .fetchBackend('/users/${user.studentId}', FetcherMethod.get);
+      final Map<String, dynamic> userResponseBody = await Fetcher()
+          .fetchBackend<Map<String, dynamic>>(
+              '/users/${user.studentId}', FetcherMethod.get);
       return AuthenticationStatus.registered;
     } catch (e) {
       try {
@@ -103,7 +138,7 @@ class AuthenticationManager {
     try {
       await Cognito.showSignIn(
         identityProvider: providerString,
-        scopes: ['email', 'profile', 'openid'],
+        scopes: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
       );
     } catch (e) {
       print(e.toString());
@@ -136,12 +171,15 @@ class AuthenticationManager {
     showDialog(
       context: context,
       barrierDismissible: false,
-      child: Center(
-        child: SizedBox(
-          height: 20,
-          width: 20,
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Center(
+          child: SizedBox(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+            ),
           ),
         ),
       ),

@@ -11,6 +11,9 @@ class User {
     @required this.studentId,
   });
 
+  /// We create our User object from the idToken, which holds the user
+  /// attributes. Unfortunately, the [Cognito.getUserAttributes] function is not
+  /// the most reliable, so at least we can trust in this.
   factory User.fromIdToken(String idToken) {
     final Map<String, dynamic> map = _parseJwt(idToken);
     if (map == null) {
@@ -21,7 +24,11 @@ class User {
     final List<dynamic> groups = map['cognito:groups'].toList();
     final bool isAdmin =
         groups.contains('admin') || email.endsWith('@ubcbiztech.com');
-    final int studentId = map['custom:student_id'];
+
+    // If custom:student_id doesn't exist or is malformed, set to -1.
+    final int studentId = map.containsKey('custom:student_id')
+        ? int.tryParse(map['custom:student_id']) ?? -1
+        : -1;
     return User(
         firstName: name.first,
         lastName: name.last,
@@ -65,18 +72,23 @@ class User {
   String heardFrom;
   String gender;
 
-  Map<String, dynamic> get userDetails => {
-        'email': email,
-        'fname': firstName,
-        'lname': lastName,
-        'id': studentId,
-        'inviteCode': inviteCode,
-        'faculty': faculty,
-        'year': year,
-        'diet': diet,
-        'heardFrom': heardFrom,
-        'gender': gender,
-      };
+  Map<String, dynamic> get userDetails {
+    final Map<String, dynamic> details = {
+      'email': email,
+      'fname': firstName,
+      'lname': lastName,
+      'id': studentId,
+      'faculty': faculty,
+      'year': year,
+      'diet': diet,
+      'heardFrom': heardFrom,
+      'gender': gender,
+    };
+    if (inviteCode != null && inviteCode.isNotEmpty) {
+      details['inviteCode'] = inviteCode;
+    }
+    return details;
+  }
 
   bool get isStudentIdValid =>
       studentId != null && studentId > 9999999 && studentId < 100000000;
