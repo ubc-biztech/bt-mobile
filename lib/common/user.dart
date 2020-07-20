@@ -70,7 +70,7 @@ class User {
   String year;
   String diet;
   String heardFrom;
-  String gender;
+  String pronouns;
 
   void updateUserDetailsFromBackend(Map<String, dynamic> details) {
     if (details.containsKey('fname')) {
@@ -91,7 +91,7 @@ class User {
       'year': year,
       'diet': diet,
       'heardFrom': heardFrom,
-      'gender': gender,
+      'gender': pronouns,
     };
     if (inviteCode != null && inviteCode.isNotEmpty) {
       details['inviteCode'] = inviteCode;

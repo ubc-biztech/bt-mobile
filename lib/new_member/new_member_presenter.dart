@@ -224,17 +224,22 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
         },
       ),
       RadioFieldModel(
-        labelText: S.newMemberGender,
+        labelText: S.newMemberPronouns,
         values: [
-          S.newMemberGenderMale,
-          S.newMemberGenderFemale,
-          S.newMemberGenderOther,
+          S.newMemberPronounsMale,
+          S.newMemberPronounsFemale,
         ],
         onChanged: (newValue) {
-          user.gender = newValue;
+          user.pronouns = newValue;
           updateView();
         },
+        onOtherSaved: (value) {
+          user.pronouns = value;
+          updateView();
+        },
+        otherLabelText: S.newMemberPronounsOther,
         isRequired: false,
+        hasOther: true,
       ),
       RadioFieldModel(
         labelText: S.newMemberHeardFrom,

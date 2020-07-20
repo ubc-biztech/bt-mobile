@@ -59,18 +59,20 @@ class TextFieldModel implements FormModel {
 }
 
 class RadioFieldModel implements FormModel {
+  ///
   RadioFieldModel({
     @required this.labelText,
     @required List<String> values,
     @required Function(String) onChanged,
-    this.onOtherSaved,
-    bool hasOther = false,
     this.isRequired = true,
+    this.onOtherSaved,
+    String otherLabelText = S.newMemberOther,
+    bool hasOther = false,
   }) {
     int i = 0;
     this.values = values.map((value) => MapEntry(i++, value)).toList();
     if (hasOther) {
-      this.values.add(MapEntry(i, S.newMemberOther));
+      this.values.add(MapEntry(i, otherLabelText));
       otherIndex = i;
     }
     _onChanged = onChanged;

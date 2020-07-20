@@ -71,27 +71,27 @@ class S {
   static const String newMemberButton = 'Try again';
 
   // First name
-  static const String newMemberFirstName = 'First name';
+  static const String newMemberFirstName = 'First Name';
   static const String newMemberFirstNameRequired = 'First name is required';
 
   // Last name
-  static const String newMemberLastName = 'Last name';
+  static const String newMemberLastName = 'Last Name';
   static const String newMemberLastNameRequired = 'Last name is required';
 
   // Email
-  static const String newMemberEmail = 'Email address';
+  static const String newMemberEmail = 'Email Address';
   static const String newMemberEmailRequired = 'Email address is required';
   static const String newMemberValidEmailRequired =
       'Valid email address is required';
 
   // Student ID
-  static const String newMemberStudentId = 'Student number';
+  static const String newMemberStudentId = 'Student Number';
   static const String newMemberStudentIdRequired = 'Student number is required';
   static const String newMemberValidStudentIdRequired =
       'Valid student number is required';
 
   // Membership
-  static const String newMemberMembershipCode = 'Membership code';
+  static const String newMemberMembershipCode = 'Membership Code';
 
   // Faculty
   static const String newMemberFaculty = 'Faculty';
@@ -104,7 +104,7 @@ class S {
   static const String newMemberFacultyForestry = 'Forestry';
 
   // Year
-  static const String newMemberYear = 'Level of study';
+  static const String newMemberYear = 'Level of Study';
   static const String newMember1Year = '1st Year';
   static const String newMember2Year = '2nd Year';
   static const String newMember3Year = '3rd Year';
@@ -118,11 +118,12 @@ class S {
   static const String newMemberDietVegan = 'Vegan';
   static const String newMemberDietGlutenFree = 'Gluten Free';
 
-  // Gender
-  static const String newMemberGender = 'Gender';
-  static const String newMemberGenderMale = 'Male';
-  static const String newMemberGenderFemale = 'Female';
-  static const String newMemberGenderOther = 'Other / Prefer not to say';
+  // Pronouns
+  static const String newMemberPronouns = 'Pronouns';
+  static const String newMemberPronounsMale = 'He/Him/His';
+  static const String newMemberPronounsFemale = 'She/Her/Hers';
+  static const String newMemberPronounsThem = 'They/Them/Their';
+  static const String newMemberPronounsOther = 'Other/Prefer not to say';
 
   // Heard from
   static const String newMemberHeardFrom =
