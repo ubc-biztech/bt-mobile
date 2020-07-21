@@ -50,7 +50,7 @@ class _FractionStat extends StatelessWidget {
           numeratorText,
           maxLines: 1,
           style: const TextStyle(
-            fontSize: 22.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.w600,
             color: C.darkColor2,
           ),

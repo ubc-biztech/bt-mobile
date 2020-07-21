@@ -1,6 +1,7 @@
 import 'package:bt_mobile/splash/splash_presenter.dart';
 import 'package:flutter/material.dart';
 
+import 'constants/colors.dart';
 import 'constants/strings.dart';
 import 'splash/splash.dart';
 
@@ -14,7 +15,21 @@ class BizTechMobile extends StatelessWidget {
     return MaterialApp(
       title: S.title,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Proxima-Nova'),
+      theme: ThemeData(
+        primarySwatch: C.biztechColor,
+        fontFamily: 'Proxima-Nova',
+        unselectedWidgetColor: C.darkColor3,
+        accentColor: C.darkColor1,
+        errorColor: C.darkError,
+        inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: C.darkColor3),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: C.darkColor1),
+          ),
+        ),
+      ),
       home: Splash(SplashPresenter()),
     );
   }

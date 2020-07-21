@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
 class WeatherManager {
+  /// Gets the OPEN_WEATHER_API_KEY key from our .env file and saves it to
+  /// [_openWeatherApiKey].
   WeatherManager() : _openWeatherApiKey = DotEnv().env['OPEN_WEATHER_API_KEY'];
 
   SharedPreferences _preferences;

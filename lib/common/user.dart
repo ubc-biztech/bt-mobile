@@ -11,17 +11,24 @@ class User {
     @required this.studentId,
   });
 
+  /// We create our User object from the idToken, which holds the user
+  /// attributes. Unfortunately, the [Cognito.getUserAttributes] function is not
+  /// the most reliable, so at least we can trust in this.
   factory User.fromIdToken(String idToken) {
     final Map<String, dynamic> map = _parseJwt(idToken);
     if (map == null) {
-      return null;
+      throw Error();
     }
     final String email = map['email'].toString();
     final List<String> name = map['name'].toString().split(' ').toList();
     final List<dynamic> groups = map['cognito:groups'].toList();
     final bool isAdmin =
         groups.contains('admin') || email.endsWith('@ubcbiztech.com');
-    final String studentId = map['custom:student_id'];
+
+    // If custom:student_id doesn't exist or is malformed, set to -1.
+    final int studentId = map.containsKey('custom:student_id')
+        ? int.tryParse(map['custom:student_id']) ?? -1
+        : -1;
     return User(
         firstName: name.first,
         lastName: name.last,
@@ -57,5 +64,41 @@ class User {
   String lastName;
   String email;
   bool isAdmin;
-  String studentId;
+  String inviteCode;
+  int studentId;
+  String faculty;
+  String year;
+  String diet;
+  String heardFrom;
+  String pronouns;
+
+  void updateUserDetailsFromBackend(Map<String, dynamic> details) {
+    if (details.containsKey('fname')) {
+      firstName = details['fname'];
+    }
+    if (details.containsKey('lname')) {
+      lastName = details['lname'];
+    }
+  }
+
+  Map<String, dynamic> get userDetails {
+    final Map<String, dynamic> details = {
+      'email': email,
+      'fname': firstName,
+      'lname': lastName,
+      'id': studentId,
+      'faculty': faculty,
+      'year': year,
+      'diet': diet,
+      'heardFrom': heardFrom,
+      'gender': pronouns,
+    };
+    if (inviteCode != null && inviteCode.isNotEmpty) {
+      details['inviteCode'] = inviteCode;
+    }
+    return details;
+  }
+
+  bool get isStudentIdValid =>
+      studentId != null && studentId > 9999999 && studentId < 100000000;
 }

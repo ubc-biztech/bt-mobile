@@ -13,6 +13,7 @@ jobs:
         with:
           channel: 'stable'
       - run: echo "OPEN_WEATHER_API_KEY=FAKE_KEY_123" >> .env
+      - run: echo "STAGING_API=FAKE_KEY_123" >> .env
       - run: flutter pub get
       - run: flutter analyze .
       - run: flutter test

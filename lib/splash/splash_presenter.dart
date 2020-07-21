@@ -1,10 +1,12 @@
-import 'package:bt_mobile/common/auth_manager.dart';
+import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/common/term_manager.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
 import 'package:bt_mobile/login/login.dart';
 import 'package:bt_mobile/login/login_presenter.dart';
 import 'package:bt_mobile/main/main.dart';
 import 'package:bt_mobile/main/main_presenter.dart';
+import 'package:bt_mobile/new_member/new_member.dart';
+import 'package:bt_mobile/new_member/new_member_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -33,21 +35,33 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
     await DotEnv().load('.env');
     _getIt.registerSingleton<TermManager>(TermManager());
     _getIt.registerSingleton<WeatherManager>(WeatherManager());
-    _getIt.registerSingleton<AuthManager>(AuthManager());
+    _getIt.registerSingleton<AuthenticationManager>(AuthenticationManager());
 
-    bool isSignedIn;
+    AuthenticationStatus status;
     final List<Future> waitForThese = [
       _getIt<TermManager>().setupTermManager(),
       _getIt<WeatherManager>().setupWeatherManager(),
-      _getIt<AuthManager>().setupAuthManager().then((b) => isSignedIn = b),
+      _getIt<AuthenticationManager>()
+          .setupAuthManager()
+          .then((s) => status = s),
     ]; // work on these asynchronously
     await Future.wait(waitForThese);
-    final Widget page =
-        isSignedIn ? Main(MainPresenter()) : Login(LoginPresenter());
+    final Widget page = _getPageRoute(status);
     await Future.delayed(const Duration(seconds: 1));
     await controller.reverse();
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  Widget _getPageRoute(AuthenticationStatus status) {
+    switch (status) {
+      case AuthenticationStatus.registered:
+        return Main(MainPresenter());
+      case AuthenticationStatus.unregistered:
+        return NewMember(NewMemberPresenter());
+      case AuthenticationStatus.unauthenticated:
+    }
+    return Login(LoginPresenter());
   }
 
   void onDispose() {
