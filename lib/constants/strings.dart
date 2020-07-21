@@ -66,8 +66,8 @@ class S {
   static const String newMember409Button = 'Okay';
   static const String newMemberErrorTitle = 'Uh oh...';
   static const String newMemberError = 'Something went wrong! Are you '
-      'connected to the internet? Contact the UBC BizTech team if this issue '
-      'persists.';
+      'connected to the internet? Contact the UBC BizTech development team '
+      '(dev@ubcbiztech.com) if this issue persists.';
   static const String newMemberButton = 'Try again';
 
   // First name

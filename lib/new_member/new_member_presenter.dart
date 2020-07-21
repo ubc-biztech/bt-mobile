@@ -228,6 +228,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
         values: [
           S.newMemberPronounsMale,
           S.newMemberPronounsFemale,
+          S.newMemberPronounsThem,
         ],
         onChanged: (newValue) {
           user.pronouns = newValue;
