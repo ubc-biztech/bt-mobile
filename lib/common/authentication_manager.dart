@@ -22,7 +22,7 @@ class AuthenticationManager {
   }
 
   Future<String> get jwtToken async {
-    final Tokens tokens = await Cognito.getTokens();
+    Tokens tokens = await Cognito.getTokens();
     return tokens.idToken;
   }
 
@@ -33,7 +33,7 @@ class AuthenticationManager {
   /// student_id.
   Future submitUserDetails(BuildContext context) async {
     _showLoadingDialog(context);
-    final User user = GetIt.I<User>();
+    User user = GetIt.I<User>();
     try {
       await Cognito.updateUserAttributes(
           {'custom:student_id': '${user.studentId}'});
@@ -66,12 +66,12 @@ class AuthenticationManager {
     if (!await Cognito.isSignedIn()) {
       return AuthenticationStatus.unauthenticated;
     }
-    final User user = GetIt.I<User>();
+    User user = GetIt.I<User>();
     if (!user.isStudentIdValid) {
       return AuthenticationStatus.unregistered;
     }
     try {
-      final Map<String, dynamic> userResponseBody = (await Fetcher()
+      Map<String, dynamic> userResponseBody = (await Fetcher()
               .fetchBackend('/users/${user.studentId}', FetcherMethod.get))
           .cast<String, dynamic>();
       user.updateUserDetailsFromBackend(userResponseBody);
@@ -100,7 +100,7 @@ class AuthenticationManager {
       print(e.toString());
     }
     await Future.delayed(const Duration(seconds: 1));
-    final bool isSuccessful = !await Cognito.isSignedIn();
+    bool isSuccessful = !await Cognito.isSignedIn();
     if (isSuccessful) {
       GetIt.I.unregister(instance: GetIt.I<User>());
     }
@@ -151,7 +151,7 @@ class AuthenticationManager {
     }
     await Future.delayed(const Duration(seconds: 1));
     await _registerUserSingleton();
-    final AuthenticationStatus status = await getAuthenticationStatus();
+    AuthenticationStatus status = await getAuthenticationStatus();
     Navigator.pop(context);
     return status;
   }
@@ -164,8 +164,8 @@ class AuthenticationManager {
   Future _registerUserSingleton() async {
     if (await Cognito.isSignedIn()) {
       try {
-        final Tokens tokens = await Cognito.getTokens();
-        final User user = User.fromIdToken(tokens.idToken);
+        Tokens tokens = await Cognito.getTokens();
+        User user = User.fromIdToken(tokens.idToken);
         GetIt.I.registerSingleton<User>(user);
       } catch (e) {
         await Cognito.signOut();

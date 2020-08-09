@@ -119,7 +119,6 @@ class FacebookSignInButton extends StatelessWidget {
   const FacebookSignInButton(this.onPressed);
 
   final Function onPressed;
-
   static const double _iconPadding = (40.0 / 18.0 * 23.0) / 40.0 * 8.0;
 
   @override

@@ -15,18 +15,18 @@ class User {
   /// attributes. Unfortunately, the [Cognito.getUserAttributes] function is not
   /// the most reliable, so at least we can trust in this.
   factory User.fromIdToken(String idToken) {
-    final Map<String, dynamic> map = _parseJwt(idToken);
+    Map<String, dynamic> map = _parseJwt(idToken);
     if (map == null) {
       throw Error();
     }
-    final String email = map['email'].toString();
-    final List<String> name = map['name'].toString().split(' ').toList();
-    final List<dynamic> groups = map['cognito:groups'].toList();
-    final bool isAdmin =
+    String email = map['email'].toString();
+    List<String> name = map['name'].toString().split(' ').toList();
+    List<dynamic> groups = map['cognito:groups'].toList();
+    bool isAdmin =
         groups.contains('admin') || email.endsWith('@ubcbiztech.com');
 
     // If custom:student_id doesn't exist or is malformed, set to -1.
-    final int studentId = map.containsKey('custom:student_id')
+    int studentId = map.containsKey('custom:student_id')
         ? int.tryParse(map['custom:student_id']) ?? -1
         : -1;
     return User(
@@ -56,7 +56,7 @@ class User {
   }
 
   static String _decodeBase64(String splitToken) {
-    final String normalizedSource = base64Url.normalize(splitToken);
+    String normalizedSource = base64Url.normalize(splitToken);
     return utf8.decode(base64Url.decode(normalizedSource));
   }
 
@@ -82,7 +82,7 @@ class User {
   }
 
   Map<String, dynamic> get userDetails {
-    final Map<String, dynamic> details = {
+    Map<String, dynamic> details = {
       'email': email,
       'fname': firstName,
       'lname': lastName,

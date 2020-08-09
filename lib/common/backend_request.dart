@@ -12,8 +12,8 @@ enum FetcherMethod { get, post }
 class BadResponseError extends Error {
   BadResponseError({@required this.status, @required this.message});
 
-  final int status;
-  final http.Response message;
+  int status;
+  http.Response message;
 }
 
 class Fetcher {
@@ -35,9 +35,9 @@ class Fetcher {
   ///         )).cast<String, dynamic>();
   Future<dynamic> fetchBackend(String endpoint, FetcherMethod method,
       {dynamic data}) async {
-    final AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
-    final String jwtToken = await authManager.jwtToken;
-    final Map<String, String> headers = {'Authorization': 'Bearer $jwtToken'};
+    AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
+    String jwtToken = await authManager.jwtToken;
+    Map<String, String> headers = {'Authorization': 'Bearer $jwtToken'};
     http.Response response;
     switch (method) {
       case FetcherMethod.get:
@@ -51,7 +51,7 @@ class Fetcher {
             await http.post('$_apiUrl$endpoint', headers: headers, body: body);
         break;
     }
-    final int status = response.statusCode;
+    int status = response.statusCode;
     if (status < 200 || status >= 300) {
       throw BadResponseError(status: status, message: response);
     }

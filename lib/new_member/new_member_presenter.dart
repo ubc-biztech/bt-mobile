@@ -25,13 +25,13 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
     if (!areUserFieldsValid()) {
       return;
     }
-    final AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
+    AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
     try {
       await authManager.submitUserDetails(context);
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Main(MainPresenter())));
     } catch (e) {
-      final bool isBadResponse = e is BadResponseError;
+      bool isBadResponse = e is BadResponseError;
       if (isBadResponse && e.status == 404) {
         _show404Dialog(context);
       } else if (isBadResponse && e.status == 409) {
@@ -98,7 +98,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
       return S.newMemberEmailRequired;
     } else {
       // https://stackoverflow.com/questions/16800540/validate-email-address-in-dart
-      final bool isValid = RegExp(
+      bool isValid = RegExp(
               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(value);
       if (!isValid) {
@@ -157,7 +157,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
         validator: studentIdValidator,
         keyboardType: TextInputType.number,
         onChanged: (String newValue) {
-          final int value = int.tryParse(newValue) ?? -1;
+          int value = int.tryParse(newValue) ?? -1;
           user.studentId = value;
           updateView();
         },

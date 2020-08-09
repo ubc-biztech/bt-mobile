@@ -37,16 +37,15 @@ class TermManager {
     if (_termDates == null || _termDates.dates == null) {
       return null;
     }
-    final int todayInMs = DateTime.now().millisecondsSinceEpoch;
+    int todayInMs = DateTime.now().millisecondsSinceEpoch;
     TermDate last;
     for (TermDate t in _termDates.dates) {
       // Is today's date within the range of t?
-      final bool isWithinRange =
-          todayInMs >= t.startDate.millisecondsSinceEpoch &&
-              todayInMs <= t.endDate.millisecondsSinceEpoch;
+      bool isWithinRange = todayInMs >= t.startDate.millisecondsSinceEpoch &&
+          todayInMs <= t.endDate.millisecondsSinceEpoch;
 
       // Is today's date within the range of the last t and current t?
-      final bool isWithinCurrentAndPrevious = last != null &&
+      bool isWithinCurrentAndPrevious = last != null &&
           todayInMs > last.endDate.millisecondsSinceEpoch &&
           todayInMs < t.startDate.millisecondsSinceEpoch;
 
@@ -68,10 +67,9 @@ class TermManager {
   /// anything goes bad (bad network, bad response, bad data).
   Future<bool> getTermDatesFromGitHub() async {
     try {
-      final http.Response response = await http.get(_termDatesUrl);
+      http.Response response = await http.get(_termDatesUrl);
       if (response.statusCode == 200) {
-        final TermDates termDates =
-            TermDates.fromJson(json.decode(response.body));
+        TermDates termDates = TermDates.fromJson(json.decode(response.body));
         if (termDates != null) {
           _termDates = termDates;
           saveTermDatesToPreferences(response.body);
@@ -90,7 +88,7 @@ class TermManager {
     if (!_preferences.containsKey(_termDatesKey)) {
       return false;
     }
-    final String termDatesJson = _preferences.getString(_termDatesKey);
+    String termDatesJson = _preferences.getString(_termDatesKey);
     if (termDatesJson == null || termDatesJson.isEmpty) {
       return false;
     }
@@ -117,18 +115,18 @@ class TermDates {
     if (json == null) {
       return null;
     }
-    final List<TermDate> dates = json.map((termDate) {
+    List<TermDate> dates = json.map((termDate) {
       return TermDate.fromJson(Map<String, dynamic>.from(termDate));
     }).toList();
     if (dates.contains(null)) {
       return null;
     }
-    final DateTime today = DateTime.now();
+    DateTime today = DateTime.now();
     return TermDates(dates: dates, dateRetrieved: today);
   }
 
-  final List<TermDate> dates;
-  final DateTime dateRetrieved;
+  List<TermDate> dates;
+  DateTime dateRetrieved;
 }
 
 class TermDate {
@@ -145,9 +143,9 @@ class TermDate {
         !json.containsKey(_title)) {
       return null;
     }
-    final DateTime startDate = _parseDateTime(json[_startDate]);
-    final DateTime endDate = _parseDateTime(json[_endDate], isEndDate: true);
-    final String title = json[_title];
+    DateTime startDate = _parseDateTime(json[_startDate]);
+    DateTime endDate = _parseDateTime(json[_endDate], isEndDate: true);
+    String title = json[_title];
     if (startDate == null || endDate == null || title == null) {
       return null;
     }
@@ -167,10 +165,10 @@ class TermDate {
   static const String _title = 'title';
   static const String _readingBreak = 'readingBreak';
 
-  final DateTime startDate;
-  final DateTime endDate;
-  final String title;
-  final TermDate readingBreak;
+  DateTime startDate;
+  DateTime endDate;
+  String title;
+  TermDate readingBreak;
 
   /// Parses a date from an integer, such as 20201231. If it's the end date, we
   /// use this formula: date + 1 day - 1 ms. By incrementing the day and
@@ -178,9 +176,9 @@ class TermDate {
   /// reduces the complexity of date range conditions.
   static DateTime _parseDateTime(int date, {bool isEndDate = false}) {
     try {
-      final int day = date % 100;
-      final int month = date ~/ 100 % 100;
-      final int year = date ~/ 10000;
+      int day = date % 100;
+      int month = date ~/ 100 % 100;
+      int year = date ~/ 10000;
       DateTime dateTime = DateTime(year, month, day);
       if (isEndDate) {
         dateTime = dateTime

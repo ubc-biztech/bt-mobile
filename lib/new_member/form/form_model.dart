@@ -95,7 +95,7 @@ class RadioFieldModel implements FormModel {
   }
 
   void onOtherChanged(String value) {
-    final MapEntry<int, String> keyValue = MapEntry(otherIndex, value);
+    MapEntry<int, String> keyValue = MapEntry(otherIndex, value);
     values.removeAt(otherIndex);
     values.insert(otherIndex, keyValue);
   }

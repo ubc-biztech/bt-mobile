@@ -28,8 +28,7 @@ class ProfilePresenter extends Presenter<ProfileView, ProfileModel> {
   }
 
   Future signOutUser(BuildContext context) async {
-    final bool signOut =
-        await GetIt.I<AuthenticationManager>().signOut(context);
+    bool signOut = await GetIt.I<AuthenticationManager>().signOut(context);
     if (signOut) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => Login(LoginPresenter())));

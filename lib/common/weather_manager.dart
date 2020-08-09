@@ -47,18 +47,17 @@ class WeatherManager {
         !_preferences.containsKey(_lastWeatherKey)) {
       return false;
     }
-    final int lastWeatherTimeStamp =
-        _preferences.getInt(_lastWeatherTimeStampKey);
-    final int lastWeatherPlusThreeHours =
+    int lastWeatherTimeStamp = _preferences.getInt(_lastWeatherTimeStampKey);
+    int lastWeatherPlusThreeHours =
         DateTime.fromMillisecondsSinceEpoch(lastWeatherTimeStamp)
             .add(const Duration(hours: 3))
             .millisecondsSinceEpoch;
-    final int rightNow = DateTime.now().millisecondsSinceEpoch;
+    int rightNow = DateTime.now().millisecondsSinceEpoch;
     if (rightNow >= lastWeatherTimeStamp &&
         rightNow <= lastWeatherPlusThreeHours) {
       try {
-        final List<String> split = _preferences.getStringList(_lastWeatherKey);
-        final int temperature = int.parse(split[0]);
+        List<String> split = _preferences.getStringList(_lastWeatherKey);
+        int temperature = int.parse(split[0]);
         _tempNameIcon = Tuple3(temperature, split[1], split[2]);
       } catch (e) {
         return false;
@@ -68,18 +67,18 @@ class WeatherManager {
   }
 
   Future<bool> _getWeatherTempNameIconFromApi() async {
-    final String url = _weatherApiUrl;
+    String url = _weatherApiUrl;
     try {
-      final http.Response response = await http.get(url);
+      http.Response response = await http.get(url);
       if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        final String icon =
+        Map<String, dynamic> data = json.decode(response.body);
+        String icon =
             _openWeatherIcon.replaceFirst(S.r, data['weather'][0]['icon']);
-        final double tempDouble = data['main']['temp'];
-        final int temp = (tempDouble - 273.15).round();
-        final String name = data['name'];
-        final List<String> split = ['$temp', name, icon];
-        final int timeStamp = DateTime.now().millisecondsSinceEpoch;
+        double tempDouble = data['main']['temp'];
+        int temp = (tempDouble - 273.15).round();
+        String name = data['name'];
+        List<String> split = ['$temp', name, icon];
+        int timeStamp = DateTime.now().millisecondsSinceEpoch;
         _preferences.setInt(_lastWeatherTimeStampKey, timeStamp);
         _preferences.setStringList(_lastWeatherKey, split);
         _tempNameIcon = Tuple3(temp, name, icon);

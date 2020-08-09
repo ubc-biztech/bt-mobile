@@ -28,8 +28,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   DateTime _termEnd = DateTime(2020, 12, 31);
 
   void setWeather() {
-    final WeatherManager weatherManager = _getIt<WeatherManager>();
-    final Tuple3<int, String, String> tempNameIcon =
+    WeatherManager weatherManager = _getIt<WeatherManager>();
+    Tuple3<int, String, String> tempNameIcon =
         weatherManager.getWeatherInformation;
     if (tempNameIcon == null) {
       model.isThereWeatherData = false;
@@ -41,8 +41,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   }
 
   void setDates() {
-    final TermManager termManager = _getIt<TermManager>();
-    final TermDate termDate = termManager.getCurrentTermDate();
+    TermManager termManager = _getIt<TermManager>();
+    TermDate termDate = termManager.getCurrentTermDate();
 
     // If the values are null, default to beginning and end of current year
     _termStart = termDate?.startDate ?? DateTime(_today.year, 1, 1);
@@ -60,12 +60,11 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   /// rounding those values, which is too complicated for me. We should probably
   /// unit test this method...
   void setStats() {
-    final DateTime todayAtZeroHours =
-        DateTime(_today.year, _today.month, _today.day);
-    final int todayDiff = todayAtZeroHours.difference(_termStart).inDays;
-    final int endDiff = _termEnd.difference(_termStart).inDays;
+    DateTime todayAtZeroHours = DateTime(_today.year, _today.month, _today.day);
+    int todayDiff = todayAtZeroHours.difference(_termStart).inDays;
+    int endDiff = _termEnd.difference(_termStart).inDays;
 
-    final int numericDayDenominator = endDiff + 1;
+    int numericDayDenominator = endDiff + 1;
     int numericDayNumerator = todayDiff + 1;
     if (numericDayNumerator > numericDayDenominator) {
       numericDayNumerator = numericDayDenominator;
@@ -79,7 +78,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     model.numericDayDenominator =
         S.homeDayDenominator.replaceFirst(S.r, '$numericDayDenominator');
 
-    final int numericWeekDenominator =
+    int numericWeekDenominator =
         (endDiff + _termStart.weekday + (7 - _termEnd.weekday)) ~/ 7;
     int numericWeekNumerator =
         ((todayDiff + _termStart.weekday - 1) / 7).floor() + 1;
@@ -108,7 +107,7 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   }
 
   void setProgressWidth(double width) {
-    final double old = model.topProgressWidth;
+    double old = model.topProgressWidth;
     model.topProgressWidth = model.percentage * width;
     if (old != model.topProgressWidth) {
       updateView();
