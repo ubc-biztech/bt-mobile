@@ -50,8 +50,6 @@ class AuthenticationManager {
     Navigator.pop(context);
   }
 
-  Future<Map<String, String>> get userAttributes => Cognito.getUserAttributes();
-
   /// Determine what the authentication status of the current user is.
   ///
   /// [AuthenticationStatus.unauthenticated]

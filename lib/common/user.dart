@@ -47,31 +47,6 @@ class User {
         studentId: studentId);
   }
 
-  /// We create our User object from the idToken, which holds the user
-  /// attributes. Unfortunately, the [Cognito.getUserAttributes] function is not
-  /// the most reliable, so at least we can trust in this.
-  factory User.fromUserAttributes(Map<String, dynamic> userAttributes) {
-    if (userAttributes == null) {
-      throw Error();
-    }
-    String email = userAttributes['email'].toString();
-    List<String> name = userAttributes['name'].toString().split(' ').toList();
-    List<dynamic> groups = userAttributes['cognito:groups'].toList();
-    bool isAdmin =
-        groups.contains('admin') || email.endsWith('@ubcbiztech.com');
-
-    // If custom:student_id doesn't exist or is malformed, set to -1.
-    int studentId = userAttributes.containsKey('custom:student_id')
-        ? int.tryParse(userAttributes['custom:student_id']) ?? -1
-        : -1;
-    return User(
-        firstName: name.first,
-        lastName: name.last,
-        email: email,
-        isAdmin: isAdmin,
-        studentId: studentId);
-  }
-
   /// Alright, even I barely know what's going on here. Basically, we aren't
   /// blessed with a wonderful Amplify SDK for Flutter, which means we need to
   /// do more manual labor in comparison to the web app. The [idToken] we get
