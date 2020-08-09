@@ -12,8 +12,8 @@ enum FetcherMethod { get, post }
 class BadResponseError extends Error {
   BadResponseError({@required this.status, @required this.message});
 
-  final int status;
-  final http.Response message;
+  int status;
+  http.Response message;
 }
 
 class Fetcher {
@@ -24,14 +24,20 @@ class Fetcher {
 
   /// This is basically the same as the web app's logic.
   ///
-  /// The dynamic type [K] is the response body type. If we're expecting a JSON,
-  /// we want it as a Map<String, dynamic>. The method call will look like:
-  ///       Fetcher().fetchBackend<Map<String, dynamic>>()
-  Future<K> fetchBackend<K>(String endpoint, FetcherMethod method,
+  /// The return type is [dynamic], so make sure that it is casted properly
+  /// after this method is called.
+  ///
+  /// ie.
+  ///     Map<String, dynamic> castMe =
+  ///         (await Fetcher().fetchBackend(
+  ///             '/some/${route}',
+  ///             FetcherMethod.get,
+  ///         )).cast<String, dynamic>();
+  Future<dynamic> fetchBackend(String endpoint, FetcherMethod method,
       {dynamic data}) async {
-    final AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
-    final String jwtToken = await authManager.jwtToken;
-    final Map<String, String> headers = {'Authorization': 'Bearer $jwtToken'};
+    AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
+    String jwtToken = await authManager.jwtToken;
+    Map<String, String> headers = {'Authorization': 'Bearer $jwtToken'};
     http.Response response;
     switch (method) {
       case FetcherMethod.get:
@@ -45,10 +51,10 @@ class Fetcher {
             await http.post('$_apiUrl$endpoint', headers: headers, body: body);
         break;
     }
-    final int status = response.statusCode;
+    int status = response.statusCode;
     if (status < 200 || status >= 300) {
       throw BadResponseError(status: status, message: response);
     }
-    return json.decode(response.body).cast<K>();
+    return json.decode(response.body);
   }
 }

@@ -55,8 +55,8 @@ class _BizBotPetState extends State<BizBotPet>
         status != AnimationStatus.dismissed) {
       return;
     }
-    final Random random = Random();
-    final Function calculateDx = (curr) {
+    Random random = Random();
+    Function calculateDx = (curr) {
       double dx = pow(-1, random.nextInt(1)) * 1 / 8;
       if (curr.dx + dx >= 1 / 2 || curr.dx + dx <= -1 / 2) {
         dx *= -1;

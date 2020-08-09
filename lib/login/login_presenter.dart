@@ -19,20 +19,18 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
   final AuthenticationManager _authManager = GetIt.I<AuthenticationManager>();
 
   Future onFacebookButtonPressed(BuildContext context) async {
-    final AuthenticationStatus status =
+    AuthenticationStatus status =
         await _authManager.signInWithFacebook(context);
     onSignInAttempt(status, context);
   }
 
   Future onGoogleButtonPressed(BuildContext context) async {
-    final AuthenticationStatus status =
-        await _authManager.signInWithGoogle(context);
+    AuthenticationStatus status = await _authManager.signInWithGoogle(context);
     onSignInAttempt(status, context);
   }
 
   Future onAppleButtonPressed(BuildContext context) async {
-    final AuthenticationStatus status =
-        await _authManager.signInWithApple(context);
+    AuthenticationStatus status = await _authManager.signInWithApple(context);
     onSignInAttempt(status, context);
   }
 
