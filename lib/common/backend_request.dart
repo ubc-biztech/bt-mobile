@@ -24,10 +24,16 @@ class Fetcher {
 
   /// This is basically the same as the web app's logic.
   ///
-  /// The dynamic type [K] is the response body type. If we're expecting a JSON,
-  /// we want it as a Map<String, dynamic>. The method call will look like:
-  ///       Fetcher().fetchBackend<Map<String, dynamic>>()
-  Future<K> fetchBackend<K>(String endpoint, FetcherMethod method,
+  /// The return type is [dynamic], so make sure that it is casted properly
+  /// after this method is called.
+  ///
+  /// ie.
+  ///     Map<String, dynamic> castMe =
+  ///         (await Fetcher().fetchBackend(
+  ///             '/some/${route}',
+  ///             FetcherMethod.get,
+  ///         )).cast<String, dynamic>();
+  Future<dynamic> fetchBackend(String endpoint, FetcherMethod method,
       {dynamic data}) async {
     final AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
     final String jwtToken = await authManager.jwtToken;
@@ -49,6 +55,6 @@ class Fetcher {
     if (status < 200 || status >= 300) {
       throw BadResponseError(status: status, message: response);
     }
-    return json.decode(response.body).cast<K>();
+    return json.decode(response.body);
   }
 }

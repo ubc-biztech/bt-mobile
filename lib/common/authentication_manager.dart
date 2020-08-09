@@ -71,9 +71,9 @@ class AuthenticationManager {
       return AuthenticationStatus.unregistered;
     }
     try {
-      final Map<String, dynamic> userResponseBody = await Fetcher()
-          .fetchBackend<Map<String, dynamic>>(
-              '/users/${user.studentId}', FetcherMethod.get);
+      final Map<String, dynamic> userResponseBody = (await Fetcher()
+              .fetchBackend('/users/${user.studentId}', FetcherMethod.get))
+          .cast<String, dynamic>();
       user.updateUserDetailsFromBackend(userResponseBody);
       return AuthenticationStatus.registered;
     } catch (e) {
