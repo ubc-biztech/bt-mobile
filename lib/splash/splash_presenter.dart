@@ -38,14 +38,16 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
     _getIt.registerSingleton<AuthenticationManager>(AuthenticationManager());
 
     AuthenticationStatus status;
+    // work on these asynchronously
     List<Future> waitForThese = [
       _getIt<TermManager>().setupTermManager(),
       _getIt<WeatherManager>().setupWeatherManager(),
       _getIt<AuthenticationManager>()
           .setupAuthManager()
           .then((s) => status = s),
-    ]; // work on these asynchronously
+    ];
     await Future.wait(waitForThese);
+
     Widget page = _getPageRoute(status);
     await Future.delayed(const Duration(seconds: 1));
     await controller.reverse();

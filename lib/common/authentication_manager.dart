@@ -35,10 +35,13 @@ class AuthenticationManager {
     _showLoadingDialog(context);
     User user = GetIt.I<User>();
     try {
-      await Cognito.updateUserAttributes(
-          {'custom:student_id': '${user.studentId}'});
-      await Fetcher()
-          .fetchBackend('/users', FetcherMethod.post, data: user.userDetails);
+      // Run asynchronously
+      await Future.wait([
+        Cognito.updateUserAttributes(
+            {'custom:student_id': '${user.studentId}'}),
+        Fetcher()
+            .fetchBackend('/users', FetcherMethod.post, data: user.userDetails),
+      ]);
     } catch (e) {
       // Only catching here so that we can close the loading dialog.
       Navigator.pop(context);
@@ -46,6 +49,8 @@ class AuthenticationManager {
     }
     Navigator.pop(context);
   }
+
+  Future<Map<String, String>> get userAttributes => Cognito.getUserAttributes();
 
   /// Determine what the authentication status of the current user is.
   ///
@@ -165,7 +170,9 @@ class AuthenticationManager {
     if (await Cognito.isSignedIn()) {
       try {
         Tokens tokens = await Cognito.getTokens();
-        User user = User.fromIdToken(tokens.idToken);
+        Map<String, String> userAttributes = await Cognito.getUserAttributes();
+        User user =
+            User.fromIdTokenAndUserAttributes(tokens.idToken, userAttributes);
         GetIt.I.registerSingleton<User>(user);
       } catch (e) {
         await Cognito.signOut();

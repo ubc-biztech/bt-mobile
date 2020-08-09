@@ -11,23 +11,58 @@ class User {
     @required this.studentId,
   });
 
+  /// Create a User object from information from [Cognito].
+  ///
+  /// We create our User object from the [idToken], which holds the user
+  /// attributes. Unfortunately, the [Cognito.getUserAttributes] function does
+  /// not include everything, so we will primarily get the information from the
+  /// parsed [idToken]. HOWEVER, the [idToken] does not contain custom fields
+  /// (like student_id), so we must get that from [userAttributes].
+  ///
+  /// ^ This changes from time to time as the [Cognito] library changes.
+  ///   BE PREPARED for things to change.
+  factory User.fromIdTokenAndUserAttributes(
+      String idToken, Map<String, dynamic> userAttributes) {
+    Map<String, dynamic> tokenMap = _parseJwt(idToken);
+    if (tokenMap == null) {
+      throw Error();
+    }
+    String email = tokenMap['email'].toString();
+    List<String> name = tokenMap['name'].toString().split(' ').toList();
+    List<dynamic> groups = tokenMap['cognito:groups'].toList();
+    bool isAdmin =
+        groups.contains('admin') || email.endsWith('@ubcbiztech.com');
+
+    // If custom:student_id doesn't exist in tokenMap, check userAttributes.
+    int studentId = tokenMap.containsKey('custom:student_id')
+        ? int.tryParse(tokenMap['custom:student_id']) ?? -1
+        : userAttributes.containsKey('custom:student_id')
+            ? userAttributes['custom:student_id']
+            : -1;
+    return User(
+        firstName: name.first,
+        lastName: name.last,
+        email: email,
+        isAdmin: isAdmin,
+        studentId: studentId);
+  }
+
   /// We create our User object from the idToken, which holds the user
   /// attributes. Unfortunately, the [Cognito.getUserAttributes] function is not
   /// the most reliable, so at least we can trust in this.
-  factory User.fromIdToken(String idToken) {
-    Map<String, dynamic> map = _parseJwt(idToken);
-    if (map == null) {
+  factory User.fromUserAttributes(Map<String, dynamic> userAttributes) {
+    if (userAttributes == null) {
       throw Error();
     }
-    String email = map['email'].toString();
-    List<String> name = map['name'].toString().split(' ').toList();
-    List<dynamic> groups = map['cognito:groups'].toList();
+    String email = userAttributes['email'].toString();
+    List<String> name = userAttributes['name'].toString().split(' ').toList();
+    List<dynamic> groups = userAttributes['cognito:groups'].toList();
     bool isAdmin =
         groups.contains('admin') || email.endsWith('@ubcbiztech.com');
 
     // If custom:student_id doesn't exist or is malformed, set to -1.
-    int studentId = map.containsKey('custom:student_id')
-        ? int.tryParse(map['custom:student_id']) ?? -1
+    int studentId = userAttributes.containsKey('custom:student_id')
+        ? int.tryParse(userAttributes['custom:student_id']) ?? -1
         : -1;
     return User(
         firstName: name.first,
