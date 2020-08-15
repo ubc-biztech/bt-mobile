@@ -1,9 +1,9 @@
-import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 import 'profile_presenter.dart';
 import 'profile_view.dart';
+import 'widgets/profile_greeting.dart';
+import 'widgets/profile_member_info.dart';
 
 class Profile extends StatefulWidget {
   const Profile(this.presenter, {Key key}) : super(key: key);
@@ -17,18 +17,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends ProfileView {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const Text(
-            S.profileDesc,
-            style: TextStyle(color: C.darkColor2),
-          ),
-          RaisedButton(
-            child: const Text('Sign out'),
-            onPressed: () => widget.presenter.signOutUser(context),
-          )
+          const ProfileGreeting(),
+          MembershipCard(model: model),
+          const SizedBox(height: 16.0),
         ],
       ),
     );
