@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
-import 'main_presenter.dart';
-import 'main_view.dart';
+import 'landing_presenter.dart';
+import 'landing_view.dart';
 
-class Main extends StatefulWidget {
-  const Main(this.presenter, {Key key}) : super(key: key);
+class Landing extends StatefulWidget {
+  const Landing(this.presenter, {Key key}) : super(key: key);
 
-  final MainPresenter presenter;
+  final LandingPresenter presenter;
 
   @override
-  _MainState createState() => _MainState();
+  _LandingState createState() => _LandingState();
 }
 
-class _MainState extends MainView {
+class _LandingState extends LandingView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

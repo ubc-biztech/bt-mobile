@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bt_mobile/constants/colors.dart';
 import 'package:bt_mobile/constants/strings.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
+import 'package:bt_mobile/landing/landing.dart';
+import 'package:bt_mobile/landing/landing_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -63,7 +63,8 @@ class FourOhFourDialog extends StatelessWidget {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Main(MainPresenter())));
+                              builder: (context) =>
+                                  Landing(LandingPresenter())));
                     },
                     color: C.darkColor1,
                   ),

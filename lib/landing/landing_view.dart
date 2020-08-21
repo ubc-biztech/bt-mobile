@@ -1,8 +1,8 @@
 import '../base/view.dart';
-import 'main.dart';
-import 'main_model.dart';
+import 'landing.dart';
+import 'landing_model.dart';
 
-abstract class MainView extends View<Main, MainModel> {
+abstract class LandingView extends View<Landing, LandingModel> {
   @override
   void initState() {
     super.initState();

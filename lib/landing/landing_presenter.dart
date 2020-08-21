@@ -10,12 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 import '../base/presenter.dart';
-import 'main_model.dart';
-import 'main_view.dart';
+import 'landing_model.dart';
+import 'landing_view.dart';
 
-class MainPresenter extends Presenter<MainView, MainModel> {
-  MainPresenter() {
-    model = MainModel();
+class LandingPresenter extends Presenter<LandingView, LandingModel> {
+  LandingPresenter({int startPageIndex = 0}) {
+    model = LandingModel();
+    model.pageIndex = startPageIndex;
     _addPages();
   }
 

@@ -35,6 +35,8 @@ class S {
       'This is where users can edit their profile!';
   static const String profileIsMember = 'Member';
   static const String profileIsNotMember = 'Non-member';
+  static const String profileMemberInfoTitle = 'Your Details';
+  static const String profileEditDetails = 'Edit details';
 
   /// Login
   static const String loginWelcome = 'Welcome!';
@@ -45,11 +47,11 @@ class S {
   static const String loginApple = 'Sign in with Apple';
 
   /// NewMember
-  static const String newMemberTitle = 'Member Information';
+  static const String newMemberTitle = 'Member Details';
   static const String newMemberDescription =
       'Thanks for signing in! Your information helps us do our best to '
       'accommodate your needs and improve our future events.';
-  static const String newMemberEditTitle = 'Edit Information';
+  static const String newMemberEditTitle = 'Edit Details';
   static const String newMemberEditDescription =
       'Thanks for keeping your details updated! This helps us do our best to '
       'accommodate your needs and improve our future events.';

@@ -51,7 +51,9 @@ class Fetcher {
             await http.post('$_apiUrl$endpoint', headers: headers, body: body);
         break;
       case FetcherMethod.patch:
-        response = await http.patch('$_apiUrl$endpoint', headers: headers);
+        final body = const JsonEncoder().convert(data);
+        response =
+            await http.patch('$_apiUrl$endpoint', headers: headers, body: body);
         break;
     }
     int status = response.statusCode;

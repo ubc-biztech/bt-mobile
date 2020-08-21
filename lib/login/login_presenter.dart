@@ -1,6 +1,6 @@
 import 'package:bt_mobile/common/authentication_manager.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
+import 'package:bt_mobile/landing/landing.dart';
+import 'package:bt_mobile/landing/landing_presenter.dart';
 import 'package:bt_mobile/member_info/member_info.dart';
 import 'package:bt_mobile/member_info/member_info_presenter.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class LoginPresenter extends Presenter<LoginView, LoginModel> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Main(MainPresenter()),
+            builder: (context) => Landing(LandingPresenter()),
           ),
         );
         break;

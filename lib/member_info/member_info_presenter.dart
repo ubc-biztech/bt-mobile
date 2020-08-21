@@ -2,8 +2,8 @@ import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/common/backend_request.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/strings.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
+import 'package:bt_mobile/landing/landing.dart';
+import 'package:bt_mobile/landing/landing_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -53,8 +53,11 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
     AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
     try {
       await authManager.submitUserDetails(context, isPost: isNew);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Landing(LandingPresenter(startPageIndex: isNew ? 0 : 2))));
     } catch (e) {
       bool isBadResponse = e is BadResponseError;
       if (isBadResponse && e.status == 404) {

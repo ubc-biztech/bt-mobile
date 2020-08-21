@@ -2,7 +2,7 @@ import 'package:bt_mobile/base/model.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
-class MainModel extends Model {
+class LandingModel extends Model {
   int pageIndex = 0;
   List<Widget> pages = [];
   List<Tuple2<Widget, String>> iconAndTitles = [];

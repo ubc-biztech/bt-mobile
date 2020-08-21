@@ -27,62 +27,65 @@ class _NewMemberState extends NewMemberView {
       child: Scaffold(
         backgroundColor: C.darkBackground,
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                NewMemberGreeting(
-                  title: model.title,
-                  description: model.description,
-                ),
-                Container(
-                  constraints: const BoxConstraints(minWidth: double.infinity),
-                  margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Card(
-                    color: C.darkBackgroundCard,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 23.0, vertical: 16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: model.formModels.map((model) {
-                          if (model is DisclaimerModel) {
-                            return AutoSizeText(
-                              model.labelText,
-                              maxLines: 1,
-                              style: const TextStyle(
-                                color: C.darkError,
-                              ),
-                            );
-                          } else if (model is TextFieldModel) {
-                            return CustomTextField(
-                              model: model,
-                            );
-                          } else if (model is RadioFieldModel) {
-                            return CustomRadioField(
-                              model: model,
-                            );
-                          } else if (model is SubmitButtonModel) {
-                            return CustomSubmitButton(
-                              model: model,
-                              onSubmitButtonPressed:
-                                  widget.presenter.onSubmitButtonPressed,
-                            );
-                          }
-                          return Container();
-                        }).toList(),
-                      ),
-                    ),
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24.0),
-                    ),
-                    elevation: 4,
+          child: Scrollbar(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  NewMemberGreeting(
+                    title: model.title,
+                    description: model.description,
                   ),
-                ),
-                const SizedBox(height: 16.0),
-              ],
+                  Container(
+                    constraints:
+                        const BoxConstraints(minWidth: double.infinity),
+                    margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Card(
+                      color: C.darkBackgroundCard,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 23.0, vertical: 16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: model.formModels.map((model) {
+                            if (model is DisclaimerModel) {
+                              return AutoSizeText(
+                                model.labelText,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  color: C.darkError,
+                                ),
+                              );
+                            } else if (model is TextFieldModel) {
+                              return CustomTextField(
+                                model: model,
+                              );
+                            } else if (model is RadioFieldModel) {
+                              return CustomRadioField(
+                                model: model,
+                              );
+                            } else if (model is SubmitButtonModel) {
+                              return CustomSubmitButton(
+                                model: model,
+                                onSubmitButtonPressed:
+                                    widget.presenter.onSubmitButtonPressed,
+                              );
+                            }
+                            return Container();
+                          }).toList(),
+                        ),
+                      ),
+                      semanticContainer: true,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      elevation: 4,
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                ],
+              ),
             ),
           ),
         ),
