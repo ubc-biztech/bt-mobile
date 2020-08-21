@@ -1,12 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class NewMemberGreeting extends StatelessWidget {
   const NewMemberGreeting({
     Key key,
+    @required this.title,
+    @required this.description,
   }) : super(key: key);
+
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +19,10 @@ class NewMemberGreeting extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           SizedBox(height: 37.0),
           AutoSizeText(
-            S.newMemberTitle,
+            title,
             maxLines: 1,
             style: TextStyle(
               fontSize: 36.0,
@@ -28,7 +32,7 @@ class NewMemberGreeting extends StatelessWidget {
           ),
           SizedBox(height: 11.0),
           AutoSizeText(
-            S.newMemberDescription,
+            description,
             maxLines: 4,
             style: TextStyle(
               fontSize: 18.0,

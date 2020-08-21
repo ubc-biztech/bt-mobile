@@ -33,6 +33,8 @@ class S {
   static const String profileTitle = 'Profile';
   static const String profileDesc =
       'This is where users can edit their profile!';
+  static const String profileIsMember = 'Member';
+  static const String profileIsNotMember = 'Non-member';
 
   /// Login
   static const String loginWelcome = 'Welcome!';
@@ -47,6 +49,10 @@ class S {
   static const String newMemberDescription =
       'Thanks for signing in! Your information helps us do our best to '
       'accommodate your needs and improve our future events.';
+  static const String newMemberEditTitle = 'Edit Information';
+  static const String newMemberEditDescription =
+      'Thanks for keeping your details updated! This helps us do our best to '
+      'accommodate your needs and improve our future events.';
   static const String newMemberOther = 'Other';
   static const String newMemberOptional = '(Optional)';
   static const String newMemberSubmit = 'Submit';
@@ -56,8 +62,7 @@ class S {
   static const String newMember404ErrorTitle = 'Uh oh...';
   static const String newMember404Error =
       'Thanks for submitting your information! Unfortunately, we weren\'t able '
-      'to verify your membership code. Please double check your code and try '
-      'again in the Profile section of the app.';
+      'to verify your membership code. Please double check your code.';
   static const String newMember404Button = 'Okay';
   static const String newMember409ErrorTitle = 'Uh oh...';
   static const String newMember409Error = 'Unfortunately, an account with '
@@ -102,6 +107,15 @@ class S {
   static const String newMemberFacultyKinesiology = 'Kinesiology';
   static const String newMemberFacultyLfs = 'Land and Food Systems';
   static const String newMemberFacultyForestry = 'Forestry';
+  static const List<String> newMemberFacultyList = [
+    S.newMemberFacultyArts,
+    S.newMemberFacultyCommerce,
+    S.newMemberFacultyScience,
+    S.newMemberFacultyEngineering,
+    S.newMemberFacultyKinesiology,
+    S.newMemberFacultyLfs,
+    S.newMemberFacultyForestry,
+  ];
 
   // Year
   static const String newMemberYear = 'Level of Study';
@@ -110,6 +124,13 @@ class S {
   static const String newMember3Year = '3rd Year';
   static const String newMember4Year = '4th Year';
   static const String newMember5PlusYear = '5+ Year';
+  static const List<String> newMemberYearList = [
+    S.newMember1Year,
+    S.newMember2Year,
+    S.newMember3Year,
+    S.newMember4Year,
+    S.newMember5PlusYear,
+  ];
 
   // Diet
   static const String newMemberDiet = 'Dietary Restrictions';
@@ -117,6 +138,12 @@ class S {
   static const String newMemberDietVegetarian = 'Vegetarian';
   static const String newMemberDietVegan = 'Vegan';
   static const String newMemberDietGlutenFree = 'Gluten Free';
+  static const List<String> newMemberDietList = [
+    S.newMemberDietNone,
+    S.newMemberDietVegetarian,
+    S.newMemberDietVegan,
+    S.newMemberDietGlutenFree,
+  ];
 
   // Pronouns
   static const String newMemberPronouns = 'Pronouns';
@@ -124,6 +151,11 @@ class S {
   static const String newMemberPronounsFemale = 'She/Her/Hers';
   static const String newMemberPronounsThem = 'They/Them/Their';
   static const String newMemberPronounsOther = 'Other/Prefer not to say';
+  static const List<String> newMemberPronounsList = [
+    S.newMemberPronounsMale,
+    S.newMemberPronounsFemale,
+    S.newMemberPronounsThem,
+  ];
 
   // Heard from
   static const String newMemberHeardFrom =
@@ -135,4 +167,11 @@ class S {
       'BizTech Newsletter';
   static const String newMemberHeardFromFacultyNewsletter =
       'Faculty Newsletter';
+  static const List<String> newMemberHeardFromList = [
+    S.newMemberHeardFromFacebook,
+    S.newMemberHeardFromBoothing,
+    S.newMemberHeardFromFriends,
+    S.newMemberHeardFromBizTechNewsletter,
+    S.newMemberHeardFromFacultyNewsletter,
+  ];
 }

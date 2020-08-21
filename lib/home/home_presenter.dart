@@ -54,6 +54,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     model.endDate = _termFormat.format(_termEnd);
   }
 
+  /// Sets the term stats that are shown in the first card.
+  ///
   /// The reason we create [todayAtZeroHours] as opposed to just using
   /// [_today] is because the math requires dates at 0 hours, 0 seconds, and
   /// 0 milliseconds. Otherwise, our date logic will have to account for

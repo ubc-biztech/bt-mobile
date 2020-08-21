@@ -59,7 +59,6 @@ class TextFieldModel implements FormModel {
 }
 
 class RadioFieldModel implements FormModel {
-  ///
   RadioFieldModel({
     @required this.labelText,
     @required List<String> values,
@@ -68,6 +67,7 @@ class RadioFieldModel implements FormModel {
     this.onOtherSaved,
     String otherLabelText = S.newMemberOther,
     bool hasOther = false,
+    String initialValue,
   }) {
     int i = 0;
     this.values = values.map((value) => MapEntry(i++, value)).toList();
@@ -80,6 +80,14 @@ class RadioFieldModel implements FormModel {
       labelText = '$labelText*';
     } else {
       labelText = '$labelText ${S.newMemberOptional}';
+    }
+    if (initialValue != null) {
+      int indexOfInitialValue = values.indexOf(initialValue);
+      if (indexOfInitialValue == -1) {
+        onOtherChanged(initialValue);
+      } else {
+        radioValue = indexOfInitialValue;
+      }
     }
   }
 

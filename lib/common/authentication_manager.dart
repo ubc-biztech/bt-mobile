@@ -31,23 +31,25 @@ class AuthenticationManager {
   /// Errors are not handled here, so they must be caught by whatever calls this
   /// method. If the POST call works, update the user attributes to include the
   /// student_id.
-  Future submitUserDetails(BuildContext context) async {
+  Future submitUserDetails(BuildContext context, {bool isPost = true}) async {
     _showLoadingDialog(context);
     User user = GetIt.I<User>();
     try {
       // Run asynchronously
+      String endpoint = '/users';
+      if (!isPost) {
+        endpoint += '/${user.studentId}';
+      }
       await Future.wait([
         Cognito.updateUserAttributes(
             {'custom:student_id': '${user.studentId}'}),
-        Fetcher()
-            .fetchBackend('/users', FetcherMethod.post, data: user.userDetails),
+        Fetcher().fetchBackend(
+            endpoint, isPost ? FetcherMethod.post : FetcherMethod.patch,
+            data: user.userDetails),
       ]);
-    } catch (e) {
-      // Only catching here so that we can close the loading dialog.
+    } finally {
       Navigator.pop(context);
-      rethrow;
     }
-    Navigator.pop(context);
   }
 
   /// Determine what the authentication status of the current user is.
@@ -77,7 +79,7 @@ class AuthenticationManager {
       Map<String, dynamic> userResponseBody = (await Fetcher()
               .fetchBackend('/users/${user.studentId}', FetcherMethod.get))
           .cast<String, dynamic>();
-      user.updateUserDetailsFromBackend(userResponseBody);
+      user.updateUserDetailsFromMap(userResponseBody);
       return AuthenticationStatus.registered;
     } catch (e) {
       try {

@@ -2,18 +2,17 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bt_mobile/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../new_member.dart';
 import 'form_model.dart';
 
 class CustomSubmitButton extends StatelessWidget {
   const CustomSubmitButton({
     Key key,
     @required this.model,
-    @required this.widget,
+    @required this.onSubmitButtonPressed,
   }) : super(key: key);
 
   final SubmitButtonModel model;
-  final NewMember widget;
+  final Function onSubmitButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class CustomSubmitButton extends StatelessWidget {
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
         ),
-        onPressed: () => widget.presenter.onSubmitButtonPressed(context),
+        onPressed: () => onSubmitButtonPressed(context),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),

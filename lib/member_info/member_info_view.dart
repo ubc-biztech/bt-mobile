@@ -1,6 +1,6 @@
 import '../base/view.dart';
-import 'new_member.dart';
-import 'new_member_model.dart';
+import 'member_info.dart';
+import 'member_info_model.dart';
 
 abstract class NewMemberView extends View<NewMember, NewMemberModel> {
   @override

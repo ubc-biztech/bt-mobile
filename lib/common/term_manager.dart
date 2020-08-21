@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bt_mobile/home/home_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,13 +32,18 @@ class TermManager {
   /// Iterates through all the terms in [_termDates] and returns the current
   /// term, reading break, or closest future term in reference to today's date.
   ///
+  ///
+  /// The [todayAtZeroHours] logic is explained at [HomePresenter.setStats].
+  ///
   /// We do date range checks using [DateTime.millisecondsSinceEpoch]. The logic
   /// in [TermDate._parseDateTime] makes this possible (date + 1 day - 1 ms).
   TermDate getCurrentTermDate() {
     if (_termDates == null || _termDates.dates == null) {
       return null;
     }
-    int todayInMs = DateTime.now().millisecondsSinceEpoch;
+    DateTime today = DateTime.now();
+    DateTime todayAtZeroHours = DateTime(today.year, today.month, today.day);
+    int todayInMs = todayAtZeroHours.millisecondsSinceEpoch;
     TermDate last;
     for (TermDate t in _termDates.dates) {
       // Is today's date within the range of t?
