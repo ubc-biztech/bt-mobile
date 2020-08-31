@@ -10,11 +10,11 @@
 /// Example:
 /// abstract class MyScreenView extends View<MyScreen, MyScreenModel> {
 ///   @override
-//    void initState() {
-//      super.initState();
-//      widget.presenter.view = this;
-//    }
-// }
+///    void initState() {
+///      super.initState();
+///      widget.presenter.view = this;
+///    }
+/// }
 
 import 'package:flutter/material.dart';
 

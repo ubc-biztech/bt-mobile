@@ -1,4 +1,5 @@
 import 'package:bt_mobile/common/authentication_manager.dart';
+import 'package:bt_mobile/common/events_manager.dart';
 import 'package:bt_mobile/common/term_manager.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
 import 'package:bt_mobile/landing/landing.dart';
@@ -33,6 +34,7 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
 
   Future setupManagers(BuildContext context) async {
     await DotEnv().load('.env');
+    _getIt.registerSingleton<EventsManager>(EventsManager());
     _getIt.registerSingleton<TermManager>(TermManager());
     _getIt.registerSingleton<WeatherManager>(WeatherManager());
     _getIt.registerSingleton<AuthenticationManager>(AuthenticationManager());
@@ -47,6 +49,8 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
           .then((s) => status = s),
     ];
     await Future.wait(waitForThese);
+    // This can only be done after setupAuthManager is called
+    await _getIt<EventsManager>().setupEventsManager();
 
     Widget page = _getPageRoute(status);
     await Future.delayed(const Duration(seconds: 1));
