@@ -18,7 +18,7 @@ class EventsManager {
   /// Returns [true] if successfully got data from backend.
   Future<bool> getEventsFromBackend() async {
     try {
-      List<Map<String, dynamic>> eventsData =
+      List<dynamic> eventsData =
           await Fetcher().fetchBackend('/events', FetcherMethod.get);
       events = eventsData.map((json) => Event.fromJson(json)).toList();
     } catch (e) {
@@ -53,7 +53,12 @@ class Event {
   factory Event.fromJson(Map<String, dynamic> json) {
     String location = json['elocation'] ?? '';
     String imageUrl = json['imageUrl'] ?? '';
-    int capacity = json['capac'] ?? 0;
+    int capacity;
+    try {
+      capacity = json['capac'] ?? 0;
+    } catch (e) {
+      capacity = int.parse(json['capac']) ?? 0;
+    }
     int checkInCapacity = json['checkinCapac'] ?? 0;
     int updatedAt = json['updatedAt'] ?? 0;
     String longitude = json['longitude'] ?? '';
