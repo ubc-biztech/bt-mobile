@@ -41,8 +41,11 @@ class Event {
       this.capacity,
       this.checkInCapacity,
       this.updatedAt,
+      this.code,
       this.longitude,
       this.latitude,
+      this.startDate,
+      this.endDate,
       this.name,
       this.description,
       this.id,
@@ -61,8 +64,11 @@ class Event {
     }
     int checkInCapacity = json['checkinCapac'] ?? 0;
     int updatedAt = json['updatedAt'] ?? 0;
+    String code = json['code'] ?? '';
     String longitude = json['longitude'] ?? '';
     String latitude = json['latitude'] ?? '';
+    String startDate = json['startDate'] ?? '';
+    String endDate = json['endDate'] ?? '';
     String name = json['ename'] ?? '';
     String description = json['description'] ?? '';
     String id = json['id'] ?? '';
@@ -76,8 +82,11 @@ class Event {
         capacity,
         checkInCapacity,
         updatedAt,
+        code,
         longitude,
         latitude,
+        startDate,
+        endDate,
         name,
         description,
         id,
@@ -91,8 +100,11 @@ class Event {
   int capacity;
   int checkInCapacity;
   int updatedAt;
+  String code;
   String longitude;
   String latitude;
+  String startDate;
+  String endDate;
   String name;
   String description;
   String id;
