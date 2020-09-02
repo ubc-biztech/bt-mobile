@@ -12,6 +12,8 @@ class EventsManager {
   /// On network call failed, load Events data from storage
   Future setupEventsManager() async {
     bool isGetSuccessful = await getEventsFromBackend();
+    _preferences ??= await SharedPreferences.getInstance();
+
     if (isGetSuccessful) {
       storeEventsToStorage();
     } else {
@@ -33,9 +35,7 @@ class EventsManager {
 
   /// Returns [true] if successfully stores event data in storage.
   Future<bool> storeEventsToStorage() async {
-    _preferences ??= await SharedPreferences.getInstance();
     String eventsJson = jsonEncode(events);
-
     if (_preferences.containsKey(_eventsKey) &&
         _preferences.getString(_eventsKey) == eventsJson){
       return false;
@@ -45,13 +45,10 @@ class EventsManager {
   }
 
   /// Returns [true] if successfully loads event data from storage.
-  Future<bool> loadEventsFromStorage() async {
-    _preferences ??= await SharedPreferences.getInstance();
-    
+  Future<bool> loadEventsFromStorage() async {    
     if (!_preferences.containsKey(_eventsKey)) {
       return false;
     }
-
     String eventsJson = _preferences.getString(_eventsKey);
     events = jsonDecode(eventsJson);
     return true;
