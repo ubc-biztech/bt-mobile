@@ -35,7 +35,8 @@ class EventsManager {
 
   /// Returns [true] if successfully stores event data in storage.
   Future<bool> storeEventsToStorage() async {
-    String eventsJson = jsonEncode(events);
+    String eventsJson = jsonEncode(events); // this will automatically call toJson on each event
+
     if (_preferences.containsKey(_eventsKey) &&
         _preferences.getString(_eventsKey) == eventsJson){
       return false;
@@ -114,7 +115,29 @@ class Event {
         registeredCount,
         checkedInCount,
         waitListCount);
-  }  
+  } 
+
+  Map<String, dynamic> toJson(){
+  return {
+    'elocation': location,
+    'imageUrl': imageUrl,
+    'capac': capacity,
+    'checkinCapac': checkInCapacity,
+    'updatedAt': updatedAt,
+    'code': code,
+    'longitude': longitude,
+    'latitude': latitude,
+    'startDate': startDate,
+    'endDate': endDate,
+    'ename': name,
+    'description': description,
+    'id': id,
+    'registeredCount':registeredCount,
+    'checkedInCount':checkedInCount,
+    'waitlistCount':waitListCount
+  };
+}
+
 
   String location;
   String imageUrl;
