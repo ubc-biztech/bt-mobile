@@ -52,7 +52,8 @@ class EventsManager {
       return false;
     }
     String eventsJson = _preferences.getString(_eventsKey);
-    events = jsonDecode(eventsJson);
+    List<dynamic> eventsData = jsonDecode(eventsJson);
+    events = eventsData.map((json) => Event.fromJson(json)).toList();
     return true;
   }
 }
