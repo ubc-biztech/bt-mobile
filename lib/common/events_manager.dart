@@ -1,6 +1,7 @@
+import 'dart:convert';
 import 'package:bt_mobile/common/backend_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+
 
 class EventsManager {
   List<Event> events = [];
