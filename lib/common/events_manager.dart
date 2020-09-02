@@ -1,7 +1,11 @@
 import 'package:bt_mobile/common/backend_request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class EventsManager {
   List<Event> events = [];
+  SharedPreferences _preferences;
+  static const _eventsKey = 'events_key';
 
   /// GET information from AWS (network call) (if fails: no internet, backend failed)
   /// ^if successful, store events data in storage
@@ -28,10 +32,30 @@ class EventsManager {
   }
 
   /// Returns [true] if successfully stores event data in storage.
-  Future<bool> storeEventsToStorage() async {}
+  Future<bool> storeEventsToStorage() async {
+    _preferences ??= await SharedPreferences.getInstance();
+    String eventsJson = jsonEncode(events);
+
+    if (_preferences.containsKey(_eventsKey) &&
+        _preferences.getString(_eventsKey) == eventsJson){
+      return false;
+    }
+    await _preferences.setString(_eventsKey, eventsJson);
+    return true;
+  }
 
   /// Returns [true] if successfully loads event data from storage.
-  Future<bool> loadEventsFromStorage() async {}
+  Future<bool> loadEventsFromStorage() async {
+    _preferences ??= await SharedPreferences.getInstance();
+    
+    if (!_preferences.containsKey(_eventsKey)) {
+      return false;
+    }
+
+    String eventsJson = _preferences.getString(_eventsKey);
+    events = jsonDecode(eventsJson);
+    return true;
+  }
 }
 
 class Event {
@@ -93,7 +117,7 @@ class Event {
         registeredCount,
         checkedInCount,
         waitListCount);
-  }
+  }  
 
   String location;
   String imageUrl;
