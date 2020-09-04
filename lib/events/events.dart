@@ -1,5 +1,5 @@
-import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
+import 'package:bt_mobile/events/widgets/event_card.dart';
+import 'package:bt_mobile/events/widgets/events_greeting.dart';
 import 'package:flutter/material.dart';
 
 import 'events_presenter.dart';
@@ -17,13 +17,27 @@ class Events extends StatefulWidget {
 class _EventsState extends EventsView {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: const Text(
-          S.eventsDesc,
-          style: TextStyle(color: C.darkColor2),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        EventsGreeting(model: model, presenter: widget.presenter),
+        Expanded(
+          child: Scrollbar(
+            child: ListView.builder(
+              itemCount: model.eventCardModels.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    top: index == 0 ? 6 : 0,
+                    bottom: index == model.eventCardModels.length - 1 ? 12 : 0,
+                  ),
+                  child: EventCard(model.eventCardModels[index]),
+                );
+              },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

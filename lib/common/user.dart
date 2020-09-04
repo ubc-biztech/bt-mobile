@@ -81,6 +81,7 @@ class User {
   String diet;
   String heardFrom;
   String pronouns;
+  Set<String> favoriteEventsId = {};
 
   void updateUserDetailsFromMap(Map<String, dynamic> details) {
     if (details.containsKey('fname')) {
@@ -109,6 +110,9 @@ class User {
     }
     if (details.containsKey('gender')) {
       pronouns = details['gender'];
+    }
+    if (details.containsKey('favedEventsID')) {
+      favoriteEventsId = Set.from(details['favedEventsID']);
     }
   }
 
