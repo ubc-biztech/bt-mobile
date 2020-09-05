@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 
 class EventCardModel {
   EventCardModel(
-      {@required this.id,
-      @required this.name,
+      {@required this.name,
       @required this.date,
       @required this.imageUrl,
       @required this.isFavorite,
+      @required this.onCardPressed,
       @required this.onFavoritePressed});
 
-  String id;
   String name;
   String date;
   String imageUrl;
   Function isFavorite;
+  Function onCardPressed;
   Function(Function) onFavoritePressed;
 }
 
@@ -62,7 +62,7 @@ class _EventCardState extends State<EventCard> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: widget.model.onCardPressed,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

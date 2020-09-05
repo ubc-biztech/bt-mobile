@@ -1,9 +1,9 @@
-import 'package:bt_mobile/events/widgets/event_card.dart';
 import 'package:bt_mobile/events/widgets/events_greeting.dart';
 import 'package:flutter/material.dart';
 
 import 'events_presenter.dart';
 import 'events_view.dart';
+import 'widgets/events_content.dart';
 
 class Events extends StatefulWidget {
   const Events(this.presenter, {Key key}) : super(key: key);
@@ -21,22 +21,7 @@ class _EventsState extends EventsView {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EventsGreeting(model: model, presenter: widget.presenter),
-        Expanded(
-          child: Scrollbar(
-            child: ListView.builder(
-              itemCount: model.eventCardModels.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                    top: index == 0 ? 6 : 0,
-                    bottom: index == model.eventCardModels.length - 1 ? 12 : 0,
-                  ),
-                  child: EventCard(model.eventCardModels[index]),
-                );
-              },
-            ),
-          ),
-        ),
+        EventsContent(model: model),
       ],
     );
   }

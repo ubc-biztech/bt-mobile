@@ -10,7 +10,8 @@ import 'events_model.dart';
 import 'events_view.dart';
 import 'widgets/event_card.dart';
 
-class EventsPresenter extends Presenter<EventsView, EventsModel> {
+class EventsPresenter extends Presenter<EventsView, EventsModel>
+    with EventsLoadListener {
   EventsPresenter() {
     model = EventsModel();
     filterEventsIntoCardModels();
@@ -25,15 +26,24 @@ class EventsPresenter extends Presenter<EventsView, EventsModel> {
     updateView();
   }
 
+  /// Filters events from [EventsManager] and maps them into [EventCardModel].
+  ///
+  /// If the [EventsManager] is still loading, clear [model.eventCardModels] and
+  /// do nothing.
   void filterEventsIntoCardModels() {
     model.eventCardModels = [];
+    if (model.showLoading) {
+      return;
+    }
     List<Event> filteredEvents;
     if (model.selectedFilterMode == S.eventsFilterAll) {
       filteredEvents = _eventsManager.events
           .where((event) => _isDateStringValid(event.startDate))
           .toList();
     } else if (model.selectedFilterMode == S.eventsFilterFavorites) {
-      filteredEvents = [];
+      filteredEvents = _eventsManager.events
+          .where((event) => _user.favoriteEventsId.contains(event.id))
+          .toList();
     } else if (model.selectedFilterMode == S.eventsFilterRegistered) {
       filteredEvents = [];
     } else if (model.selectedFilterMode == S.eventsFilterUpcoming) {
@@ -58,14 +68,18 @@ class EventsPresenter extends Presenter<EventsView, EventsModel> {
       DateTime startDate = DateTime.parse(event.startDate);
       String date = DateFormat.yMMMEd().format(startDate);
       return EventCardModel(
-          id: event.id,
           name: event.name,
           date: date,
           isFavorite: () => _user.favoriteEventsId.contains(event.id),
           imageUrl: event.imageUrl,
+          onCardPressed: () => _onEventCardPressed(event),
           onFavoritePressed: (updateCard) =>
               _onFavoritePressed(event.id, updateCard));
     }).toList();
+  }
+
+  Future _onEventCardPressed(Event event) async {
+    // do something
   }
 
   Future _onFavoritePressed(String id, Function updateCard) async {
@@ -98,5 +112,19 @@ class EventsPresenter extends Presenter<EventsView, EventsModel> {
     } catch (e) {
       return false;
     }
+  }
+
+  @override
+  void onLoadFinished() {
+    model.showLoading = false;
+    filterEventsIntoCardModels();
+    updateView();
+  }
+
+  @override
+  void onLoadStart() {
+    model.showLoading = true;
+    filterEventsIntoCardModels();
+    updateView();
   }
 }
