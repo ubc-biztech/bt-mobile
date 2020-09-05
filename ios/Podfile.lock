@@ -1,0 +1,137 @@
+PODS:
+  - AWSAuth (2.13.6):
+    - AWSAuth/Core (= 2.13.6)
+    - AWSAuth/FacebookSignIn (= 2.13.6)
+    - AWSAuth/GoogleSignIn (= 2.13.6)
+    - AWSAuth/UI (= 2.13.6)
+    - AWSAuth/UserPoolsSignIn (= 2.13.6)
+  - AWSAuth/Core (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+  - AWSAuth/FacebookSignIn (2.13.6):
+    - AWSFacebookSignIn (= 2.13.6)
+  - AWSAuth/GoogleSignIn (2.13.6):
+    - AWSGoogleSignIn (= 2.13.6)
+  - AWSAuth/UI (2.13.6):
+    - AWSAuthUI (= 2.13.6)
+  - AWSAuth/UserPoolsSignIn (2.13.6):
+    - AWSUserPoolsSignIn (= 2.13.6)
+  - AWSAuthCore (2.13.6):
+    - AWSCore (= 2.13.6)
+  - AWSAuthUI (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+    - AWSCore (= 2.13.6)
+  - AWSCognito (2.13.6):
+    - AWSCore (= 2.13.6)
+  - AWSCognitoIdentityProvider (2.13.6):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.13.6)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.13.6)
+  - AWSFacebookSignIn (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+    - FBSDKCoreKit (= 5.8)
+    - FBSDKLoginKit (= 5.8)
+  - AWSGoogleSignIn (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+  - AWSMobileClient (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+    - AWSCognitoIdentityProvider (= 2.13.6)
+  - AWSUserPoolsSignIn (2.13.6):
+    - AWSAuthCore (= 2.13.6)
+    - AWSCognitoIdentityProvider (= 2.13.6)
+  - FBSDKCoreKit (5.8.0):
+    - FBSDKCoreKit/Basics (= 5.8.0)
+    - FBSDKCoreKit/Core (= 5.8.0)
+  - FBSDKCoreKit/Basics (5.8.0)
+  - FBSDKCoreKit/Core (5.8.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.8.0):
+    - FBSDKLoginKit/Login (= 5.8.0)
+  - FBSDKLoginKit/Login (5.8.0):
+    - FBSDKCoreKit (~> 5.0)
+  - Flutter (1.0.0)
+  - flutter_cognito_plugin (0.0.1):
+    - AWSAuth (~> 2.13.0)
+    - AWSAuthUI (~> 2.13.0)
+    - AWSCognito (~> 2.13.0)
+    - AWSMobileClient (~> 2.13.0)
+    - AWSUserPoolsSignIn (~> 2.13.0)
+    - Flutter
+    - plugin_scaffold
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - path_provider (0.0.1):
+    - Flutter
+  - plugin_scaffold (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_cognito_plugin (from `.symlinks/plugins/flutter_cognito_plugin/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - plugin_scaffold (from `.symlinks/plugins/plugin_scaffold/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AWSAuth
+    - AWSAuthCore
+    - AWSAuthUI
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSFacebookSignIn
+    - AWSGoogleSignIn
+    - AWSMobileClient
+    - AWSUserPoolsSignIn
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FMDB
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_cognito_plugin:
+    :path: ".symlinks/plugins/flutter_cognito_plugin/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  plugin_scaffold:
+    :path: ".symlinks/plugins/plugin_scaffold/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+
+SPEC CHECKSUMS:
+  AWSAuth: 8be69810a13a6fe6aadb672d24d9e664bf728d61
+  AWSAuthCore: 62e92b5ffbd66b8ba0eac471e7f90ccfa76cf63b
+  AWSAuthUI: d3bc970e09f49ebc6355694fbfaa4a0fe3da964c
+  AWSCognito: a993c057d32173a7c7a9776684972d4073a6c7f5
+  AWSCognitoIdentityProvider: 05f14f7c892df9ff764268d2ac33b4e95288e603
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 2b6015f278770e745b4863ac5f45e007e647f298
+  AWSFacebookSignIn: 51f3194c51bef177972dffee941f08f9fd341423
+  AWSGoogleSignIn: 5f1a9797d0ac2473de794d0a04b8777ec926be02
+  AWSMobileClient: 420a899c4691c7f0991daa35daee82a84396ec63
+  AWSUserPoolsSignIn: 81036a9e6516e9ad3d643ca4b1a0baaf0dfd1bf1
+  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
+  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_cognito_plugin: 1b7f93b023433f702c8c5f953aea379af363fc5b
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  plugin_scaffold: f83b8103defd141436d8ee29ba4a3e1b5230fea1
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+
+PODFILE CHECKSUM: ff9888c8854044a0a28f2c32b1e4fe0b3583728e
+
+COCOAPODS: 1.8.4
