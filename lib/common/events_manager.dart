@@ -1,26 +1,27 @@
-import 'package:bt_mobile/common/backend_request.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-
-
+import 'package:bt_mobile/common/backend_request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EventsManager {
   List<Event> events = [];
   SharedPreferences _preferences;
-
   static const _eventsKey = 'events_key';
 
-  /// GET information from AWS (network call) (if fails: no internet, backend failed)
-  /// ^if successful, store events data in storage
-  /// On network call failed, load Events data from storage
+  bool isSetup = false;
+
+  /// Pulls events from our backend or from device storage.
+  ///
+  /// Saves events to storage if successfully pulled from backend.
   Future setupEventsManager() async {
     bool isGetSuccessful = await getEventsFromBackend();
+    _preferences ??= await SharedPreferences.getInstance();
+
     if (isGetSuccessful) {
+      isSetup = true;
       storeEventsToStorage();
     } else {
-      loadEventsFromStorage();
+      isSetup = await loadEventsFromStorage();
     }
   }
 
@@ -38,8 +39,8 @@ class EventsManager {
 
   /// Returns [true] if successfully stores event data in storage.
   Future<bool> storeEventsToStorage() async {
-    _preferences ??= await SharedPreferences.getInstance();
-    String eventsJson = jsonEncode(events);
+    String eventsJson =
+        jsonEncode(events); // this will automatically call toJson on each event
 
     if (_preferences.containsKey(_eventsKey) &&
         _preferences.getString(_eventsKey) == eventsJson) {
@@ -51,16 +52,15 @@ class EventsManager {
 
   /// Returns [true] if successfully loads event data from storage.
   Future<bool> loadEventsFromStorage() async {
-    _preferences ??= await SharedPreferences.getInstance();
     if (!_preferences.containsKey(_eventsKey)) {
       return false;
     }
-
     String eventsJson = _preferences.getString(_eventsKey);
-    events = jsonDecode(eventsJson);
+    List<dynamic> eventsData = jsonDecode(eventsJson);
+    events = eventsData.map((json) => Event.fromJson(json)).toList();
     return true;
   }
-  }
+}
 
 class Event {
   Event(
@@ -121,10 +121,28 @@ class Event {
         registeredCount,
         checkedInCount,
         waitListCount);
-
-
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'elocation': location,
+      'imageUrl': imageUrl,
+      'capac': capacity,
+      'checkinCapac': checkInCapacity,
+      'updatedAt': updatedAt,
+      'code': code,
+      'longitude': longitude,
+      'latitude': latitude,
+      'startDate': startDate,
+      'endDate': endDate,
+      'ename': name,
+      'description': description,
+      'id': id,
+      'registeredCount': registeredCount,
+      'checkedInCount': checkedInCount,
+      'waitlistCount': waitListCount
+    };
+  }
 
   String location;
   String imageUrl;

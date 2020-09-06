@@ -49,7 +49,7 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
           .then((s) => status = s),
     ];
     await Future.wait(waitForThese);
-    // This can only be done after setupAuthManager is called
+    // This will only work after setupAuthManager is called and user is Authed.
     await _getIt<EventsManager>().setupEventsManager();
 
     Widget page = _getPageRoute(status);
