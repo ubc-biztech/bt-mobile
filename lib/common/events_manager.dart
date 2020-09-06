@@ -28,7 +28,7 @@ class EventsManager {
   /// Pulls events from our backend or from device storage.
   ///
   /// Saves events to storage if successfully pulled from backend.
-  Future setupEventsManager() async {
+  Future loadEvents() async {
     for (EventsLoadListener listener in _loadListeners) {
       listener.onLoadStart();
     }

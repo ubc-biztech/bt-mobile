@@ -19,17 +19,17 @@ class LandingPresenter extends Presenter<LandingView, LandingModel> {
   LandingPresenter({int startPageIndex = 0}) {
     model = LandingModel();
     model.pageIndex = startPageIndex;
+    _setupEventsPresenter();
     _addPages();
   }
 
+  final EventsPresenter _eventsPresenter = EventsPresenter();
   final EventsManager _eventsManager = GetIt.I<EventsManager>();
 
   /// Creates an [EventsPresenter] and registers it as an [EventsLoadListener]
   /// with the [EventsManager].
-  EventsPresenter get _eventsPresenter {
-    EventsPresenter eventsPresenter = EventsPresenter();
-    _eventsManager.registerEventsLoadListener(eventsPresenter);
-    return eventsPresenter;
+  void _setupEventsPresenter() {
+    _eventsManager.registerEventsLoadListener(_eventsPresenter);
   }
 
   void _addPages() {
@@ -40,7 +40,12 @@ class LandingPresenter extends Presenter<LandingView, LandingModel> {
     model.iconAndTitles.add(Tuple2(Icon(Icons.calendar_today), S.eventsTitle));
     model.pages.add(Profile(ProfilePresenter()));
     model.iconAndTitles.add(Tuple2(Icon(Icons.person), S.profileTitle));
-    _eventsManager.setupEventsManager();
+    _eventsManager.loadEvents();
+  }
+
+  /// When [Landing] is being disposed, unregister all presenters.
+  void onDispose() {
+    _eventsManager.unregisterEventsLoadListener(_eventsPresenter);
   }
 
   void onTabTapped(int index) {

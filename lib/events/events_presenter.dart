@@ -20,6 +20,10 @@ class EventsPresenter extends Presenter<EventsView, EventsModel>
   final EventsManager _eventsManager = GetIt.I<EventsManager>();
   final User _user = GetIt.I<User>();
 
+  Future<void> onEventCardsRefresh() async {
+    _eventsManager.loadEvents();
+  }
+
   void onFilterDropdownItemChanged(String newMode) {
     model.selectedFilterMode = newMode;
     filterEventsIntoCardModels();
@@ -45,7 +49,9 @@ class EventsPresenter extends Presenter<EventsView, EventsModel>
           .where((event) => _user.favoriteEventsId.contains(event.id))
           .toList();
     } else if (model.selectedFilterMode == S.eventsFilterRegistered) {
-      filteredEvents = [];
+      filteredEvents = _eventsManager.events
+          .where((event) => _user.registeredEventsId.contains(event.id))
+          .toList();
     } else if (model.selectedFilterMode == S.eventsFilterUpcoming) {
       filteredEvents = _eventsManager.events
           .where((event) =>

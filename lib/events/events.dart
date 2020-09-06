@@ -21,7 +21,7 @@ class _EventsState extends EventsView {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EventsGreeting(model: model, presenter: widget.presenter),
-        EventsContent(model: model),
+        EventsContent(model: model, presenter: widget.presenter),
       ],
     );
   }

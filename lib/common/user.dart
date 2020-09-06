@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'backend_request.dart';
 
 class User {
   User({
@@ -47,6 +50,30 @@ class User {
         studentId: studentId);
   }
 
+  static const _registeredEventsKey = 'user_registered_events_key';
+
+  /// Fetch registered events.
+  ///
+  /// Save to device storage if fetch works.
+  /// Load from device storage if it does not exist
+  Future fetchRegisteredEvents() async {
+    // TODO(anyone): make sure this works, can't test until registrations work.
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    try {
+      List<String> registeredEvents = await Fetcher().fetchBackend(
+              '/registrations?id=$studentId', FetcherMethod.get) ??
+          [];
+      preferences.setStringList(_registeredEventsKey, registeredEvents);
+      registeredEventsId = registeredEvents.toSet();
+    } catch (e) {
+      if (preferences.containsKey(_registeredEventsKey)) {
+        List<String> registeredEvents =
+            preferences.getStringList(_registeredEventsKey) ?? [];
+        registeredEventsId = registeredEvents.toSet();
+      }
+    }
+  }
+
   /// Alright, even I barely know what's going on here. Basically, we aren't
   /// blessed with a wonderful Amplify SDK for Flutter, which means we need to
   /// do more manual labor in comparison to the web app. The [idToken] we get
@@ -82,6 +109,7 @@ class User {
   String heardFrom;
   String pronouns;
   Set<String> favoriteEventsId = {};
+  Set<String> registeredEventsId = {};
 
   void updateUserDetailsFromMap(Map<String, dynamic> details) {
     if (details.containsKey('fname')) {

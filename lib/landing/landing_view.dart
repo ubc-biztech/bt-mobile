@@ -8,4 +8,10 @@ abstract class LandingView extends View<Landing, LandingModel> {
     super.initState();
     widget.presenter.view = this;
   }
+
+  @override
+  void dispose() {
+    widget.presenter.onDispose();
+    super.dispose();
+  }
 }
