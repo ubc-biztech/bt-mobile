@@ -1,9 +1,9 @@
-import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
+import 'package:bt_mobile/events/widgets/events_greeting.dart';
 import 'package:flutter/material.dart';
 
 import 'events_presenter.dart';
 import 'events_view.dart';
+import 'widgets/events_content.dart';
 
 class Events extends StatefulWidget {
   const Events(this.presenter, {Key key}) : super(key: key);
@@ -17,13 +17,12 @@ class Events extends StatefulWidget {
 class _EventsState extends EventsView {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: const Text(
-          S.eventsDesc,
-          style: TextStyle(color: C.darkColor2),
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        EventsGreeting(model: model, presenter: widget.presenter),
+        EventsContent(model: model, presenter: widget.presenter),
+      ],
     );
   }
 }

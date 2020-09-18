@@ -3,6 +3,11 @@ import 'dart:convert';
 import 'package:bt_mobile/common/backend_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+abstract class EventsLoadListener {
+  dynamic onLoadStart();
+  dynamic onLoadFinished();
+}
+
 class EventsManager {
   List<Event> events = [];
   SharedPreferences _preferences;
@@ -10,10 +15,23 @@ class EventsManager {
 
   bool isSetup = false;
 
+  final Set<EventsLoadListener> _loadListeners = {};
+
+  void registerEventsLoadListener(EventsLoadListener listener) {
+    _loadListeners.add(listener);
+  }
+
+  void unregisterEventsLoadListener(EventsLoadListener listener) {
+    _loadListeners.remove(listener);
+  }
+
   /// Pulls events from our backend or from device storage.
   ///
   /// Saves events to storage if successfully pulled from backend.
-  Future setupEventsManager() async {
+  Future loadEvents() async {
+    for (EventsLoadListener listener in _loadListeners) {
+      listener.onLoadStart();
+    }
     bool isGetSuccessful = await getEventsFromBackend();
     _preferences ??= await SharedPreferences.getInstance();
 
@@ -22,6 +40,9 @@ class EventsManager {
       storeEventsToStorage();
     } else {
       isSetup = await loadEventsFromStorage();
+    }
+    for (EventsLoadListener listener in _loadListeners) {
+      listener.onLoadFinished();
     }
   }
 

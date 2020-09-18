@@ -1,6 +1,5 @@
 import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/common/backend_request.dart';
-import 'package:bt_mobile/common/events_manager.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/strings.dart';
 import 'package:bt_mobile/landing/landing.dart';
@@ -47,17 +46,11 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
   /// [isNew] is used here to denote whether it should make a POST or PATCH
   /// request. Basically, POST if this is the first time user is submitting
   /// information, PATCH if it is modifying the information.
-  ///
-  /// Also, if the [EventsManager] did not run setup earlier, do it now.
   Future onSubmitButtonPressed(BuildContext context) async {
     if (!areUserFieldsValid()) {
       return;
     }
     AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
-    EventsManager eventsManager = GetIt.I<EventsManager>();
-    if (!eventsManager.isSetup) {
-      await eventsManager.setupEventsManager();
-    }
     try {
       await authManager.submitUserDetails(context, isPost: isNew);
       Navigator.pushReplacement(

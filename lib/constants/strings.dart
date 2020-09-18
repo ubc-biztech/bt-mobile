@@ -28,6 +28,11 @@ class S {
   /// Events
   static const String eventsTitle = 'Events';
   static const String eventsDesc = 'This is where our events are listed!';
+  static const String eventsFilterAll = 'All';
+  static const String eventsFilterFavorites = 'Favorites';
+  static const String eventsFilterRegistered = 'Registered';
+  static const String eventsFilterUpcoming = 'Upcoming';
+  static const String eventsFilterPast = 'Past';
 
   /// Profile
   static const String profileTitle = 'Profile';
