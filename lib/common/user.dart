@@ -82,12 +82,33 @@ class User {
   String heardFrom;
   String pronouns;
 
-  void updateUserDetailsFromBackend(Map<String, dynamic> details) {
+  void updateUserDetailsFromMap(Map<String, dynamic> details) {
     if (details.containsKey('fname')) {
       firstName = details['fname'];
     }
     if (details.containsKey('lname')) {
       lastName = details['lname'];
+    }
+    if (details.containsKey('inviteCode')) {
+      inviteCode = details['inviteCode'];
+    }
+    if (details.containsKey('id')) {
+      studentId = details['id'];
+    }
+    if (details.containsKey('faculty')) {
+      faculty = details['faculty'];
+    }
+    if (details.containsKey('year')) {
+      year = details['year'];
+    }
+    if (details.containsKey('diet')) {
+      diet = details['diet'];
+    }
+    if (details.containsKey('heardFrom')) {
+      heardFrom = details['heardFrom'];
+    }
+    if (details.containsKey('gender')) {
+      pronouns = details['gender'];
     }
   }
 

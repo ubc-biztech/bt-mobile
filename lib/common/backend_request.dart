@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
-enum FetcherMethod { get, post }
+enum FetcherMethod { get, post, patch }
 
 /// A simplified [Error] class to keep our code robust and easier to read.
 class BadResponseError extends Error {
@@ -49,6 +49,11 @@ class Fetcher {
         final body = const JsonEncoder().convert(data);
         response =
             await http.post('$_apiUrl$endpoint', headers: headers, body: body);
+        break;
+      case FetcherMethod.patch:
+        final body = const JsonEncoder().convert(data);
+        response =
+            await http.patch('$_apiUrl$endpoint', headers: headers, body: body);
         break;
     }
     int status = response.statusCode;

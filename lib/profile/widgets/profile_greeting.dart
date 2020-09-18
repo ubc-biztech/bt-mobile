@@ -3,8 +3,8 @@ import 'package:bt_mobile/constants/colors.dart';
 import 'package:bt_mobile/constants/strings.dart';
 import 'package:flutter/material.dart';
 
-class NewMemberGreeting extends StatelessWidget {
-  const NewMemberGreeting({
+class ProfileGreeting extends StatelessWidget {
+  const ProfileGreeting({
     Key key,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class NewMemberGreeting extends StatelessWidget {
         children: const <Widget>[
           SizedBox(height: 37.0),
           AutoSizeText(
-            S.newMemberTitle,
+            S.profileTitle,
             maxLines: 1,
             style: TextStyle(
               fontSize: 36.0,
@@ -26,16 +26,8 @@ class NewMemberGreeting extends StatelessWidget {
               color: C.darkColor1,
             ),
           ),
-          SizedBox(height: 11.0),
-          AutoSizeText(
-            S.newMemberDescription,
-            maxLines: 4,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w600,
-              color: C.darkColor2,
-            ),
-          ),
+//          SizedBox(height: 11.0),
+//          BizBotPet(),
           SizedBox(height: 16.0),
         ],
       ),

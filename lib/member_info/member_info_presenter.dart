@@ -2,34 +2,62 @@ import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/common/backend_request.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/strings.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
-import 'package:bt_mobile/new_member/form/form_model.dart';
+import 'package:bt_mobile/landing/landing.dart';
+import 'package:bt_mobile/landing/landing_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../base/presenter.dart';
-import 'new_member_model.dart';
-import 'new_member_view.dart';
+import 'form/form_model.dart';
+import 'member_info_model.dart';
+import 'member_info_view.dart';
 import 'widgets/error_dialogs.dart';
 
 class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
-  NewMemberPresenter() {
+  NewMemberPresenter({this.isNew = true}) {
     model = NewMemberModel();
+    if (isNew) {
+      model.title = S.newMemberTitle;
+      model.description = S.newMemberDescription;
+    } else {
+      model.title = S.newMemberEditTitle;
+      model.description = S.newMemberEditDescription;
+    }
     addFormModels();
+    _savedUserDetails = user.userDetails;
   }
 
   User user = GetIt.I<User>();
+  bool isNew;
+  Map<String, dynamic> _savedUserDetails;
 
+  /// Resets all of [User]'s values to what they were before.
+  ///
+  /// When the user backs out of the form, we undo all of the changes by setting
+  /// them to what they were before, saved in [_savedUserDetails]. We return
+  /// [true] to notify the system that we are ok with backing out now.
+  bool onWillPop() {
+    user.updateUserDetailsFromMap(_savedUserDetails);
+    return true;
+  }
+
+  /// Submits the information to the backend.
+  ///
+  /// [isNew] is used here to denote whether it should make a POST or PATCH
+  /// request. Basically, POST if this is the first time user is submitting
+  /// information, PATCH if it is modifying the information.
   Future onSubmitButtonPressed(BuildContext context) async {
     if (!areUserFieldsValid()) {
       return;
     }
     AuthenticationManager authManager = GetIt.I<AuthenticationManager>();
     try {
-      await authManager.submitUserDetails(context);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Main(MainPresenter())));
+      await authManager.submitUserDetails(context, isPost: isNew);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Landing(LandingPresenter(startPageIndex: isNew ? 0 : 2))));
     } catch (e) {
       bool isBadResponse = e is BadResponseError;
       if (isBadResponse && e.status == 404) {
@@ -42,9 +70,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
     }
   }
 
-  void _show404Dialog(
-    BuildContext context,
-  ) {
+  void _show404Dialog(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -72,7 +98,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
     return firstNameValidator(user.firstName) == null &&
         lastNameValidator(user.lastName) == null &&
         emailValidator(user.email) == null &&
-        _isStudentIdTouched &&
+        (_isStudentIdTouched || user.studentId != null) &&
         studentIdValidator('${user.studentId}') == null &&
         user.faculty != null &&
         user.year != null &&
@@ -161,6 +187,8 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
           user.studentId = value;
           updateView();
         },
+        initialValue: isNew ? '' : user.studentId.toString(),
+        enabled: isNew,
       ),
       TextFieldModel(
         labelText: S.newMemberMembershipCode,
@@ -169,18 +197,11 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
           updateView();
         },
         isRequired: false,
+        initialValue: user.inviteCode,
       ),
       RadioFieldModel(
         labelText: S.newMemberFaculty,
-        values: [
-          S.newMemberFacultyArts,
-          S.newMemberFacultyCommerce,
-          S.newMemberFacultyScience,
-          S.newMemberFacultyEngineering,
-          S.newMemberFacultyKinesiology,
-          S.newMemberFacultyLfs,
-          S.newMemberFacultyForestry,
-        ],
+        values: S.newMemberFacultyList,
         onChanged: (newValue) {
           user.faculty = newValue;
           updateView();
@@ -190,29 +211,20 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
           user.faculty = value;
           updateView();
         },
+        initialValue: user.faculty,
       ),
       RadioFieldModel(
         labelText: S.newMemberYear,
-        values: [
-          S.newMember1Year,
-          S.newMember2Year,
-          S.newMember3Year,
-          S.newMember4Year,
-          S.newMember5PlusYear,
-        ],
+        values: S.newMemberYearList,
         onChanged: (newValue) {
           user.year = newValue;
           updateView();
         },
+        initialValue: user.year,
       ),
       RadioFieldModel(
         labelText: S.newMemberDiet,
-        values: [
-          S.newMemberDietNone,
-          S.newMemberDietVegetarian,
-          S.newMemberDietVegan,
-          S.newMemberDietGlutenFree,
-        ],
+        values: S.newMemberDietList,
         onChanged: (newValue) {
           user.diet = newValue;
           updateView();
@@ -222,14 +234,11 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
           user.diet = newValue;
           updateView();
         },
+        initialValue: user.diet,
       ),
       RadioFieldModel(
         labelText: S.newMemberPronouns,
-        values: [
-          S.newMemberPronounsMale,
-          S.newMemberPronounsFemale,
-          S.newMemberPronounsThem,
-        ],
+        values: S.newMemberPronounsList,
         onChanged: (newValue) {
           user.pronouns = newValue;
           updateView();
@@ -241,16 +250,11 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
         otherLabelText: S.newMemberPronounsOther,
         isRequired: false,
         hasOther: true,
+        initialValue: user.pronouns,
       ),
       RadioFieldModel(
         labelText: S.newMemberHeardFrom,
-        values: [
-          S.newMemberHeardFromFacebook,
-          S.newMemberHeardFromBoothing,
-          S.newMemberHeardFromFriends,
-          S.newMemberHeardFromBizTechNewsletter,
-          S.newMemberHeardFromFacultyNewsletter,
-        ],
+        values: S.newMemberHeardFromList,
         onChanged: (newValue) {
           user.heardFrom = newValue;
           updateView();
@@ -261,6 +265,7 @@ class NewMemberPresenter extends Presenter<NewMemberView, NewMemberModel> {
           updateView();
         },
         isRequired: false,
+        initialValue: user.heardFrom,
       ),
       SubmitButtonModel(
         isEnabled: areUserFieldsValid,

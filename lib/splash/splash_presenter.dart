@@ -1,12 +1,12 @@
 import 'package:bt_mobile/common/authentication_manager.dart';
 import 'package:bt_mobile/common/term_manager.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
+import 'package:bt_mobile/landing/landing.dart';
+import 'package:bt_mobile/landing/landing_presenter.dart';
 import 'package:bt_mobile/login/login.dart';
 import 'package:bt_mobile/login/login_presenter.dart';
-import 'package:bt_mobile/main/main.dart';
-import 'package:bt_mobile/main/main_presenter.dart';
-import 'package:bt_mobile/new_member/new_member.dart';
-import 'package:bt_mobile/new_member/new_member_presenter.dart';
+import 'package:bt_mobile/member_info/member_info.dart';
+import 'package:bt_mobile/member_info/member_info_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -58,7 +58,7 @@ class SplashPresenter extends Presenter<SplashView, SplashModel> {
   Widget _getPageRoute(AuthenticationStatus status) {
     switch (status) {
       case AuthenticationStatus.registered:
-        return Main(MainPresenter());
+        return Landing(LandingPresenter());
       case AuthenticationStatus.unregistered:
         return NewMember(NewMemberPresenter());
       case AuthenticationStatus.unauthenticated:
