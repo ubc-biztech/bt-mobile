@@ -25,7 +25,7 @@ class TermStats extends StatelessWidget {
       child: Card(
         color: C.darkBackgroundCard,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class TermStats extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,
-                  color: C.darkColor2,
+                  color: C.darkColor1,
                 ),
               ),
               const SizedBox(height: 16.0),

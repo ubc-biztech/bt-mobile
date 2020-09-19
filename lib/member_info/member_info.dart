@@ -43,7 +43,7 @@ class _NewMemberState extends NewMemberView {
                       color: C.darkBackgroundCard,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 23.0, vertical: 16.0),
+                            horizontal: 20.0, vertical: 16.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
