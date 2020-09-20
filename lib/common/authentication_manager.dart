@@ -80,6 +80,7 @@ class AuthenticationManager {
               .fetchBackend('/users/${user.studentId}', FetcherMethod.get))
           .cast<String, dynamic>();
       user.updateUserDetailsFromMap(userResponseBody);
+      await user.fetchRegisteredEvents();
       return AuthenticationStatus.registered;
     } catch (e) {
       try {
