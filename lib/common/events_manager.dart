@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class EventsLoadListener {
   dynamic onLoadStart();
+
   dynamic onLoadFinished();
 }
 
@@ -114,8 +115,8 @@ class Event {
     int checkInCapacity = json['checkinCapac'] ?? 0;
     int updatedAt = json['updatedAt'] ?? 0;
     String code = json['code'] ?? '';
-    String longitude = json['longitude'] ?? '';
-    String latitude = json['latitude'] ?? '';
+    String longitude = '${json['longitude'] ?? ''}';
+    String latitude = '${json['latitude'] ?? ''}';
     String startDate = json['startDate'] ?? '';
     String endDate = json['endDate'] ?? '';
     String name = json['ename'] ?? '';
