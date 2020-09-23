@@ -66,20 +66,19 @@ class _HomeState extends HomeView {
                 ),
               ),
             ),
-            FeaturedEvent(
+            if (model.featuredEvent != null) FeaturedEvent(
               headline: 'Featured',
               eventCardModel: EventCardModel(
-                name: 'Some event',
-                date: 'Some date',
+                name: model.featuredEvent.name,
+                date: model.featuredEventStartDate,
                 isFavorite: () => true,
-                imageUrl:
-                    'https://www.denverpost.com/wp-content/uploads/2016/09/jamal-murray.jpg',
+                imageUrl: model.featuredEvent.imageUrl,
                 onCardPressed: () {},
                 onFavoritePressed: (updateCard) {},
                 fontSize: 20,
                 imageAspectRatio: 16 * 1.5 / 9,
               ),
-            ),
+            ) else Container(),
             SizedBox(height: 16.0),
           ],
         ),

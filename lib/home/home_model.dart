@@ -1,4 +1,5 @@
 import 'package:bt_mobile/base/model.dart';
+import 'package:bt_mobile/common/events_manager.dart';
 
 class HomeModel extends Model {
   String salutation = '';
@@ -18,4 +19,7 @@ class HomeModel extends Model {
   String numericDayDenominator = '';
   String numericWeekNumerator = '';
   String numericWeekDenominator = '';
+
+  Event featuredEvent;
+  String featuredEventStartDate = '';
 }
