@@ -22,4 +22,6 @@ class HomeModel extends Model {
 
   Event featuredEvent;
   String featuredEventStartDate = '';
+  Event nextEvent;
+  String nextEventStartDate = '';
 }

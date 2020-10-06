@@ -40,21 +40,21 @@ class _HomeState extends HomeView {
                 ),
               ),
             ),
-            FeaturedEvent(
+            if (model.nextEvent != null) FeaturedEvent(
               headline: 'Your Next Event',
               eventCardModel: EventCardModel(
-                name: 'Some event',
-                date: 'Some date',
+                name: model.nextEvent.name,
+                date: model.nextEventStartDate,
                 isFavorite: () => true,
                 imageUrl:
-                    'https://www.denverpost.com/wp-content/uploads/2016/09/jamal-murray.jpg',
+                    model.nextEvent.imageUrl,
                 onCardPressed: () {},
                 onFavoritePressed: (updateCard) {},
                 fontSize: 20,
                 imageAspectRatio: 16 * 1.5 / 9,
               ),
             ),
-            Padding(
+            if (model.nextEvent != null) Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Container(
                 constraints: BoxConstraints(minWidth: double.infinity),
