@@ -27,6 +27,8 @@ dependencies:
   flutter_dotenv: ^2.1.0
   cached_network_image: ^2.2.0+1
   flutter_cognito_plugin: ^2.2.0
+  flutter_markdown: ^0.4.4
+  icon_shadow: ^1.0.1
   flutter:
     sdk: flutter
 

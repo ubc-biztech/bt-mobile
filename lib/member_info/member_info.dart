@@ -30,6 +30,7 @@ class _NewMemberState extends NewMemberView {
           child: Scrollbar(
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   NewMemberGreeting(
                     title: model.title,

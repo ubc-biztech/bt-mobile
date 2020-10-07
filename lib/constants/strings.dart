@@ -34,6 +34,13 @@ class S {
   static const String eventsFilterUpcoming = 'Upcoming';
   static const String eventsFilterPast = 'Past';
 
+  /// Event Details
+  static const String eventDetailsRegister = 'Register';
+  static const String eventDetailsGreetingPresents = 'UBC BizTech presents...';
+  static const String eventDetailsGreetingInvites =
+      'UBC BizTech invites you to...';
+  static const String eventDetailsGreetingJoinUs = 'Join UBC BizTech at...';
+
   /// Profile
   static const String profileTitle = 'Profile';
   static const String profileDesc =
@@ -42,6 +49,7 @@ class S {
   static const String profileIsNotMember = 'Non-member';
   static const String profileMemberInfoTitle = 'Your Details';
   static const String profileEditDetails = 'Edit details';
+  static const String profileSignOut = 'Sign out';
 
   /// Login
   static const String loginWelcome = 'Welcome!';
@@ -181,4 +189,45 @@ class S {
     S.newMemberHeardFromBizTechNewsletter,
     S.newMemberHeardFromFacultyNewsletter,
   ];
+
+  static const String markdownExample = '# An exhibit of Markdown'
+      '\n\nThis note demonstrates some of what [Markdown][1] is capable of doing.'
+      '\n\n*Note: Feel free to play with this page. Unlike regular notes, this doesn\'t automatically save itself.*'
+      '\n\n## Basic formatting'
+      '\n\nParagraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.'
+      '\n\nParagraphs must be separated by a blank line. Basic formatting of *italics* and **bold** is supported. This *can be **nested** like* so.'
+      '\n\n## Lists'
+      '\n\n### Ordered list'
+      '\n\n1. Item 1\n2. A second item\n3. Number 3\n4. Ⅳ'
+      '\n\n*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*'
+      '\n\n### Unordered list'
+      '\n\n* An item\n* Another item\n* Yet another item\n* And there\'s more...'
+      '\n\n### Code block'
+      '\n\nYou can also make `inline code` to add code into other things.'
+      '\n\n> Here is a quote. What this is should be self explanatory. Quotes are automatically indented when they are used.'
+      '\n\n### Headings *can* also contain **formatting**'
+      '\n\n### They can even contain `inline code`'
+      '\n\n* A named link to [MarkItDown][3]. The easiest way to do these is to select what you want to make a link and hit `Ctrl+L`.'
+      '\n* Another named link to [MarkItDown](http://www.markitdown.net/)'
+      '\n* Sometimes you just want a URL like <http://www.markitdown.net/>.'
+      '\n---'
+      '\n\n__This is bold text__'
+      '\n\n~~Strikethrough~~'
+      '\n\n> Blockquotes can also be nested...'
+      '\n>> ...by using additional greater-than signs right next to each other...'
+      '\n> > > ...or with spaces between arrows.'
+      '\n\n``` js'
+      '\nvar foo = function (bar) {'
+      '\n  return bar++;'
+      '\n};'
+      '\nconsole.log(foo(5));'
+      '\n```'
+      '\n\nUnordered'
+      '\n\n+ Create a list by starting a line with `+`, `-`, or `*`'
+      '\n+ Sub-lists are made by indenting 2 spaces:'
+      '\n  - Marker character change forces new list start:'
+      '\n    * Ac tristique libero volutpat at'
+      '\n    + Facilisis in pretium nisl aliquet'
+      '\n    - Nulla volutpat aliquam velit'
+      '\n+ Very easy!';
 }

@@ -13,6 +13,10 @@ import 'example_model.dart';
 import 'example_view.dart';
 
 class ExamplePresenter extends Presenter<ExampleView, ExampleModel> {
+  ExamplePresenter() {
+    model = ExampleModel();
+  }
+
   void onButtonPressed() {
     model.exampleNumber *= 99; // Multiply itself by 99
     updateView(); // Tell View to show the updated number

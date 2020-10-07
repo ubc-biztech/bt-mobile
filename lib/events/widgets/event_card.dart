@@ -17,7 +17,7 @@ class EventCardModel {
   String date;
   String imageUrl;
   Function isFavorite;
-  Function onCardPressed;
+  Function(BuildContext context, Function updateCard) onCardPressed;
   Function(Function) onFavoritePressed;
 }
 
@@ -62,7 +62,8 @@ class _EventCardState extends State<EventCard> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: widget.model.onCardPressed,
+                  onTap: () => widget.model
+                      .onCardPressed(context, () => setState(() {})),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

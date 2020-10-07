@@ -2,10 +2,13 @@ import 'package:bt_mobile/common/backend_request.dart';
 import 'package:bt_mobile/common/events_manager.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/strings.dart';
+import 'package:bt_mobile/events/event_details/event_details.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 
 import '../base/presenter.dart';
+import 'event_details/event_details_presenter.dart';
 import 'events_model.dart';
 import 'events_view.dart';
 import 'widgets/event_card.dart';
@@ -78,14 +81,21 @@ class EventsPresenter extends Presenter<EventsView, EventsModel>
           date: date,
           isFavorite: () => _user.favoriteEventsId.contains(event.id),
           imageUrl: event.imageUrl,
-          onCardPressed: () => _onEventCardPressed(event),
+          onCardPressed: (context, updateCard) =>
+              _onEventCardPressed(context, event, updateCard),
           onFavoritePressed: (updateCard) =>
               _onFavoritePressed(event.id, updateCard));
     }).toList();
   }
 
-  Future _onEventCardPressed(Event event) async {
-    // do something
+  Future _onEventCardPressed(
+      BuildContext context, Event event, Function updateCard) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EventDetails(EventDetailsPresenter(event)),
+        ));
+    updateCard();
   }
 
   Future _onFavoritePressed(String id, Function updateCard) async {
