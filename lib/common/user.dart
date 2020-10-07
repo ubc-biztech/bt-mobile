@@ -60,11 +60,12 @@ class User {
     // TODO(anyone): make sure this works, can't test until registrations work.
     SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
-      List<String> registeredEvents = await Fetcher().fetchBackend(
-              '/registrations?id=$studentId', FetcherMethod.get) ??
-          [];
-      preferences.setStringList(_registeredEventsKey, registeredEvents);
-      registeredEventsId = registeredEvents.toSet();
+      Map<String, dynamic> responseData = await Fetcher().fetchBackend(
+          '/registrations?id=$studentId', FetcherMethod.get);
+      List<dynamic> events = responseData['data'];
+      List<String> eventIDs = events.map((e) => e['eventID'].toString()).toList();
+      preferences.setStringList(_registeredEventsKey, eventIDs);
+      registeredEventsId = eventIDs.toSet();
     } catch (e) {
       if (preferences.containsKey(_registeredEventsKey)) {
         List<String> registeredEvents =

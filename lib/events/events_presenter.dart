@@ -79,6 +79,7 @@ class EventsPresenter extends Presenter<EventsView, EventsModel>
           isFavorite: () => _user.favoriteEventsId.contains(event.id),
           imageUrl: event.imageUrl,
           onCardPressed: () => _onEventCardPressed(event),
+          horizontalPadding: 12.0,
           onFavoritePressed: (updateCard) =>
               _onFavoritePressed(event.id, updateCard));
     }).toList();

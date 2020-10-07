@@ -1,4 +1,6 @@
+import 'package:bt_mobile/common/events_manager.dart';
 import 'package:bt_mobile/common/term_manager.dart';
+import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/common/weather_manager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +18,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
     setDates();
     setStats();
     setWeather();
+    setFeaturedEvent();
+    setNextEvent();
   }
 
   final GetIt _getIt = GetIt.I;
@@ -23,6 +27,8 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
   final DateTime _today = DateTime.now();
   final DateFormat _termFormat = DateFormat('MMMEd');
   final DateFormat _todayFormat = DateFormat('yMMMEd');
+  final EventsManager _eventsManager = GetIt.I<EventsManager>();
+  final User _user = GetIt.I<User>();
 
   DateTime _termStart = DateTime(2020, 1, 1);
   DateTime _termEnd = DateTime(2020, 12, 31);
@@ -105,6 +111,44 @@ class HomePresenter extends Presenter<HomeView, HomeModel> {
       model.salutation = S.homeGoodAfternoon;
     } else {
       model.salutation = S.homeGoodEvening;
+    }
+  }
+
+  Future<void> setFeaturedEvent() async {
+    await _eventsManager.loadEvents();
+    List<Event> events = _eventsManager.events
+        .where((event) => _isDateStringValid(event.startDate))
+        .toList();
+    model.featuredEvent = events[events.length - 1];
+    DateTime startDate = DateTime.parse(model.featuredEvent.startDate);
+    String date = DateFormat.yMMMEd().format(startDate);
+    model.featuredEventStartDate = date;
+    updateView();
+  }
+
+  Future<void> setNextEvent() async {
+    await _eventsManager.loadEvents();
+    await _user.fetchRegisteredEvents();
+    if (_user.registeredEventsId.isNotEmpty) {
+      List<Event> events = _eventsManager.events
+          .where((event) => _user.registeredEventsId.contains(event.id))
+          .toList();
+      events.sort((event1, event2) =>
+          DateTime.parse(event2.startDate).millisecondsSinceEpoch -
+          DateTime.parse(event1.startDate).millisecondsSinceEpoch);
+      model.nextEvent = events[0];
+      DateTime startDate = DateTime.parse(model.nextEvent.startDate);
+      String date = DateFormat.yMMMEd().format(startDate);
+      model.nextEventStartDate = date;
+    }
+  }
+
+  bool _isDateStringValid(String date) {
+    try {
+      DateTime.parse(date);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 

@@ -11,11 +11,17 @@ class EventCardModel {
       @required this.imageUrl,
       @required this.isFavorite,
       @required this.onCardPressed,
-      @required this.onFavoritePressed});
+      @required this.onFavoritePressed,
+      this.fontSize = 24.0,
+      this.horizontalPadding = 0,
+      this.imageAspectRatio = 16 / 9});
 
   String name;
   String date;
   String imageUrl;
+  double fontSize;
+  double horizontalPadding;
+  double imageAspectRatio;
   Function isFavorite;
   Function onCardPressed;
   Function(Function) onFavoritePressed;
@@ -39,7 +45,8 @@ class _EventCardState extends State<EventCard> {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Container(
         constraints: const BoxConstraints(minWidth: double.infinity),
-        margin: const EdgeInsets.symmetric(horizontal: 12.0),
+        margin:
+            EdgeInsets.symmetric(horizontal: widget.model.horizontalPadding),
         child: Card(
           color: C.darkBackgroundCard,
           child: Stack(
@@ -57,7 +64,7 @@ class _EventCardState extends State<EventCard> {
                   ),
                   errorWidget: (context, url, error) => Container(),
                 ),
-                aspectRatio: 16 / 9,
+                aspectRatio: widget.model.imageAspectRatio,
               ),
               Material(
                 color: Colors.transparent,
@@ -68,7 +75,7 @@ class _EventCardState extends State<EventCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      AspectRatio(aspectRatio: 16 / 9),
+                      AspectRatio(aspectRatio: widget.model.imageAspectRatio),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14.0, vertical: 14.0),
@@ -81,8 +88,8 @@ class _EventCardState extends State<EventCard> {
                                   AutoSizeText(
                                     widget.model.name,
                                     maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 24.0,
+                                    style: TextStyle(
+                                      fontSize: widget.model.fontSize,
                                       fontWeight: FontWeight.w600,
                                       color: C.darkColor2,
                                     ),
@@ -91,8 +98,8 @@ class _EventCardState extends State<EventCard> {
                                   AutoSizeText(
                                     widget.model.date,
                                     maxLines: 1,
-                                    style: const TextStyle(
-                                      fontSize: 18.0,
+                                    style: TextStyle(
+                                      fontSize: widget.model.fontSize * 3 / 4,
                                       color: C.darkColor3,
                                     ),
                                   ),
