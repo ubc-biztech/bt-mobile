@@ -8,7 +8,6 @@ import 'profile_view.dart';
 import 'widgets/profile_details/profile_details.dart';
 import 'widgets/profile_greeting.dart';
 
-
 class Profile extends StatefulWidget {
   const Profile(this.presenter, {Key key}) : super(key: key);
 
@@ -41,9 +40,8 @@ class _ProfileState extends ProfileView {
                 ),
               ),
             ),
-            //ProfileSignOut(onSignOutPressed: widget.presenter.onSignOutButtonPressed),
-            ProfileSignOut(onSignOutPressed: widget.presenter.onSignOutButtonPressed),
-            // ProfileSignOutDialog(onConfirmedPressed: widget.presenter.onConfirmButtonPressed),
+            ProfileSignOut(
+                onSignOutPressed: widget.presenter.onSignOutButtonPressed),
             const SizedBox(height: 16.0),
           ],
         ),
