@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
         validator: model.validator,
         keyboardType: model.keyboardType,
         autocorrect: false,
-        autovalidate: true,
+        autovalidateMode: AutovalidateMode.always,
       ),
     );
   }

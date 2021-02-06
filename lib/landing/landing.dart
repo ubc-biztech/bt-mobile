@@ -31,7 +31,7 @@ class _LandingState extends LandingView {
         items: model.iconAndTitles
             .map((i) => BottomNavigationBarItem(
                   icon: i.item1,
-                  title: Text(i.item2),
+                  label: i.item2,
                 ))
             .toList(growable: false),
       ),
