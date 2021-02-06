@@ -6,7 +6,6 @@ import 'package:bt_mobile/login/login.dart';
 import 'package:bt_mobile/login/login_presenter.dart';
 import 'package:bt_mobile/member_info/member_info.dart';
 import 'package:bt_mobile/member_info/member_info_presenter.dart';
-import 'package:bt_mobile/member_info/widgets/error_dialogs.dart';
 import 'package:bt_mobile/profile/widgets/profile_sign_out_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

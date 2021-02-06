@@ -1,6 +1,5 @@
 import 'package:bt_mobile/constants/colors.dart';
 import 'package:bt_mobile/profile/widgets/profile_sign_out.dart';
-import 'package:bt_mobile/profile/widgets/profile_sign_out_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'profile_presenter.dart';
