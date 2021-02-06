@@ -24,16 +24,6 @@ class EventDetailsTitle extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(
-                model.greeting,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                  color: C.darkColor2,
-                ),
-              ),
-              SizedBox(height: 10),
-              AutoSizeText(
                 model.title,
                 maxLines: 1,
                 style: TextStyle(

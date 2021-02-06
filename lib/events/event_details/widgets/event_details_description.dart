@@ -15,7 +15,7 @@ class EventDetailsDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(minWidth: double.infinity),
-      margin: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 70.0),
+      margin: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 70.0),
       child: Card(
         color: C.darkBackgroundCard,
         child: Padding(

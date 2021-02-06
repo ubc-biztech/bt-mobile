@@ -11,7 +11,7 @@ class EventDetailsDivider extends StatelessWidget {
       alignment: Alignment.center,
       child: Container(
         width: 1,
-        height: 60,
+        height: 30,
         color: C.darkBackgroundCard,
       ),
     );

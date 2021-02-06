@@ -8,12 +8,10 @@ class EventDetailsDividerModel extends EventDetailsWidgetModel {}
 
 class EventDetailsTitleModel extends EventDetailsWidgetModel {
   EventDetailsTitleModel({
-    @required this.greeting,
     @required this.title,
     @required this.date,
   });
 
-  String greeting;
   String title;
   String date;
 }

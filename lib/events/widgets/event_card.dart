@@ -48,11 +48,13 @@ class _EventCardState extends State<EventCard> {
                 child: CachedNetworkImage(
                   imageUrl: widget.model.imageUrl,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => SizedBox(
+                  placeholder: (_, __) => SizedBox(
                     height: 20,
                     width: 20,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+                      ),
                     ),
                   ),
                   errorWidget: (context, url, error) => Container(),

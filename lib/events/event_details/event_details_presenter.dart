@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:bt_mobile/base/presenter.dart';
 import 'package:bt_mobile/common/backend_request.dart';
 import 'package:bt_mobile/common/events_manager.dart';
 import 'package:bt_mobile/common/user.dart';
 import 'package:bt_mobile/constants/colors.dart';
-import 'package:bt_mobile/constants/strings.dart';
 import 'package:bt_mobile/events/event_details/widgets/event_details_widget_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -24,9 +21,7 @@ class EventDetailsPresenter
     model.getIsFavourite = () => _user.favoriteEventsId.contains(event.id);
     model.widgetModels = [
       EventDetailsTitleModel(
-          greeting: _getGreeting,
-          title: event.name,
-          date: _formatStartDate(event.startDate)),
+          title: event.name, date: _formatStartDate(event.startDate)),
       EventDetailsDividerModel(),
       EventDetailsDescriptionModel(event.description ?? '', _customStyleSheet),
     ];
@@ -42,17 +37,6 @@ class EventDetailsPresenter
         DateFormat.jm().format(dateTime) +
         ' PST';
     return date;
-  }
-
-  String get _getGreeting {
-    List<String> greetings = [
-      S.eventDetailsGreetingInvites,
-      S.eventDetailsGreetingJoinUs,
-      S.eventDetailsGreetingPresents
-    ];
-    Random random = Random();
-    int index = random.nextInt(greetings.length);
-    return greetings[index];
   }
 
   Future onFavouriteButtonPressed() async {

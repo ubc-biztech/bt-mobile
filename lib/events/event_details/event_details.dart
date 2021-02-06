@@ -55,13 +55,13 @@ class _EventDetailsState extends EventDetailsView {
         ),
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 12.0),
+        padding: EdgeInsets.only(bottom: 20.0),
         child: RaisedButton(
           color: C.darkColor1,
           child: AutoSizeText(
             S.eventDetailsRegister,
             maxLines: 1,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           ),
           onPressed: () => widget.presenter.onRegisterButtonPressed(context),
           clipBehavior: Clip.antiAliasWithSaveLayer,
