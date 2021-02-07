@@ -39,7 +39,8 @@ class _ProfileState extends ProfileView {
                 ),
               ),
             ),
-            ProfileSignOut(onSignOutPressed: widget.presenter.signOutUser),
+            ProfileSignOut(
+                onSignOutPressed: widget.presenter.onSignOutButtonPressed),
             const SizedBox(height: 16.0),
           ],
         ),
