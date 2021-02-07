@@ -10,6 +10,9 @@ import 'package:bt_mobile/profile/profile_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tuple/tuple.dart';
+import 'package:bt_mobile/tamagotchi/tamagotchi.dart';
+import 'package:bt_mobile/tamagotchi/tamagotchi_presenter.dart';
+
 
 import '../base/presenter.dart';
 import 'landing_model.dart';
@@ -40,6 +43,8 @@ class LandingPresenter extends Presenter<LandingView, LandingModel> {
     model.iconAndTitles.add(Tuple2(Icon(Icons.calendar_today), S.eventsTitle));
     model.pages.add(Profile(ProfilePresenter()));
     model.iconAndTitles.add(Tuple2(Icon(Icons.person), S.profileTitle));
+    model.pages.add(Tamagotchi(TamagotchiPresenter()));
+    model.iconAndTitles.add(Tuple2(Icon(Icons.accessible), S.tamagotchiTitle));
     _eventsManager.loadEvents();
   }
 
