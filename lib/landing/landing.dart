@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
 import 'landing_presenter.dart';
 import 'landing_view.dart';
@@ -22,6 +21,7 @@ class _LandingState extends LandingView {
         child: model.currentPage,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: C.darkBackground,
         selectedItemColor: C.darkColor1,
         unselectedItemColor: C.darkColor2,

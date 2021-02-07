@@ -13,7 +13,6 @@ import 'package:tuple/tuple.dart';
 import 'package:bt_mobile/tamagotchi/tamagotchi.dart';
 import 'package:bt_mobile/tamagotchi/tamagotchi_presenter.dart';
 
-
 import '../base/presenter.dart';
 import 'landing_model.dart';
 import 'landing_view.dart';
