@@ -50,6 +50,11 @@ class S {
   static const String profileMemberInfoTitle = 'Your Details';
   static const String profileEditDetails = 'Edit details';
   static const String profileSignOut = 'Sign out';
+  static const String confirmSignOutTitle = 'Sign Out';
+  static const String confirmSignOutDescription =
+      'Are you sure you want to sign out?';
+  static const String confirmSignOutButton = 'Confirm';
+  static const String confirmSignOutCancelButton = 'Cancel';
 
   /// Login
   static const String loginWelcome = 'Welcome!';
