@@ -56,6 +56,9 @@ class S {
   static const String confirmSignOutButton = 'Confirm';
   static const String confirmSignOutCancelButton = 'Cancel';
 
+  /// Tamagotchi
+  static const String tamagotchiTitle = 'Tamagotchi';
+
   /// Login
   static const String loginWelcome = 'Welcome!';
   static const String loginSalutation =
