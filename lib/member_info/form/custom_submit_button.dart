@@ -34,7 +34,7 @@ class CustomSubmitButton extends StatelessWidget {
         onPressed: () => onSubmitButtonPressed(context),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(45.0),
         ),
       ),
     );

@@ -55,7 +55,7 @@ class FourOhFourDialog extends StatelessWidget {
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(45.0),
                     ),
                     elevation: 4,
                     onPressed: () {
@@ -132,7 +132,7 @@ class FourOhNineDialog extends StatelessWidget {
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(45.0),
                     ),
                     elevation: 4,
                     onPressed: () {
@@ -204,7 +204,7 @@ class GeneralErrorDialog extends StatelessWidget {
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(45.0),
                     ),
                     elevation: 4,
                     onPressed: () {

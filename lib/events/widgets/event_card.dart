@@ -17,7 +17,7 @@ class EventCardModel {
   String date;
   String imageUrl;
   Function isFavorite;
-  Function onCardPressed;
+  Function(BuildContext context, Function updateCard) onCardPressed;
   Function(Function) onFavoritePressed;
 }
 
@@ -48,11 +48,13 @@ class _EventCardState extends State<EventCard> {
                 child: CachedNetworkImage(
                   imageUrl: widget.model.imageUrl,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => SizedBox(
+                  placeholder: (_, __) => SizedBox(
                     height: 20,
                     width: 20,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+                      ),
                     ),
                   ),
                   errorWidget: (context, url, error) => Container(),
@@ -62,7 +64,8 @@ class _EventCardState extends State<EventCard> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: widget.model.onCardPressed,
+                  onTap: () => widget.model
+                      .onCardPressed(context, () => setState(() {})),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
