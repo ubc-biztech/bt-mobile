@@ -1,4 +1,5 @@
 import 'package:bt_mobile/constants/colors.dart';
+import 'package:bt_mobile/constants/strings.dart';
 import 'package:bt_mobile/events/widgets/event_card.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class _HomeState extends HomeView {
               ),
             ),
             if (model.nextEvent != null) FeaturedEvent(
-              headline: 'Your Next Event',
+              headline: S.homeNextEvent,
               eventCardModel: EventCardModel(
                 name: model.nextEvent.name,
                 date: model.nextEventStartDate,
@@ -67,7 +68,7 @@ class _HomeState extends HomeView {
               ),
             ),
             if (model.featuredEvent != null) FeaturedEvent(
-              headline: 'Featured',
+              headline: S.homeFeaturedEvent,
               eventCardModel: EventCardModel(
                 name: model.featuredEvent.name,
                 date: model.featuredEventStartDate,

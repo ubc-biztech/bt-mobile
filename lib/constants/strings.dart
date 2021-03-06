@@ -24,6 +24,8 @@ class S {
   static const String homeWeekNumerator = 'Week $r';
   static const String homeWeekDenominator = ' / $r';
   static const String homeEmptyTitle = 'What a year...';
+  static const String homeNextEvent = 'Your Next Event';
+  static const String homeFeaturedEvent = 'Featured';
 
   /// Events
   static const String eventsTitle = 'Events';
