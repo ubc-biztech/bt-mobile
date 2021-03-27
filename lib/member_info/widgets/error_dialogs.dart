@@ -42,7 +42,15 @@ class FourOhFourDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(C.darkColor1),
+                      elevation: MaterialStateProperty.all(4.0),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(45.0))),
+                    ),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2),
                       child: AutoSizeText(
@@ -54,10 +62,6 @@ class FourOhFourDialog extends StatelessWidget {
                       ),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(45.0),
-                    ),
-                    elevation: 4,
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.pushReplacement(
@@ -66,7 +70,6 @@ class FourOhFourDialog extends StatelessWidget {
                               builder: (context) =>
                                   Landing(LandingPresenter())));
                     },
-                    color: C.darkColor1,
                   ),
                 ],
               ),
@@ -119,7 +122,15 @@ class FourOhNineDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(C.darkColor1),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(45.0)))),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2),
                       child: AutoSizeText(
@@ -131,14 +142,9 @@ class FourOhNineDialog extends StatelessWidget {
                       ),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(45.0),
-                    ),
-                    elevation: 4,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    color: C.darkColor1,
                   ),
                 ],
               ),
@@ -191,7 +197,16 @@ class GeneralErrorDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(4.0),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(C.darkColor1),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(45.0)))),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2),
                       child: AutoSizeText(
@@ -203,14 +218,9 @@ class GeneralErrorDialog extends StatelessWidget {
                       ),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(45.0),
-                    ),
-                    elevation: 4,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    color: C.darkColor1,
                   ),
                 ],
               ),
