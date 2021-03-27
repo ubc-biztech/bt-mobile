@@ -19,8 +19,12 @@ class CustomSubmitButton extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.only(top: 26.0, left: 12, right: 12, bottom: 10),
-      child: RaisedButton(
-        color: C.darkColor1,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(C.darkColor1),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0)))),
         child: Container(
           height: 50.0,
           constraints: const BoxConstraints(minWidth: double.infinity),
@@ -33,9 +37,6 @@ class CustomSubmitButton extends StatelessWidget {
         ),
         onPressed: () => onSubmitButtonPressed(context),
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(45.0),
-        ),
       ),
     );
   }

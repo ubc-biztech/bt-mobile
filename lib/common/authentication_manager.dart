@@ -185,20 +185,19 @@ class AuthenticationManager {
   /// popping the context off with [Navigator.pop].
   void _showLoadingDialog(BuildContext context) {
     showDialog(
-      context: context,
-      barrierDismissible: false,
-      child: WillPopScope(
-        onWillPop: () async => false,
-        child: Center(
-          child: SizedBox(
-            height: 20,
-            width: 20,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => WillPopScope(
+          onWillPop: () async => false,
+          child: Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(C.darkColor1),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

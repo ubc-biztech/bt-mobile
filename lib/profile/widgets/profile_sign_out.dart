@@ -13,8 +13,13 @@ class ProfileSignOut extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: RaisedButton(
-        color: C.darkError,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(4.0),
+            backgroundColor: MaterialStateProperty.all<Color>(C.darkColor1),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0)))),
         child: AutoSizeText(
           S.profileSignOut,
           maxLines: 1,
@@ -22,10 +27,6 @@ class ProfileSignOut extends StatelessWidget {
         ),
         onPressed: () => onSignOutPressed(context),
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(45.0),
-        ),
-        elevation: 4.0,
       ),
     );
   }

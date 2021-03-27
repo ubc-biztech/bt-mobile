@@ -56,8 +56,15 @@ class _EventDetailsState extends EventDetailsView {
       ),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 20.0),
-        child: RaisedButton(
-          color: C.darkColor1,
+        child: ElevatedButton(
+          style: ButtonStyle(
+              elevation: MaterialStateProperty.all(4.0),
+              backgroundColor: MaterialStateProperty.all<Color>(C.darkColor1),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(45.0),
+                ),
+              )),
           child: AutoSizeText(
             S.eventDetailsRegister,
             maxLines: 1,
@@ -65,10 +72,6 @@ class _EventDetailsState extends EventDetailsView {
           ),
           onPressed: () => widget.presenter.onRegisterButtonPressed(context),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(45.0),
-          ),
-          elevation: 4.0,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
